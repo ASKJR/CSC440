@@ -4,6 +4,6 @@ public class Main {
 		System.out.println("Hello world");
 		System.out.println("Git é legal");
 		System.out.println("Git 000");
-		// asuhduhasdhuashduashud
+		// agora funcionou?
 	}
 }
