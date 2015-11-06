@@ -2,6 +2,7 @@ package view;
 
 import java.util.ArrayList;
 
+import beans.Member;
 import dao.UserDAO;
 
 public class Main {
