@@ -1,4 +1,4 @@
-package chocAn;
+package beans;
 
 public class User {
 
