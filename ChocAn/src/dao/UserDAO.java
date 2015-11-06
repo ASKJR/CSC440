@@ -14,7 +14,7 @@ public class UserDAO {
     public ArrayList<String> sFstNames()
     {
         Connection conexao = Conexao.abrirConexao();
-        ArrayList<String> lstNames = new ArrayList();
+        ArrayList<String> lstNames = new ArrayList<String>();
         ResultSet rsListar = null;
         PreparedStatement pstListar = null;
 
