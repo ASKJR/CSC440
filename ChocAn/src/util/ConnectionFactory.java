@@ -6,11 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 
-public class Conexao implements MySQL {
+public class ConnectionFactory implements MySQL {
     
-    private Conexao() {}
+    private ConnectionFactory() {}
     
-    public static Connection abrirConexao() {
+    public static Connection openConnection() {
         Connection con = null;
 
         try {
@@ -22,40 +22,40 @@ public class Conexao implements MySQL {
         return con;
     }
     
-    public static void fecharConexao(Connection con){
+    public static void closeConnection(Connection connection){
         try {
-            if (con != null){
-                con.close();
+            if (connection != null){
+            	connection.close();
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
     
-    public static void fecharConexao(Connection con, PreparedStatement pstm){
+    public static void closeConnection(Connection connection, PreparedStatement prepStatement){
         try {
-            if (con != null){
-                con.close();
+            if (connection != null){
+            	connection.close();
             }
             
-            if (pstm != null){
-                pstm.close();
+            if (prepStatement != null){
+            	prepStatement.close();
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
     
-    public static void fecharConexao(Connection con, PreparedStatement pstm, ResultSet rst)
+    public static void closeConnection(Connection connection, PreparedStatement prepStatement, ResultSet resultSet)
     {
         try
         {
-            if(con!=null)
-                con.close();
-            if(pstm != null)
-                pstm.close();
-            if(rst!=null)
-                rst.close();
+            if(connection!=null)
+            	connection.close();
+            if(prepStatement != null)
+            	prepStatement.close();
+            if(resultSet!=null)
+            	resultSet.close();
         }
         catch (SQLException e)
         {

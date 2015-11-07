@@ -2,7 +2,7 @@ package view;
 
 import java.util.ArrayList;
 
-import beans.Member;
+import beans.User;
 import dao.UserDAO;
 
 public class Main {
@@ -10,10 +10,10 @@ public class Main {
 	public static void main(String[] args) {
 		
 		UserDAO uDAO = new UserDAO();
-		ArrayList<String> lstNames = uDAO.sFstNames();
+		ArrayList<User> userList = uDAO.sAll();
 		
-		for(String str : lstNames){
-			System.out.println(str);
+		for(User user : userList){
+			System.out.println(user.getFstName());
 		}
 		
 	}
