@@ -2,17 +2,20 @@ package beans;
 
 public class Member extends User {
 
+	public static final int STATUS_VALID=1;
+	public static final int STATUS_INVALID=2;
+	public static final int STATUS_SUSPENDED=3;
+	public static final int STATUS_BLOCKED=4;			// We need to work in pointing out all the possible status for a Member 
+	
 	private int fkIdMember;
-
-	private boolean status;
-
+	private int status;
 	private User user;
 	
 	public Member(){}
 	
 	public Member(
 			int fkIdMember,
-			boolean status,
+			int status,
 			User user
 			){
 		this.fkIdMember = fkIdMember;
@@ -28,11 +31,11 @@ public class Member extends User {
 		this.fkIdMember = fkIdMember;
 	}
 
-	public boolean isStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

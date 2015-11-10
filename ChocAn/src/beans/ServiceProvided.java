@@ -1,6 +1,6 @@
 package beans;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.sql.Date;
 
 public class ServiceProvided {
@@ -15,7 +15,7 @@ public class ServiceProvided {
 
 	private Date occurrenceDate;
 
-	private String comments;
+	private String comment;
 	
 	public ServiceProvided(){}
 	
@@ -25,14 +25,14 @@ public class ServiceProvided {
 			Service service,
 			Timestamp currentDate,
 			Date occurrenceDate,
-			String comments
+			String comment
 			){
 		this.provider = provider;
 		this.member = member;
 		this.service = service;
 		this.currentDate = currentDate;
 		this.occurrenceDate = occurrenceDate;
-		this.comments = comments;
+		this.comment = comment;
 	}
 
 	public Provider getProvider() {
@@ -75,12 +75,12 @@ public class ServiceProvided {
 		this.occurrenceDate = occurrenceDate;
 	}
 
-	public String getComments() {
-		return comments;
+	public String getComment() {
+		return comment;
 	}
 
-	public void setComments(String comments) {
-		this.comments = comments;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 	

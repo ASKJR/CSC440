@@ -31,25 +31,26 @@ public class UserDAO {
             
             while (rsListing.next()) {									// Filling the ArrayList instance with the received data
             	userList.add(
-            			new User(
-            				rsListing.getInt("id_user"),
-            				rsListing.getString("st_addr"),
-            				rsListing.getString("addr_comp"),
-            				rsListing.getString("city"),
-            				rsListing.getString("state"),
-            				rsListing.getString("zip_code"),
-            				rsListing.getString("fst_name"),
-            				rsListing.getString("lst_name"),
-            				rsListing.getString("cell_phone"),
-            				rsListing.getString("home_phone"),
-            				rsListing.getString("work_phone"),
-            				rsListing.getString("email")
-            					)
-            			);
+        			new User(
+        				rsListing.getInt("id_user"),
+        				rsListing.getString("st_addr"),
+        				rsListing.getString("addr_comp"),
+        				rsListing.getString("city"),
+        				rsListing.getString("state"),
+        				rsListing.getString("zip_code"),
+        				rsListing.getString("fst_name"),
+        				rsListing.getString("lst_name"),
+        				rsListing.getString("cell_phone"),
+        				rsListing.getString("home_phone"),
+        				rsListing.getString("work_phone"),
+        				rsListing.getString("email")
+        					)
+        			);
             }
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());							// Error Treatment
+            return null;
         }
         
         ConnectionFactory.closeConnection(
@@ -102,11 +103,12 @@ public class UserDAO {
             rsInserting = pstInserting.getGeneratedKeys();				// Generated ID being retrieved
             
             if (rsInserting.next()) {
-            	generatedId = rsInserting.getInt(1);					// Assigning generated ID to the returnable variable
+            	generatedId = rsInserting.getInt(1);					// Assigning generated ID to the returning variable
             }
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());							// Error Treatment
+            return -1;
         }
         
         ConnectionFactory.closeConnection(
