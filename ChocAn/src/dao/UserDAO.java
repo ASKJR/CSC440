@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import com.mysql.jdbc.Statement;
 
-import beans.User;
+import beans.*;
 import util.ConnectionFactory;
 
 public class UserDAO {
@@ -116,5 +116,98 @@ public class UserDAO {
         return generatedId;
 	}
     
+    public User retrieveUserType(User user){
+        Connection connection = ConnectionFactory.openConnection(); 	// Connection to the database
+        ResultSet rsType = null;										// ResultSet to receive the selected data
+        PreparedStatement pstType = null;								// PreparedStatement to process the SQL        
+        
+     // Verifying if there is a registry for this user in the PROVIDER table
+        try {
+            
+        	pstType = connection.prepareStatement(""
+        			+ " SELECT * FROM provider "
+        			+ "WHERE fk_id_provider = ?; ");					// SQL itself being prepared 
+
+        	pstType.setInt(1, user.getIdUser());						// Replacing each ? with the correct value
+        	
+        	rsType = pstType.executeQuery();							// SQL being executed and results being assigned to ResultSet
+            
+            if (rsType.next())
+            {
+            	return new Provider(user.getIdUser(), null);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());							// Error Treatment
+            return null;
+        }
+        
+     // Verifying if there is a registry for this user in the MANAGER table
+        try {
+            
+        	pstType = connection.prepareStatement(""
+        			+ " SELECT * FROM manager "
+        			+ "WHERE fk_id_manager = ?; ");							// SQL itself being prepared 
+
+        	pstType.setInt(1, user.getIdUser());							// Replacing each ? with the correct value
+        	
+        	rsType = pstType.executeQuery();								// SQL being executed and results being assigned to ResultSet
+            
+            if (rsType.next())
+            {
+            	return new Manager(user.getIdUser());
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());								// Error Treatment
+            return null;
+        }
+        
+     // Verifying if there is a registry for this user in the OPERATOR table
+        try {
+            
+        	pstType = connection.prepareStatement(""
+        			+ " SELECT * FROM operator "
+        			+ "WHERE fk_id_operator = ?; ");						// SQL itself being prepared 
+
+        	pstType.setInt(1, user.getIdUser());							// Replacing each ? with the correct value
+        	
+        	rsType = pstType.executeQuery();								// SQL being executed and results being assigned to ResultSet
+            
+            if (rsType.next())
+            {
+            	return new Operator(user.getIdUser());
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());								// Error Treatment
+            return null;
+        }
+        
+     // Verifying if there is a registry for this user in the MEMBER table
+        try {
+            
+        	pstType = connection.prepareStatement(""
+        			+ " SELECT * FROM member "
+        			+ "WHERE fk_id_member = ?; ");							// SQL itself being prepared 
+
+        	pstType.setInt(1, user.getIdUser());							// Replacing each ? with the correct value
+        	
+        	rsType = pstType.executeQuery();								// SQL being executed and results being assigned to ResultSet
+            
+            if (rsType.next())
+            {
+            	return new Member(user.getIdUser(), rsType.getInt("status"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());								// Error Treatment
+            return null;
+        }
+        
+        ConnectionFactory.closeConnection(connection, pstType, rsType);		// Closing connection to the DBMS
+        
+        return null;
+    }
     
 }

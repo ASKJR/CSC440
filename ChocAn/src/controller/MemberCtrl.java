@@ -5,10 +5,12 @@ import dao.MemberDAO;
 
 public class MemberCtrl {
 	
-	public int iOne(
-		int fkIdMember
-		, int status
-			){
+	public int iOne
+		(
+			int fkIdMember,
+			int status
+		)
+	{
 		
 		MemberDAO memberDAO = new MemberDAO();
 		Member member = new Member();

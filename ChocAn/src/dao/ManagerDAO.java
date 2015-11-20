@@ -27,11 +27,11 @@ public class ManagerDAO {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());							// Error Treatment
-            return Manager.UNSUCCESSFUL_INSERT;													// Method finished UNsuccessfully
+            return Manager.UNSUCCESSFUL_INSERT;							// Method finished UNsuccessfully
         }
         
         ConnectionFactory.closeConnection(connection, pstInserting);	// Closing connection to the DBMS
-        return Manager.SUCCESSFUL_INSERT;														// Method finished successfully
+        return Manager.SUCCESSFUL_INSERT;								// Method finished successfully
 	}
        
 }

@@ -5,23 +5,15 @@ import java.util.ArrayList;
 public class Provider extends User {
 	
 	private int fkIdProvider;
-	
 	private ArrayList<Service> serviceList;
-
-	private User user;
-
-	private Service service;
 
 	public Provider(){}
 	
 	public Provider(
 			int fkIdProvider,
-			ArrayList<Service> serviceList,
-			User user,
-			Service service
+			ArrayList<Service> serviceList
 			){
 		this.serviceList = serviceList;
-		this.user = user;
 		this.fkIdProvider = fkIdProvider;
 	}
 	
@@ -51,22 +43,6 @@ public class Provider extends User {
 
 	public void setServiceList(ArrayList<Service> serviceList) {
 		this.serviceList = serviceList;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Service getService() {
-		return service;
-	}
-
-	public void setService(Service service) {
-		this.service = service;
 	}
 	
 	

@@ -2,30 +2,26 @@ package beans;
 
 public class User {
 
+	public static final int MANAGER = 1;
+	public static final int PROVIDER = 2;
+	public static final int OPERATOR = 3;
+	public static final int MEMBER = 4;
+	
+	public static final int NOT_FOUND = -1;
+	public static final int TYPE_ERROR = -2;
+	
 	private int idUser;
-
 	private String stAddr;
-
 	private String addrComp;
-
 	private String city;
-
 	private String state;
-
 	private String zipCode;
-
 	private String fstName;
-
 	private String lstName;
-
 	private String cellPhone;
-
 	private String homePhone;
-
 	private String workPhone;
-
 	private String email;
-
 	
 	public User(){
 		

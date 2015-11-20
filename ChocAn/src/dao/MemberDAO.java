@@ -8,6 +8,7 @@ import beans.Member;
 import util.ConnectionFactory;
 
 public class MemberDAO {
+	
 	public int iOne(Member member){
 
         Connection connection = ConnectionFactory.openConnection();		// Connection to the database

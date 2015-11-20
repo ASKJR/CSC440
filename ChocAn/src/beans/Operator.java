@@ -3,17 +3,13 @@ package beans;
 public class Operator extends User{
 
 	private int fkIdOperator;
-
-	private User user;
 	
 	public Operator(){}
 	
 	public Operator(
-			int fkIdOperator,
-			User user
+			int fkIdOperator
 			){
 		this.fkIdOperator = fkIdOperator;
-		this.user = user;
 	}
 	
 	public int addMember(Member member) {
@@ -46,14 +42,6 @@ public class Operator extends User{
 
 	public void setFkIdOperator(int fkIdOperator) {
 		this.fkIdOperator = fkIdOperator;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 	
 	

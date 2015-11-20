@@ -6,16 +6,15 @@ public class Manager extends User{
 	public static final int SUCCESSFUL_INSERT = 0;
 	
 	private int fkIdManager;
-	private User user;
 	
 	public Manager(){}
 	
-	public Manager(
-			int fkIdManager,
-			User user
-			){
+	public Manager
+		(
+			int fkIdManager
+		)
+	{
 		this.fkIdManager = fkIdManager;
-		this.user = user;
 	}
 	
 	public int printWeeklyReports() {
@@ -28,14 +27,6 @@ public class Manager extends User{
 
 	public void setFkIdManager(int fkIdManager) {
 		this.fkIdManager = fkIdManager;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 	
 }

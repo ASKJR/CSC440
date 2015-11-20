@@ -2,6 +2,10 @@ package controller;
 
 import java.util.ArrayList;
 
+import beans.Manager;
+import beans.Member;
+import beans.Operator;
+import beans.Provider;
 import beans.User;
 import dao.UserDAO;
 
@@ -44,5 +48,25 @@ public class UserCtrl {
 		UserDAO uDAO = new UserDAO();
 		return uDAO.sAll();
 	}
+	
+	public int retrieveUserType(User user){
+		
+		UserDAO userDAO = new UserDAO();
+		
+		User userTypeDefined = userDAO.retrieveUserType(user);
+		
+		if(userTypeDefined instanceof Provider)
+			return User.PROVIDER;
+		else if(userTypeDefined instanceof Manager)
+			return User.MANAGER;
+		else if(userTypeDefined instanceof Member) 
+			return User.MEMBER;
+		else if(userTypeDefined instanceof Operator)
+			return User.OPERATOR;
+		else
+			return User.NOT_FOUND;
+		
+	}
+
 	
 }
