@@ -22,6 +22,7 @@ public class User {
 	private String homePhone;
 	private String workPhone;
 	private String email;
+	private Login login;
 	
 	public User(){
 		
@@ -150,6 +151,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public Login getLogin() {
+		return login;
+	}
+
+	public void setLogin(Login login) {
+		this.login = login;
 	}
 	
 }
