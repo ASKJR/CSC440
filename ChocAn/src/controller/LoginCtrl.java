@@ -22,26 +22,28 @@ public class LoginCtrl {
 		return loginDAO.iOne(login);
 	}
 	
-	public User logIn
+	public int verifyLogin
 		(
-			int fkIdUser
+			int fkIdUser,
+			String password
 		)
 	{
 		LoginDAO loginDAO = new LoginDAO();
 		Login login = new Login();
 		
 		login.setFkIdUser(fkIdUser);
+		login.setPassword(password);
 		
-		return loginDAO.logIn(login);
+		return loginDAO.verifyLogin(login);
 	}
 	
-	public int verifyPassword
-		(
-			Login login
-		)
-	{
-		LoginDAO loginDAO = new LoginDAO();
-		return loginDAO.verifyPassword(login);
-	}
+    public User retrieveUserType
+    	(
+    			Login login
+    	)
+    {
+    	LoginDAO loginDAO = new LoginDAO();
+    	return loginDAO.retrieveUserType(login);
+    }
 	
 }

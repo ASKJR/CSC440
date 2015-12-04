@@ -1,6 +1,6 @@
 package beans;
 
-public class User {
+public abstract class User {
 
 	public static final int MANAGER = 1;
 	public static final int PROVIDER = 2;
@@ -9,6 +9,9 @@ public class User {
 	
 	public static final int NOT_FOUND = -1;
 	public static final int TYPE_ERROR = -2;
+	
+	public static final int UNSUCCESSFUL_INSERT = -3;
+	public static final int SUCCESSFUL_INSERT = -4;
 	
 	private int idUser;
 	private String stAddr;

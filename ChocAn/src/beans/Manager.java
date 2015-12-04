@@ -1,9 +1,6 @@
 package beans;
 
 public class Manager extends User{
-
-	public static final int UNSUCCESSFUL_INSERT = -1;
-	public static final int SUCCESSFUL_INSERT = 0;
 	
 	private int fkIdManager;
 	

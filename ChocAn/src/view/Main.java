@@ -3,75 +3,60 @@ package view;
 import java.util.Scanner;
 
 import beans.*;
-import controller.*;
+import controller.LoginCtrl;
+import controller.UserCtrl;
+import dao.UserDAO;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		// DECLARATIONS
+		Scanner scan = new Scanner(System.in);
+		int userId = 0;
+		String password = "";
 		
-		LoginCtrl loginCtrl = new LoginCtrl();						// Controller instances
-		UserCtrl userCtrl = new UserCtrl();							
+		System.out.println("ID: ");
+		userId = Integer.valueOf(scan.nextLine());
 		
-		User user = new User();										// Beans instances
+		System.out.println("Password: ");
+		password = scan.nextLine();
 		
-		Scanner scan = new Scanner(System.in);						// Scanner instance
+		LoginCtrl loginCtrl = new LoginCtrl();
+		Login login = new Login();
 		
-		int idUser = -1;											// Variables
-		String password = new String();
+		login.setFkIdUser(userId);
+		login.setPassword(password);
 		
-		// CODING
+		User user = null;
 		
-		System.out.println("Enter any User's ID:");					// Reading ID (swiping ID card)
-		idUser = Integer.valueOf(scan.nextLine());
-
-		user = loginCtrl.logIn(idUser);								// Looking for the ID in the User table
-		if(user != null){
-			System.out.printf("User Found! ");
-			switch(userCtrl.retrieveUserType(user))					// Retrieving type of user
-			{
-			case User.MANAGER:
-				System.out.printf("It is a Manager!");					// MANAGER
-				break;
-			case User.PROVIDER:
-				System.out.printf("It is a Provider!");					// PROVIDER
-				break;
-			case User.OPERATOR:
-				System.out.printf("It is an Operator!");				// OPERATOR
-				break;
-			case User.MEMBER:
-				System.out.printf("It is a Member!");					// MEMBER
-				break;
-			default:
-				// User Type NOT DEFINED (The user exists in table User, but his ID is not a FK in any of the other tables (Provider, Manager, Operator, or Member))
-				System.out.println("User Type Not Defined!"); 
-			}
-			 
-			System.out.println("\nEnter Your Password: ");			// Requesting password
-			password = scan.nextLine();
+		if(loginCtrl.verifyLogin(userId, password) == 1){
+			user = loginCtrl.retrieveUserType(login);
 			
-			user.setLogin(new Login(idUser, password, null));		// Filling information of the object user.login
-			
-			switch(loginCtrl.verifyPassword(user.getLogin()))		// Checking password
-			{
-			case 1:
-				System.out.println("Password Correct!");				// CORRECT
-				break;
-			case 0:
-				System.out.println("Password Incorrect!");				// INCORRECT
-				break;
-			case -1:
-				System.out.println("System Error!");					// SYSTEM ERROR
-				break;
-			default:
-				System.out.println("Unknown System Error!");			// UNKNOWN SYSTEM ERROR
+			if(user instanceof Manager){
+				System.out.println("It is a Manager!");
+			}else if (user instanceof Member){
+				System.out.println("It is a Member!");
+			}else if (user instanceof Operator){
+				System.out.println("It is a Operator!");
+			}else if (user instanceof Provider){
+				System.out.println("It is a Provider!");
+			}else {
+				System.out.println("It is a not defined user!");
 			}
 			
-		}
-		else
-		{
-			System.out.println("User Not Found!");
+			System.out.println("ID: " + user.getIdUser());
+			System.out.println("ST_ADDR: " + user.getStAddr());
+			System.out.println("ADDR_COMP: " + user.getAddrComp());
+			System.out.println("CITY: " + user.getCity());
+			System.out.println("STATE: " + user.getState());
+			System.out.println("ZIP_CODE: " + user.getZipCode());
+			System.out.println("LST_NAME: " + user.getLstName());
+			System.out.println("FST_NAME: " + user.getFstName());
+			System.out.println("CELL_PHONE: " + user.getCellPhone());
+			System.out.println("HOME_PHONE: " + user.getHomePhone());
+			System.out.println("WORK_PHONE: " + user.getWorkPhone());
+			System.out.println("EMAIL: " + user.getEmail());
+			
 		}
 		
 		scan.close();
