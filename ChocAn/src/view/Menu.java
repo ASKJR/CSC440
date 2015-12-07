@@ -20,6 +20,31 @@ public class Menu {
 		
 	}
 	
+	private void printMenuOperator(String operatorName){
+		System.out.println("\n------------OPERATOR------------");
+		System.out.println("\t Operator: " + operatorName);
+		System.out.println("\n\t Choose an option:");
+		System.out.println("\t 1. Member"
+				+ "\n\t 2. Provider"
+				+ "\n\t 3. Logoff\n");
+	}
+	public int InputMenuOperator(){
+		printMenuOperator("Kato");
+		String in = "";
+		int out = 0;
+		boolean notValid = true;
+		while(notValid){
+			System.out.print("Type your operarion: ");
+			in = sc.nextLine();
+			if(isNumeric(in) && (in.equals("1") || in.equals("2") || in.equals("3"))){
+				notValid = false;
+			}
+		}
+		out = Integer.valueOf(in);
+		return out;
+	}
+	
+	
 	public String InputLogin(){
 		String in = "";
 		boolean notValid = true;

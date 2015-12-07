@@ -17,6 +17,7 @@ public class Main2 {
 		    	notValid = false;
 		    }
 		}
+		menu.InputMenuOperator();
 		
 
 	}
