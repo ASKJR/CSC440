@@ -12,7 +12,7 @@ import util.ConnectionFactory;
 
 public class OperatorDAO {
 
-	public int iOne(Operator operator){
+	public int iOne(Operator operator) {
 
         Connection connection = ConnectionFactory.openConnection();		// Connection to the database
         ResultSet rsInserting = null;

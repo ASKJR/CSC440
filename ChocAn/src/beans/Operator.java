@@ -1,6 +1,6 @@
 package beans;
 
-public class Operator extends User{
+public class Operator extends User {
 
 	private int fkIdOperator;
 	

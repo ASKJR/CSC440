@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 import beans.*;
 import controller.LoginCtrl;
-import controller.UserCtrl;
-import dao.UserDAO;
 
 public class Main {
 
