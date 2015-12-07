@@ -39,7 +39,7 @@ public class LoginCtrl {
 	
     public User retrieveUserType
     	(
-    			Login login
+    		Login login
     	)
     {
     	LoginDAO loginDAO = new LoginDAO();
