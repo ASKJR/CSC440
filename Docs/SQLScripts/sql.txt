@@ -1,0 +1,2 @@
+/*Senha == carrollu*/
+INSERT INTO login VALUES(1,'8e4c2ae639acc04461404fbfa69ce493');
