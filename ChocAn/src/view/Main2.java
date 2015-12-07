@@ -1,10 +1,8 @@
 package view;
-import beans.*;
-import dao.*;
 import controller.*;
 
 public class Main2 {
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		Menu menu = new Menu();
 		LoginCtrl loginctrl = new LoginCtrl(); 
 		boolean notValid = true;
@@ -13,7 +11,7 @@ public class Main2 {
 			int login        =  Integer.valueOf(menu.InputLogin());
 		    String password  =  menu.InputPassword();
 		    
-		    if(loginctrl.verifyLogin(login,password)==1){
+		    if(loginctrl.verifyLogin(login,password) == 1) {
 		    	notValid = false;
 		    }
 		}
