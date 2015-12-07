@@ -12,7 +12,14 @@ public class Menu {
 	
 	public void printMenuLogin(){
 		System.out.println("\t Login: ");
+		
 	}
+	
+	public void hello(){
+		System.out.println("Oi");
+	}
+	
+	
 	
 	public void logicMenuLogin(){
 		String in;

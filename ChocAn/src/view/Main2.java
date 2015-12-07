@@ -1,6 +1,9 @@
 package view;
 
 public class Main2 {
-	Menu me = new Menu();
-	me.logicMenuLogin();
+	public static void main(String[] args){
+		Menu menu = new Menu();
+
+	}
+
 }
