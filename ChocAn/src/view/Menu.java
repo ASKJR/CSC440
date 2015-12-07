@@ -44,12 +44,9 @@ public class Menu {
 	
 	
 	public static boolean isNumeric(String str) {  
-		try  
-		{  
+		try {  
 			Integer.parseInt(str);
-		}  
-		catch(NumberFormatException nfe)  
-		{  
+		} catch(NumberFormatException nfe) {  
 			return false;  
 		}  
 		return true;  
