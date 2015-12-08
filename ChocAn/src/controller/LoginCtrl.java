@@ -2,7 +2,6 @@ package controller;
 
 import beans.*;
 import dao.LoginDAO;
-import dao.UserDAO;
 
 public class LoginCtrl {
 
