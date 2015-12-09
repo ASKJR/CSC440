@@ -60,7 +60,7 @@ public class ProviderDAO {
 
             	pstInserting = connection.prepareStatement(""
                 		+ " INSERT INTO `provider`("
-                		+ " fk_id_provider) "
+                		+ " fk_id_provider, `status`) "
                 		+ " VALUES "
                 		+ " (?)");											// SQL itself being prepared
 
