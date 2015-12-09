@@ -1,11 +1,11 @@
 package view;
 
-//import controller.*;
+import controller.*;
 
 public class Main2 {
 	public static void main(String[] args) {
 		Menu menu = new Menu();
-		/*
+		
 		LoginCtrl loginctrl = new LoginCtrl(); 
 		boolean notValid = true;
 		
@@ -17,8 +17,8 @@ public class Main2 {
 		    	notValid = false;
 		    }
 		}
-		*/
-		menu.startMenuOperator();
+		
+		//menu.startMenuOperator();
 
 	}
 

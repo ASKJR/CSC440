@@ -9,7 +9,7 @@ import util.ConnectionFactory;
 
 public class UserDAO {
 	
-    public User fillData(User user)
+    public User sOne(User user)
     {
         Connection connection = ConnectionFactory.openConnection(); 		// Connection to the database
         ResultSet rsListing = null;											// ResultSet to receive the selected data
