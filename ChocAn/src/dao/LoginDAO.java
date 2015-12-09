@@ -15,12 +15,12 @@ public class LoginDAO {
         PreparedStatement pstInserting = null;								// PreparedStatement to process the SQL
 
         try {
-            
+
         	pstInserting = connection.prepareStatement(""
             		+ " INSERT INTO `login`("
             		+ " fk_id_user, `password`) "
             		+ " VALUES "
-            		+ " (?, (SELECT md5(?)));");								// SQL itself being prepared
+            		+ " (?, (SELECT md5(?)));");							// SQL itself being prepared
 
             pstInserting.setInt(1, login.getFkIdUser());					// Replacing each ? with the correct value
             pstInserting.setString(2, login.getPassword());					// Replacing each ? with the correct value
@@ -37,9 +37,9 @@ public class LoginDAO {
 
 	public int verifyLogin (Login login){
 
-        Connection connection = ConnectionFactory.openConnection(); 	// Connection to the database
-        ResultSet rsLogin = null;										// ResultSet to receive the selected data
-        PreparedStatement pstLogin = null;								// PreparedStatement to process the SQL
+        Connection connection = ConnectionFactory.openConnection(); 		// Connection to the database
+        ResultSet rsLogin = null;											// ResultSet to receive the selected data
+        PreparedStatement pstLogin = null;									// PreparedStatement to process the SQL
         
         try {
             
@@ -47,24 +47,24 @@ public class LoginDAO {
         			+ "SELECT * "
         			+ "FROM login "
         			+ "WHERE fk_id_user = ? "
-        			+ "AND password = (SELECT md5(?)) ");				// SQL itself being prepared
+        			+ "AND password = (SELECT md5(?)) ");					// SQL itself being prepared
 
-        	pstLogin.setInt(1, login.getFkIdUser());					// Replacing each ? with the correct value
-        	pstLogin.setString(2, login.getPassword());					// Replacing each ? with the correct value
+        	pstLogin.setInt(1, login.getFkIdUser());						// Replacing each ? with the correct value
+        	pstLogin.setString(2, login.getPassword());						// Replacing each ? with the correct value
         	
-        	rsLogin = pstLogin.executeQuery();							// SQL being executed and results being assigned to ResultSet
+        	rsLogin = pstLogin.executeQuery();								// SQL being executed and results being assigned to ResultSet
             
             if (rsLogin.next())
             	return 1;
             	
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());							// Error Treatment
+            System.out.println(e.getMessage());								// Error Treatment
             return -1;
         }
         
         ConnectionFactory.closeConnection(
-        		connection, pstLogin, rsLogin);						// Closing connection to the DBMS
+        		connection, pstLogin, rsLogin);								// Closing connection to the DBMS
 
         return 0;
 
@@ -72,9 +72,9 @@ public class LoginDAO {
 	
     public User retrieveUserType(Login login){
     	
-        Connection connection = ConnectionFactory.openConnection(); 	// Connection to the database
-        ResultSet rsType = null;										// ResultSet to receive the selected data
-        PreparedStatement pstType = null;								// PreparedStatement to process the SQL
+        Connection connection = ConnectionFactory.openConnection(); 		// Connection to the database
+        ResultSet rsType = null;											// ResultSet to receive the selected data
+        PreparedStatement pstType = null;									// PreparedStatement to process the SQL
         UserDAO userDAO = new UserDAO();
         
      // Verifying if there is a registry for this user in the PROVIDER table
@@ -82,23 +82,23 @@ public class LoginDAO {
             
         	pstType = connection.prepareStatement(""
         			+ " SELECT * FROM provider "
-        			+ "WHERE fk_id_provider = ?; ");					// SQL itself being prepared 
+        			+ "WHERE fk_id_provider = ?; ");						// SQL itself being prepared 
 
-        	pstType.setInt(1, login.getFkIdUser());						// Replacing each ? with the correct value
+        	pstType.setInt(1, login.getFkIdUser());							// Replacing each ? with the correct value
         	
-        	rsType = pstType.executeQuery();							// SQL being executed and results being assigned to ResultSet
+        	rsType = pstType.executeQuery();								// SQL being executed and results being assigned to ResultSet
             
             if (rsType.next())
             {
             	Provider provider = new Provider();
             	provider.setLogin(login);
             	
-        		userDAO.fillData(provider);
+        		userDAO.sOne(provider);										// Fill data
             	return provider;
             }
             
         } catch (SQLException e) {
-            System.out.println(e.getMessage());							// Error Treatment
+            System.out.println(e.getMessage());								// Error Treatment
             return null;
         }
 
@@ -118,7 +118,7 @@ public class LoginDAO {
             	Manager manager = new Manager();
             	manager.setLogin(login);
             	
-            	userDAO.fillData(manager);
+            	userDAO.sOne(manager);										// Fill data
             	return manager;
             }
 
@@ -143,7 +143,7 @@ public class LoginDAO {
             	Operator operator = new Operator();
             	operator.setLogin(login);
             	
-            	userDAO.fillData(operator);
+            	userDAO.sOne(operator);										// Fill data
             	return operator;
             }
             
@@ -169,7 +169,7 @@ public class LoginDAO {
             	member.setLogin(login);
             	member.setStatus(rsType.getInt("status"));
             	
-            	userDAO.fillData(member);
+            	userDAO.sOne(member);										// Fill data
             	return member;
             }
 
@@ -186,32 +186,32 @@ public class LoginDAO {
     /*
     public int verifyPassword(Login login) // Check if the informed password is the correct one
     {
-        Connection connection = ConnectionFactory.openConnection(); 	// Connection to the database
-        ResultSet rsLogin = null;										// ResultSet to receive the selected data
-        PreparedStatement pstLogin = null;								// PreparedStatement to process the SQL
+        Connection connection = ConnectionFactory.openConnection(); 		// Connection to the database
+        ResultSet rsLogin = null;											// ResultSet to receive the selected data
+        PreparedStatement pstLogin = null;									// PreparedStatement to process the SQL
         
         try {
             
         	pstLogin = connection.prepareStatement(" "
         			+ "SELECT * FROM login "
         			+ "WHERE fk_id_user = ? "
-        			+ "AND password = (SELECT md5(?)) ");				// SQL itself being prepared
+        			+ "AND password = (SELECT md5(?)) ");					// SQL itself being prepared
 
-        	pstLogin.setInt(1, login.getFkIdUser());					// Replacing each ? with the correct value
-        	pstLogin.setString(2, login.getPassword());					// Replacing each ? with the correct value
+        	pstLogin.setInt(1, login.getFkIdUser());						// Replacing each ? with the correct value
+        	pstLogin.setString(2, login.getPassword());						// Replacing each ? with the correct value
         	
-        	rsLogin = pstLogin.executeQuery();							// SQL being executed and results being assigned to ResultSet
+        	rsLogin = pstLogin.executeQuery();								// SQL being executed and results being assigned to ResultSet
             
             if (rsLogin.next())
             	return 1;
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());							// Error Treatment
+            System.out.println(e.getMessage());								// Error Treatment
             return -1;
         }
         
         ConnectionFactory.closeConnection(
-        		connection, pstLogin, rsLogin);						// Closing connection to the DBMS
+        		connection, pstLogin, rsLogin);								// Closing connection to the DBMS
 
         return 0;
     }

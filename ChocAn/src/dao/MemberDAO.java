@@ -74,12 +74,67 @@ public class MemberDAO {
             
 
         } catch (SQLException e) {
+            System.out.println(e.getMessage());								// Error Treatment
+            return Member.UNSUCCESSFUL_INSERT;								// Method finished UNsuccessfully
+        }
+        
+        ConnectionFactory.closeConnection(connection, pstInserting);		// Closing connection to the DBMS
+        return Member.SUCCESSFUL_INSERT;									// Method finished successfully
+	}
+
+	
+	public int uOne(Member member){
+
+        Connection connection = ConnectionFactory.openConnection();			// Connection to the database
+        PreparedStatement pstUpdating = null;								// PreparedStatement to process the SQL
+
+        try {
+            
+        	pstUpdating = connection.prepareStatement(""
+            		+ "UPDATE `user` "
+            		+ "SET "
+            		+ "st_addr = ? "
+            		+ "addr_comp =? "
+            		+ "city = ? "
+            		+ "state = ? "
+            		+ "zip_code = ? "
+            		+ "lst_name = ? "
+            		+ "fst_name = ? "
+            		+ "cell_phone = ? "
+            		+ "home_phone = ? "
+            		+ "work_phone = ? "
+            		+ "email = ? "
+            		+ "WHERE "
+            		+ "user.id_user = ?");									// SQL itself being prepared
+
+
+        	pstUpdating.setString(1, member.getStAddr());					// Replacing each ? with the correct value
+        	pstUpdating.setString(2, member.getAddrComp());
+        	pstUpdating.setString(3, member.getCity());
+        	pstUpdating.setString(4, member.getState());
+        	pstUpdating.setString(5, member.getZipCode());
+        	pstUpdating.setString(6, member.getLstName());
+        	pstUpdating.setString(7, member.getFstName());
+        	pstUpdating.setString(8, member.getCellPhone());
+        	pstUpdating.setString(9, member.getHomePhone());
+        	pstUpdating.setString(10, member.getWorkPhone());
+        	pstUpdating.setString(11, member.getEmail());
+        	pstUpdating.setInt(12, member.getFkIdMember());
+            
+            pstUpdating.executeUpdate();								// SQL being executed
+            pstUpdating.getGeneratedKeys();
+
+
+
+        } catch (SQLException e) {
             System.out.println(e.getMessage());							// Error Treatment
             return Member.UNSUCCESSFUL_INSERT;							// Method finished UNsuccessfully
         }
         
-        ConnectionFactory.closeConnection(connection, pstInserting);	// Closing connection to the DBMS
+        ConnectionFactory.closeConnection(connection, pstUpdating);	// Closing connection to the DBMS
         return Member.SUCCESSFUL_INSERT;								// Method finished successfully
 	}
 
+
+	
 }

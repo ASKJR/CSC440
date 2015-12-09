@@ -2,6 +2,8 @@ package view;
 
 import java.util.Scanner;
 
+import beans.User;
+
 public class Menu {
 	
 	Scanner sc ;
@@ -33,16 +35,16 @@ public class Menu {
 	}
 	
 	//************************ operator
-	public void startMenuOperator() {
-		System.out.println("\n\t Operator: " + " === NAME === ");
+	public void startMenuOperator(User operator) {
+		System.out.println("\n\t Operator: " + operator.getFstName());
 		System.out.println("\n\t Choose the type of user you want to operate: ");
 		System.out.println("\t 1. Member"
 					   + "\n\t 2. Provider"
 					   + "\n\t 3. Logoff\n");
-		printMenuOperator();
+		printMenuOperator(operator);
 	}
 	
-	public void printMenuOperator() {
+	public void printMenuOperator(User operator) {
 		String in = "";
 		String option = "";
 		int inInt = 0;
@@ -91,7 +93,7 @@ public class Menu {
 		else if(inInt == 3)
 			openMenuDelete(option);
 		else if(inInt == 4)
-			startMenuOperator();
+			startMenuOperator(operator);
 			
 	}	
 	
@@ -178,25 +180,25 @@ public class Menu {
 	}
 	
 	//************************ manager
-	public void startMenuManager() {
-		System.out.println("\n\t Manager: " + " === NAME === ");
+	public void startMenuManager(User manager) {
+		System.out.println("\n\t Manager: " + manager.getFstName());
 		System.out.print("\n\t Do you want to visualize the weekly report? (Y/N): ");
 		// shows the weekly report		
 	}
 	
 	//************************ provider
-	public void startMenuProvider() {
-		System.out.println("\n\t Provider: " + " === NAME === ");
+	public void startMenuProvider(User provider) {
+		System.out.println("\n\t Provider: " + provider.getFstName());
 		System.out.println("\n\t Choose the type of operation: ");
 		System.out.println("\t 1. Check member's status"
 					   + "\n\t 2. Register a service for a member"
 					   + "\n\t 3. Check fee's total"
 					   + "\n\t 4. Request Provider Directory"
 					   + "\n\t 5. Logoff\n");
-		printMenuProvider();
+		printMenuProvider(provider);
 	}
 	
-	public void printMenuProvider() {
+	public void printMenuProvider(User provider) {
 		String in = "";
 		String option = "";
 		int inInt = 0;
@@ -213,13 +215,13 @@ public class Menu {
 		
 		inInt = Integer.valueOf(in);
 		if(inInt == 1)
-			openMenuCheckStatus();
+			openMenuCheckStatus(provider);
 		else if(inInt == 2)
 			openMenuUpdate(option);
 		else if(inInt == 3)
 			openMenuDelete(option);
 		else if(inInt == 4)
-			startMenuOperator();
+			startMenuProvider(provider);
 		else if(inInt == 5) {
 			System.out.println("\n\t Good bye!."); // fix this. It should return to Login screen
 			return;
@@ -227,7 +229,7 @@ public class Menu {
 			
 	}
 	
-	public void openMenuCheckStatus() {
+	public void openMenuCheckStatus(User provider) {
 		String in = "";
 		int inInt = 0;
 		int status = 0;
@@ -260,7 +262,7 @@ public class Menu {
 			if(in.equalsIgnoreCase("Y"))
 				openMenuRegisterService(inInt);
 			else
-				startMenuProvider();
+				startMenuProvider(provider);
 		}			
 		else if(status == 2)
 			System.out.println("\t Invalid number!"); // if not valid
