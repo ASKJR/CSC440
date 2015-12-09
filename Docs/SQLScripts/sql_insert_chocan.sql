@@ -31,4 +31,62 @@ VALUES
 ('112 Brastow Street',NULL,'San Diego','CA','93122','Reetz','Kaleb','+1 555 999 5555','+1 323 666 8887','+1 777 222 9999','reetz@globo.com'),
 ('14 Gray Street',NULL,'San Diego','CA','99223','Johson','Juliana','+1 555 999 5555','+1 234 366 6666',NULL,'johson@gmail.com');
 
+INSERT INTO choc_an.`member`(fk_id_member, `status`)
+VALUES
+(1,1),
+(2,1),
+(3,1),
+(4,1),
+(5,1),
+(6,1),
+(7,1),
+(8,1),
+(9,1),
+(10,1),
+(11,2),
+(12,3),
+(13,4),
+(14,2),
+(15,3);
 
+INSERT INTO choc_an.`provider`(fk_id_provider, `status`)
+VALUES
+(16,1),
+(17,1),
+(18,1),
+(19,1),
+(20,4);
+
+INSERT INTO choc_an.`operator`(fk_id_operator)
+VALUES
+(21),
+(22),
+(23),
+(24),
+(25);
+
+INSERT INTO choc_an.`manager`(fk_id_manager)
+VALUES
+(26),
+(27),
+(28),
+(29),
+(30);
+
+INSERT INTO choc_an.`login` (fk_id_user, `password`)
+VALUES
+(16,(SELECT md5('123456'))),
+(17,(SELECT md5('123456'))),
+(18,(SELECT md5('123456'))),
+(19,(SELECT md5('123456'))),
+(20,(SELECT md5('123456'))),
+(21,(SELECT md5('123456'))),
+(22,(SELECT md5('123456'))),
+(23,(SELECT md5('123456'))),
+(24,(SELECT md5('123456'))),
+(25,(SELECT md5('123456'))),
+(26,(SELECT md5('123456'))),
+(27,(SELECT md5('123456'))),
+(28,(SELECT md5('123456'))),
+(29,(SELECT md5('123456'))),
+(30,(SELECT md5('123456')));
