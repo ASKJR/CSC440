@@ -39,7 +39,7 @@ public class Main {
 				System.out.println("It is a not defined user!");
 			}
 		}else{
-			System.out.println("The system did not find any user!");
+			System.err.println("\n\n\t The system did not find any user!");
 		}
 		
 		scan.close();

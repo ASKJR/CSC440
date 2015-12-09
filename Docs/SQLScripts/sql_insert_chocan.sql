@@ -90,3 +90,11 @@ VALUES
 (28,(SELECT md5('123456'))),
 (29,(SELECT md5('123456'))),
 (30,(SELECT md5('123456')));
+
+INSERT INTO choc_an.`service` (id_service, `name`, fee)
+VALUES
+(1,'nutritionist',100.0),
+(2,'personal trainer',80.0),
+(3,'psychologist',75.5),
+(4,'psychiatrist',120.0),
+(10,'cook',190.0);
