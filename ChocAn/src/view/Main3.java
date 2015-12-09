@@ -1,6 +1,6 @@
 package view;
 
-public class MainJorge {
+public class Main3 {
 
 	public static void main(String[] args) {
 	
