@@ -19,4 +19,16 @@ VALUES
 ('139 Bear Avenue',NULL,'Madison','WI','83486','Clemonce','Marie','+1 333 333 4444','+1 221 232 2222','+1 888 888 8288','france@pio.carrollu.edu'),
 ('1026 Beach avenue',NULL,'Pewaukee','WI','33184','Megumi','Patricia','+1 555 666 5555','+1 828 266 5555','+1 777 777 6666','megumi@pio.carrollu.edu'),
 ('1688 Space Avenue',NULL,'Houston','TX','52184','Smith','Lucy','+1 555 999 5555','+1 123 666 8888','+1 777 222 9999','smith@pio.carrollu.edu'),
-('626 Carroll Street',NULL,'Green Bay','WI','93187','Santanta','Steven','+1 555 999 5555','+1 234 666 6666','+1 777 777 2222','santana@pio.carrollu.edu');
+('626 Carroll Street',NULL,'Green Bay','WI','93187','Santanta','Steven','+1 555 999 5555','+1 234 666 6666','+1 777 777 2222','santana@pio.carrollu.edu'),
+('2434 Nice Avenue',NULL,'Boston','MA','46543','Pereira','Maicon','+1 444 555 5555','+1 661 666 6266','+1 777 777 323','pereira@bol.com'),
+('4243 Fast Avenue',NULL,'Boston','MA','43486','Hoegen','Carol','+1 333 333 4444','+1 221 232 2222','+1 888 888 8288','hoegen@aol.com'),
+('42245 Boston Avenue',NULL,'Boston','MA','43184','Oliveira','Luma','+1 555 666 5555','+1 828 266 5577','+1 777 777 6666','oliveira@uol.com'),
+('112 Brastow Street',NULL,'Quincy','MA','42184','Valasques','John','+1 555 999 5555','+1 323 666 8887','+1 777 222 9999','valasques@globo.com'),
+('14 Gray Street',NULL,'Quincy','MA','43187','Leite','Romilda','+1 555 999 5555','+1 234 366 6666',NULL,'leite@gmail.com'),
+('2434 Nice Avenue',NULL,'San Francisco','CA','94122','Kawasaki','Daniel','+1 444 555 5555','+1 661 666 6266','+1 777 777 323','kawasaki@bol.com'),
+('4243 Fast Avenue',NULL,'San Francisco','CA','94124','Noger','Murilo','+1 333 333 4444','+1 221 232 2222','+1 888 888 8288','noger@aol.com'),
+('42245 Boston Avenue',NULL,'San Diego','CA','94124','Oliveira','Davi','+1 555 666 5555','+1 828 266 5577','+1 777 777 6666','oliveirafdr@uol.com'),
+('112 Brastow Street',NULL,'San Diego','CA','93122','Reetz','Kaleb','+1 555 999 5555','+1 323 666 8887','+1 777 222 9999','reetz@globo.com'),
+('14 Gray Street',NULL,'San Diego','CA','99223','Johson','Juliana','+1 555 999 5555','+1 234 366 6666',NULL,'johson@gmail.com');
+
+
