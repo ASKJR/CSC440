@@ -4,11 +4,13 @@ import java.util.Scanner;
 
 import beans.User;
 import util.*;
+import controller.*;
 
 public class OperatorMenu {
 	
 	Scanner sc =  new Scanner(System.in);
 	Utility u  =  new Utility();
+	OperatorCtrl opeCtrl = new OperatorCtrl(); 
 	
 	//************************ operator
 	public void startMenu(User operator) {
@@ -74,18 +76,121 @@ public class OperatorMenu {
 	}	
 	
 	public void openMenuAdd(String user) {
+		String userData[] = new String[11];
+		String in;
 		System.out.println("\n\t Operation: Add " + user);
-		System.out.print("\t First name    : ");
-		System.out.print("\t Last name     : ");
-		System.out.print("\t Email         : ");
-		System.out.print("\t Cell phone    : ");
-		System.out.print("\t Home phone    : ");
-		System.out.print("\t Work phone    : ");
-		System.out.print("\t Address       : ");
-		System.out.print("\t Address line 2: ");
-		System.out.print("\t City          : ");
-		System.out.print("\t State         : ");
-		System.out.print("\t Zip code      : ");
+		
+		while(true){
+			System.out.print("\t First name    : ");
+			in = sc.nextLine();
+			if(u.isValidStr(in)){
+				userData[6] = in;
+				break;
+			}
+		}
+		
+
+		while(true){
+			System.out.print("\t Last name     :");
+			in = sc.nextLine();
+			if(u.isValidStr(in)){
+				userData[5] = in;
+				break;
+			}
+		}
+		
+		
+		while(true){
+			System.out.print("\t Email         : ");
+			in = sc.nextLine();
+			if(u.isValidStr(in)){
+				userData[10] = in;
+				break;
+			}
+		}
+		
+		while(true){
+			System.out.print("\t Cell phone    : ");
+			in = sc.nextLine();
+			if(u.isValidStr(in)){
+				userData[7] = in;
+				break;
+			}
+		}
+		
+		while(true){
+			System.out.print("\t Home phone    : ");
+			in = sc.nextLine();
+			if(u.isValidStr(in)){
+				userData[8] = in;
+				break;
+			}
+		}
+		
+		while(true){
+			System.out.print("\t Work phone    : ");
+			in = sc.nextLine();
+			if(u.isValidStr(in)){
+				userData[9] = in;
+				break;
+			}
+		}
+		
+		while(true){
+			System.out.print("\t Address       : ");
+			in = sc.nextLine();
+			if(u.isValidStr(in)){
+				userData[0] = in;
+				break;
+			}
+		}
+		
+		while(true){
+			System.out.print("\t Address line 2: ");
+			in = sc.nextLine();
+			if(u.isValidStr(in)){
+				userData[1] = in;
+				break;
+			}
+		}
+		
+		
+		while(true){
+			System.out.print("\t City          : ");
+			in = sc.nextLine();
+			if(u.isValidStr(in)){
+				userData[2] = in;
+				break;
+			}
+		}
+		
+		while(true){
+			System.out.print("\t State         : ");
+			in = sc.nextLine();
+			if(u.isValidStr(in)){
+				userData[3] = in;
+				break;
+			}
+		}
+
+		while(true){
+			System.out.print("\t Zip code      : ");
+			in = sc.nextLine();
+			if(u.isValidStr(in)){
+				userData[4] = in;
+				break;
+			}
+		}
+		
+		if(opeCtrl.iOne(userData[0],userData[1],userData[2],userData[3],
+						userData[4],userData[5],userData[6],userData[7],
+						userData[8],userData[9],userData[10]) == User.SUCCESSFUL_SQL_QUERY){
+			System.out.println("Inserido");
+		}
+		else{
+			System.out.println("Nao inserido!");
+		}
+		
 		System.out.print("\n\t Do you want to add this " + user + "? (Y/N): ");
 	}
 	

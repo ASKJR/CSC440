@@ -7,7 +7,6 @@ public class OperatorCtrl {
 
 	public int iOne
 		(
-			int fkIdOperator,
 			String stAddr,
 			String addrComp,
 			String city,
@@ -24,8 +23,6 @@ public class OperatorCtrl {
 		OperatorDAO operatorDAO = new OperatorDAO();
 		Operator operator = new Operator();
 		
-		operator.setFkIdOperator(fkIdOperator);
-		operator.setIdUser(fkIdOperator);
 		operator.setStAddr(stAddr);
 		operator.setAddrComp(addrComp);
 		operator.setCity(city);

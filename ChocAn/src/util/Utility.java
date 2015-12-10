@@ -9,4 +9,10 @@ public class Utility {
 		}  
 		return true;  
 	}
+	public static boolean isValidStr(String in){
+		if(in.equals("")){
+			return false;
+		}
+		else return true;
+	}
 }
