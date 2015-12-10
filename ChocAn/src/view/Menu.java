@@ -269,6 +269,7 @@ public class Menu {
 		}
 		
 		inInt = Integer.valueOf(in);
+		
 		// verificar status do membro e salvar na variavel "status"
 		status = 0; // verificar status pra executar a funcao correta
 		System.out.println("\t Status of the Member: " + " === NAME === ");
@@ -337,8 +338,6 @@ public class Menu {
 		}
 		if(in.equalsIgnoreCase("1"))
 			startMenuProvider(provider);
-		
-		// alterei aqui
 			
 		System.out.println("\n\t Comments: ");
 		// get the comments
