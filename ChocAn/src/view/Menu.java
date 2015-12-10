@@ -19,7 +19,7 @@ public class Menu {
 		System.out.print("\t Login: ");
 		while(notValid) {
 			in = sc.nextLine();
-			if(isNumeric(in) || !in.equals("")) {
+			if(isNumeric(in) && !in.equals("")) {
 				notValid = false;
 			} else System.out.print("\t Invalid login. Re-enter: ");
 		}
