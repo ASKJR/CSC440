@@ -145,12 +145,12 @@ public class MemberDAO {
             
         	pstSelecting = connection.prepareStatement(""
             		+ "SELECT * "
-            		+ "FROM user"
+            		+ "FROM user "
             		+ "WHERE id_user = ?");							// SQL itself being prepared
 
 
             pstSelecting.setInt(1, member.getFkIdMember());					// Replacing each ? with the correct value
-            
+
             rsSelecting = pstSelecting.executeQuery();						// SQL being executed
         	
             if (rsSelecting.next()) {
@@ -168,12 +168,12 @@ public class MemberDAO {
             	
             	pstSelecting = connection.prepareStatement(""
                 		+ "SELECT * "
-                		+ "FROM member"
+                		+ "FROM member "
                 		+ "WHERE fk_id_member = ?");							// SQL itself being prepared
 
 
                 pstSelecting.setInt(1, member.getFkIdMember());					// Replacing each ? with the correct value
-                
+    
                 rsSelecting = pstSelecting.executeQuery();						// SQL being executed
                 
                 if(rsSelecting.next()){
