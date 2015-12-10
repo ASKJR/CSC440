@@ -59,11 +59,12 @@ public class MemberDAO {
 
             	pstInserting = connection.prepareStatement(""
                 		+ " INSERT INTO `member`("
-                		+ " fk_id_member) "
+                		+ " fk_id_member, `status`) "
                 		+ " VALUES "
-                		+ " (?)");											// SQL itself being prepared
+                		+ " (?, ?)");											// SQL itself being prepared
 
                 pstInserting.setInt(1, generatedId);						// Replacing each ? with the correct value
+                pstInserting.setInt(2, member.getStatus());
                 pstInserting.executeUpdate();								// SQL being executed
             }
             else
