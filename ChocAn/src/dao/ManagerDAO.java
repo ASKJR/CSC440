@@ -69,17 +69,17 @@ public class ManagerDAO {
             else
             {
             	System.out.println("No Insert to the Database happened.");
-            	return Manager.UNSUCCESSFUL_INSERT;
+            	return Manager.UNSUCCESSFUL_SQL_QUERY;
             }
             
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());							// Error Treatment
-            return Manager.UNSUCCESSFUL_INSERT;							// Method finished UNsuccessfully
+            return Manager.UNSUCCESSFUL_SQL_QUERY;							// Method finished UNsuccessfully
         }
         
         ConnectionFactory.closeConnection(connection, pstInserting);	// Closing connection to the DBMS
-        return Manager.SUCCESSFUL_INSERT;								// Method finished successfully
+        return Manager.SUCCESSFUL_SQL_QUERY;								// Method finished successfully
 	}
        
 }

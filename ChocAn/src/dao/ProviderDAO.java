@@ -70,17 +70,17 @@ public class ProviderDAO {
             else
             {
             	System.out.println("No Insert to the Database happened.");
-            	return Provider.UNSUCCESSFUL_INSERT;
+            	return Provider.UNSUCCESSFUL_SQL_QUERY;
             }
             
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());								// Error Treatment
-            return Provider.UNSUCCESSFUL_INSERT;							// Method finished UNsuccessfully
+            return Provider.UNSUCCESSFUL_SQL_QUERY;							// Method finished UNsuccessfully
         }
         
         ConnectionFactory.closeConnection(connection, pstInserting);		// Closing connection to the DBMS
-        return Provider.SUCCESSFUL_INSERT;									// Method finished successfully
+        return Provider.SUCCESSFUL_SQL_QUERY;									// Method finished successfully
 	}
 
 	public int uOne(Provider provider){
@@ -128,11 +128,11 @@ public class ProviderDAO {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());								// Error Treatment
-            return Member.UNSUCCESSFUL_INSERT;								// Method finished UNsuccessfully
+            return Member.UNSUCCESSFUL_SQL_QUERY;								// Method finished UNsuccessfully
         }
         
         ConnectionFactory.closeConnection(connection, pstUpdating);			// Closing connection to the DBMS
-        return Member.SUCCESSFUL_INSERT;									// Method finished successfully
+        return Member.SUCCESSFUL_SQL_QUERY;									// Method finished successfully
 	}
 
 	public int alterStatus(Provider provider){
@@ -160,11 +160,11 @@ public class ProviderDAO {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());								// Error Treatment
-            return Member.UNSUCCESSFUL_INSERT;								// Method finished UNsuccessfully
+            return Member.UNSUCCESSFUL_SQL_QUERY;								// Method finished UNsuccessfully
         }
         
         ConnectionFactory.closeConnection(connection, pstUpdating);			// Closing connection to the DBMS
-        return Member.SUCCESSFUL_INSERT;									// Method finished successfully
+        return Member.SUCCESSFUL_SQL_QUERY;									// Method finished successfully
 	}
 	
     public Provider sOne(Provider provider)

@@ -17,7 +17,7 @@ public class Main {
 		Scanner scan = new Scanner(System.in);
 		
 		System.out.println(" =============================== LOGIN =============================== ");
-		
+
 		System.out.printf("\n\t ID: ");
 		login.setFkIdUser(Integer.valueOf(scan.nextLine()));
 		
@@ -41,7 +41,7 @@ public class Main {
 		}else{
 			System.err.println("\n\n\t The system did not find any user!");
 		}
-		
+
 		scan.close();
 		
 	}

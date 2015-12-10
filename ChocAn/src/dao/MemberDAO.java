@@ -14,9 +14,9 @@ public class MemberDAO {
 
 	public int iOne(Member member){
 
-        Connection connection = ConnectionFactory.openConnection();		// Connection to the database
+        Connection connection = ConnectionFactory.openConnection();			// Connection to the database
         ResultSet rsInserting = null;
-        PreparedStatement pstInserting = null;							// PreparedStatement to process the SQL
+        PreparedStatement pstInserting = null;								// PreparedStatement to process the SQL
         int generatedId = 0;
 
         try {
@@ -36,10 +36,10 @@ public class MemberDAO {
             		+ "email) "
             		+ "VALUES "
             		+ "(?,?,?,?,?,?,?,?,?,?,?)"
-            		, Statement.RETURN_GENERATED_KEYS);					// SQL itself being prepared
+            		, Statement.RETURN_GENERATED_KEYS);						// SQL itself being prepared
 
 
-            pstInserting.setString(1, member.getStAddr());				// Replacing each ? with the correct value
+            pstInserting.setString(1, member.getStAddr());					// Replacing each ? with the correct value
             pstInserting.setString(2, member.getAddrComp());
             pstInserting.setString(3, member.getCity());
             pstInserting.setString(4, member.getState());
@@ -51,9 +51,9 @@ public class MemberDAO {
             pstInserting.setString(10, member.getWorkPhone());
             pstInserting.setString(11, member.getEmail());
             
-            pstInserting.executeUpdate();								// SQL being executed
-            rsInserting = pstInserting.getGeneratedKeys();				// Generated ID being retrieved
-        	
+            pstInserting.executeUpdate();									// SQL being executed
+            rsInserting = pstInserting.getGeneratedKeys();					// Generated ID being retrieved
+
             if (rsInserting.next()) {
             	generatedId = rsInserting.getInt(1);						// Assigning generated ID to the returning variable
 
@@ -69,20 +69,19 @@ public class MemberDAO {
             else
             {
             	System.out.println("No Insert to the Database happened.");
-            	return Member.UNSUCCESSFUL_INSERT;
+            	return Member.UNSUCCESSFUL_SQL_QUERY;
             }
             
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());								// Error Treatment
-            return Member.UNSUCCESSFUL_INSERT;								// Method finished UNsuccessfully
+            return Member.UNSUCCESSFUL_SQL_QUERY;								// Method finished UNsuccessfully
         }
         
         ConnectionFactory.closeConnection(connection, pstInserting);		// Closing connection to the DBMS
-        return Member.SUCCESSFUL_INSERT;									// Method finished successfully
+        return Member.SUCCESSFUL_SQL_QUERY;									// Method finished successfully
 	}
 
-	
 	public int uOne(Member member){
 
         Connection connection = ConnectionFactory.openConnection();			// Connection to the database
@@ -121,20 +120,80 @@ public class MemberDAO {
         	pstUpdating.setString(11, member.getEmail());
         	pstUpdating.setInt(12, member.getFkIdMember());
             
-            pstUpdating.executeUpdate();								// SQL being executed
+            pstUpdating.executeUpdate();									// SQL being executed
             pstUpdating.getGeneratedKeys();
 
 
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());							// Error Treatment
-            return Member.UNSUCCESSFUL_INSERT;							// Method finished UNsuccessfully
+            System.out.println(e.getMessage());								// Error Treatment
+            return Member.UNSUCCESSFUL_SQL_QUERY;								// Method finished UNsuccessfully
         }
         
-        ConnectionFactory.closeConnection(connection, pstUpdating);	// Closing connection to the DBMS
-        return Member.SUCCESSFUL_INSERT;								// Method finished successfully
+        ConnectionFactory.closeConnection(connection, pstUpdating);			// Closing connection to the DBMS
+        return Member.SUCCESSFUL_SQL_QUERY;									// Method finished successfully
 	}
 
+	public Member sOne(Member member){
 
+        Connection connection = ConnectionFactory.openConnection();			// Connection to the database
+        ResultSet rsSelecting = null;
+        PreparedStatement pstSelecting = null;								// PreparedStatement to process the SQL
+
+        try {
+            
+        	pstSelecting = connection.prepareStatement(""
+            		+ "SELECT * "
+            		+ "FROM user"
+            		+ "WHERE id_user = ?");							// SQL itself being prepared
+
+
+            pstSelecting.setInt(1, member.getFkIdMember());					// Replacing each ? with the correct value
+            
+            rsSelecting = pstSelecting.executeQuery();						// SQL being executed
+        	
+            if (rsSelecting.next()) {
+            	member.setStAddr(rsSelecting.getString("st_addr"));
+            	member.setAddrComp(rsSelecting.getString("addr_comp"));
+            	member.setCity(rsSelecting.getString("city"));
+            	member.setState(rsSelecting.getString("state"));
+            	member.setZipCode(rsSelecting.getString("zip_code"));
+            	member.setLstName(rsSelecting.getString("lst_name"));
+            	member.setFstName(rsSelecting.getString("fst_name"));
+            	member.setCellPhone(rsSelecting.getString("cell_phone"));
+            	member.setHomePhone(rsSelecting.getString("home_phone"));
+            	member.setWorkPhone(rsSelecting.getString("work_phone"));
+            	member.setEmail(rsSelecting.getString("email"));
+            	
+            	pstSelecting = connection.prepareStatement(""
+                		+ "SELECT * "
+                		+ "FROM member"
+                		+ "WHERE fk_id_member = ?");							// SQL itself being prepared
+
+
+                pstSelecting.setInt(1, member.getFkIdMember());					// Replacing each ? with the correct value
+                
+                rsSelecting = pstSelecting.executeQuery();						// SQL being executed
+                
+                if(rsSelecting.next()){
+                	member.setStatus(rsSelecting.getInt("status"));
+                	member.setFkIdMember(rsSelecting.getInt("fk_id_member"));
+                }
+            	
+            }
+            else
+            {
+            	System.out.println("The system could not find any member.");
+            	return null;
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());									// Error Treatment
+            return null;														// Method finished UNsuccessfully
+        }
+        
+        ConnectionFactory.closeConnection(connection, pstSelecting);			// Closing connection to the DBMS
+        return member;															// Method finished successfully
+	}
 	
 }

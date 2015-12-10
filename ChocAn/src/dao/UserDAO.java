@@ -1,5 +1,6 @@
 package dao;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,8 +8,9 @@ import java.sql.SQLException;
 import beans.*;
 import util.ConnectionFactory;
 
+
 public class UserDAO {
-	
+
     public User sOne(User user)
     {
         Connection connection = ConnectionFactory.openConnection(); 		// Connection to the database

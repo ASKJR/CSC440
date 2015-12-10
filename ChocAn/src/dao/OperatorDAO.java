@@ -69,17 +69,17 @@ public class OperatorDAO {
             else
             {
             	System.out.println("No Insert to the Database happened.");
-            	return Operator.UNSUCCESSFUL_INSERT;
+            	return Operator.UNSUCCESSFUL_SQL_QUERY;
             }
             
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());							// Error Treatment
-            return Operator.UNSUCCESSFUL_INSERT;							// Method finished UNsuccessfully
+            return Operator.UNSUCCESSFUL_SQL_QUERY;							// Method finished UNsuccessfully
         }
         
         ConnectionFactory.closeConnection(connection, pstInserting);	// Closing connection to the DBMS
-        return Operator.SUCCESSFUL_INSERT;								// Method finished successfully
+        return Operator.SUCCESSFUL_SQL_QUERY;								// Method finished successfully
 	}
 
 }

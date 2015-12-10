@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 import beans.Service;
 import dao.ServiceDAO;
 
@@ -18,6 +20,11 @@ public class ServiceCtrl {
 		ServiceDAO serviceDAO = new ServiceDAO();
 		
 		return serviceDAO.iOne(service);
+	}
+	
+	public ArrayList<Service> sAll(){
+		ServiceDAO serviceDAO = new ServiceDAO();
+		return serviceDAO.sAll();
 	}
 	
 }
