@@ -18,17 +18,17 @@ public class Main {
 		
 		System.out.println(" =============================== LOGIN =============================== ");
 		
-		System.out.println("\n\tID: ");
+		System.out.printf("\n\t ID: ");
 		login.setFkIdUser(Integer.valueOf(scan.nextLine()));
 		
-		System.out.println("\n\tPassword: ");
+		System.out.printf("\t Password: ");
 		login.setPassword(scan.nextLine());
 		
 		if(loginCtrl.verifyLogin(login.getFkIdUser(), login.getPassword()) == 1){
 			user = loginCtrl.retrieveUserType(login);
 			
 			if(user instanceof Manager){
-				System.out.println("It is a Manager!");
+				menu.startMenuManager(user);
 			}else if (user instanceof Member){
 				System.out.println("It is a Member!");
 			}else if (user instanceof Operator){
@@ -38,6 +38,8 @@ public class Main {
 			}else {
 				System.out.println("It is a not defined user!");
 			}
+		}else{
+			System.err.println("\n\n\t The system did not find any user!");
 		}
 		
 		scan.close();

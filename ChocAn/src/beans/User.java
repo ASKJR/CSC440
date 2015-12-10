@@ -2,10 +2,15 @@ package beans;
 
 public abstract class User {
 
-	public static final int MANAGER = 1;
-	public static final int PROVIDER = 2;
-	public static final int OPERATOR = 3;
-	public static final int MEMBER = 4;
+	public static final int STATUS_VALID = 1;
+	public static final int STATUS_INVALID = 2;
+	public static final int STATUS_SUSPENDED = 3;
+	public static final int STATUS_DELETED = 4;
+	
+	public static final int MANAGER = 5;
+	public static final int PROVIDER = 6;
+	public static final int OPERATOR = 7;
+	public static final int MEMBER = 8;
 	
 	public static final int NOT_FOUND = -1;
 	public static final int TYPE_ERROR = -2;
