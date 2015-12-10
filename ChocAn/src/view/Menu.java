@@ -244,7 +244,7 @@ public class Menu {
 		}
 		
 		inInt = Integer.valueOf(in);
-		// validar status do membro e salvar na variavel "status"
+		// verificar status do membro e salvar na variavel "status"
 		status = 0; // verificar status pra executar a funcao correta
 		System.out.println("\t Status of the Member: " + " === NAME === ");
 		if(status == 1) {
@@ -266,7 +266,7 @@ public class Menu {
 			System.out.println("\t Invalid number!"); // if not valid
 		else if(status == 3)
 			System.out.println("\t Member suspended!"); // if suspended
-		System.out.print("\n\t Push ENTER to return to menu ");
+		System.out.print("\n\t Press ENTER to return to menu ");
 		sc.nextLine();
 		startMenuProvider(provider);
 		// complete the method
@@ -274,18 +274,75 @@ public class Menu {
 	
 	public void openMenuRegisterService(User provider, int ID) {
 		String in = "";
+		boolean notValid = true;
 		
 		System.out.println("\n\t Enter the date the service was provided." 
 						 + "\n\t (Format: MM/DD/YYYY): ");
+		// get the date
 		openMenuProviderDirectory(provider, 1);
 		System.out.print("\n\t Which service do you want to register? ");
 		// get the service code
-		System.out.println("\t The service keyed was: " + " === SERVICE NAME === ");
+		System.out.println("\n\t The service keyed was: " + " === SERVICE NAME === ");
 		System.out.print("Confirm? (Y/N)");
+		System.out.println("\n\t Comments: ");
+		// get the comments
+		System.out.println("\n\t Current date and time === SHOW === ");
+		System.out.println("\t Date service was provided === SHOW === ");
+		System.out.println("\t Provider number === SHOW === ");
+		System.out.println("\t Member number === SHOW === ");
+		System.out.println("\t Service code === SHOW === ");
+		System.out.println("\t Comments === SHOW === ");
+		System.out.println("\n\t Confirm registration of this service? (Y/N): ");
+		while(notValid) {
+			in = sc.nextLine();
+			if(!in.equals("") || in.equalsIgnoreCase("Y") || in.equalsIgnoreCase("N")) {
+				notValid = false;
+			} else System.out.print("\t Invalid option. Re-enter: ");
+		}
+		
+		if(in.equalsIgnoreCase("Y")) {
+			// register service in database
+			// if success print
+			System.out.println("\t Registered successfully!");
+			System.out.println("\n\t The fee to be paid for this service is === SHOW FEE RECEIVED BY PROVIDER === ");
+		}
+		else
+			startMenuProvider(provider);
+		
+	}
+	
+	public void openVerificationForm(User provider) {
+		System.out.println("\n\t Please, fill the verification form: ");
+		System.out.println("\t (Once filled, it cannot be changed)");
+		System.out.print("\n\t Current date (MM/DD/YYYY): ");
+		System.out.print("\t Current time (HH:MM am or pm): ");
+		System.out.print("\t Date service was provided: ");
+		System.out.print("\t Member name: ");
+		System.out.print("\t Member number: ");
+		System.out.print("\t Service code: ");
+		System.out.print("\t Fee: ");
+		System.out.print("\n\t Confirm? (Y/N): ");
+		
 	}
 	
 	public void openMenuCheckFees(User provider) {
-		// TODO
+		System.out.println("\n\t Fee's total of current week");
+		// get the report of the current week for that provider passed as parameter
+		System.out.println("\n\t Provider name === SHOW === ");
+		System.out.println("\t Provider number === SHOW === ");
+		System.out.println("\t Provider street address === SHOW === ");
+		System.out.println("\t Provider city === SHOW === ");
+		System.out.println("\t Provider state === SHOW === ");
+		System.out.println("\t Provider ZIP code === SHOW === ");
+		// make a loop between all the services of the current week
+		System.out.println("\t   Date of service === SHOW === ");
+		System.out.println("\t   Date and time data were receive by the computer === SHOW === ");
+		System.out.println("\t   Member name === SHOW === ");
+		System.out.println("\t   Member number === SHOW === ");
+		System.out.println("\t   Service code === SHOW === ");
+		System.out.println("\t   Fee to be paid === SHOW === ");
+		System.out.println("\n\t Total number of consultations with members === SHOW === ");
+		System.out.println("\t Total fee for week === SHOW === ");
 	}
 	
 	public void openMenuProviderDirectory(User provider, int status) { // status: se o provider solicitou o directory do menu principal, status = 0
@@ -293,18 +350,11 @@ public class Menu {
 		System.out.println("\n\t Provider Directory");
 		System.out.println(" === SHOWS SERVICES AVAILABLES === ");     // solicitar do banco
 		if(status == 0) {
-			System.out.print("\n\t Push ENTER to return to menu ");
+			System.out.print("\n\t Press ENTER to return to menu ");
 			sc.nextLine();
 			startMenuProvider(provider);
 		} else
 			return;
-	}
-	
-	public void validInput() {
-		String in = "";
-		in = sc.nextLine();
-		while(in.equals(""))
-			in = sc.nextLine();
 	}
 	
 	public static boolean isNumeric(String str) { // verifies the input  
