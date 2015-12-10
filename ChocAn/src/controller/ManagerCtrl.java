@@ -7,7 +7,6 @@ public class ManagerCtrl {
 
 	public int iOne
 		(
-			int fkIdManager,
 			String stAddr,
 			String addrComp,
 			String city,
@@ -24,8 +23,6 @@ public class ManagerCtrl {
 		ManagerDAO managerDAO = new ManagerDAO();
 		Manager manager = new Manager();
 		
-		manager.setFkIdManager(fkIdManager);
-		manager.setIdUser(fkIdManager);
 		manager.setStAddr(stAddr);
 		manager.setAddrComp(addrComp);
 		manager.setCity(city);
