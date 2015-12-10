@@ -43,10 +43,10 @@ VALUES
 (8,1),
 (9,1),
 (10,1),
-(11,2),
+(11,3),
 (12,3),
 (13,4),
-(14,2),
+(14,4),
 (15,3);
 
 INSERT INTO choc_an.`provider`(fk_id_provider, `status`)
