@@ -1,7 +1,6 @@
 package view;
 
 import java.util.Scanner;
-
 import beans.User;
 
 public class Menu {
@@ -200,7 +199,6 @@ public class Menu {
 	
 	public void printMenuProvider(User provider) {
 		String in = "";
-		String option = "";
 		int inInt = 0;
 		boolean notValid = true;
 		
@@ -217,11 +215,11 @@ public class Menu {
 		if(inInt == 1)
 			openMenuCheckStatus(provider);
 		else if(inInt == 2)
-			openMenuUpdate(option);
+			openMenuCheckStatus(provider); // openMenuCheckStatus is used to start a service because the method gets first the ID and then sends it to startMenuRegisterService()
 		else if(inInt == 3)
-			openMenuDelete(option);
+			openMenuCheckFees(provider);
 		else if(inInt == 4)
-			startMenuProvider(provider);
+			openMenuProviderDirectory(provider, 0);
 		else if(inInt == 5) {
 			System.out.println("\n\t Good bye!."); // fix this. It should return to Login screen
 			return;
@@ -241,9 +239,9 @@ public class Menu {
 			in = sc.nextLine();
 			if(isNumeric(in) || !in.equals("")) {
 				notValid = false;
-			} else System.out.print("\t Invalid login. Re-enter: ");
+			} else 
+				System.out.print("\t Invalid login. Re-enter: ");
 		}
-		
 		
 		inInt = Integer.valueOf(in);
 		// validar status do membro e salvar na variavel "status"
@@ -260,7 +258,7 @@ public class Menu {
 			}
 			
 			if(in.equalsIgnoreCase("Y"))
-				openMenuRegisterService(inInt);
+				openMenuRegisterService(provider, inInt);
 			else
 				startMenuProvider(provider);
 		}			
@@ -268,36 +266,38 @@ public class Menu {
 			System.out.println("\t Invalid number!"); // if not valid
 		else if(status == 3)
 			System.out.println("\t Member suspended!"); // if suspended
-		
+		System.out.print("\n\t Push ENTER to return to menu ");
+		sc.nextLine();
+		startMenuProvider(provider);
 		// complete the method
 	}
 	
-	public void openMenuRegisterService(int ID) {
-		System.out.print("\n\t Enter the date the service was provided: "
-					   + "\n\t (Format: MM/DD/YYYY): ");
+	public void openMenuRegisterService(User provider, int ID) {
+		String in = "";
 		
+		System.out.println("\n\t Enter the date the service was provided." 
+						 + "\n\t (Format: MM/DD/YYYY): ");
+		openMenuProviderDirectory(provider, 1);
+		System.out.print("\n\t Which service do you want to register? ");
+		// get the service code
+		System.out.println("\t The service keyed was: " + " === SERVICE NAME === ");
+		System.out.print("Confirm? (Y/N)");
 	}
 	
-	public void openMenuRegisterService() {
-		String in = "";
-		int inInt;
-		boolean notValid = true;
-		
-		System.out.println("\n\t Register a service for a member");
-		System.out.print("\t Insert the ID: ");
-		while(notValid) {
-			in = sc.nextLine();
-			if(isNumeric(in)) { // valid ID
-				notValid = false;
-			} 
-			else
-				System.out.print("\t Invalid ID. Re-enter: ");
-		}
-		
-		inInt = Integer.valueOf(in);
-		// testar status do member (sem precisar dizer qual eh)
-		// chama o metodo abaixo pra continuar o registro 
-		openMenuRegisterService(inInt);
+	public void openMenuCheckFees(User provider) {
+		// TODO
+	}
+	
+	public void openMenuProviderDirectory(User provider, int status) { // status: se o provider solicitou o directory do menu principal, status = 0
+																	   //         se o provider iniciou um registro de servico, status = 1
+		System.out.println("\n\t Provider Directory");
+		System.out.println(" === SHOWS SERVICES AVAILABLES === ");     // solicitar do banco
+		if(status == 0) {
+			System.out.print("\n\t Push ENTER to return to menu ");
+			sc.nextLine();
+			startMenuProvider(provider);
+		} else
+			return;
 	}
 	
 	public void validInput() {
