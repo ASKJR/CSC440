@@ -176,6 +176,7 @@ public class Menu {
 		System.out.print("\t State         : ");
 		System.out.print("\t Zip code      : ");
 		System.out.print("\n\t Do you want to delete this " + user + "? (Y/N): ");
+		
 	}
 	
 	//************************ manager
@@ -248,7 +249,7 @@ public class Menu {
 		status = 0; // verificar status pra executar a funcao correta
 		System.out.println("\t Status of the Member: " + " === NAME === ");
 		if(status == 1) {
-			System.out.println("\t Member validated!"); // if validated
+			System.out.println("\t Member Validated!"); // if validated
 			System.out.print("\n\t Do you want to start a service with this member? (Y/N): ");
 			while(notValid) {
 				in = sc.nextLine();
@@ -265,7 +266,7 @@ public class Menu {
 		else if(status == 2)
 			System.out.println("\t Invalid number!"); // if not valid
 		else if(status == 3)
-			System.out.println("\t Member suspended!"); // if suspended
+			System.out.println("\t Member Suspended!"); // if suspended
 		System.out.print("\n\t Press ENTER to return to menu ");
 		sc.nextLine();
 		startMenuProvider(provider);
@@ -275,15 +276,46 @@ public class Menu {
 	public void openMenuRegisterService(User provider, int ID) {
 		String in = "";
 		boolean notValid = true;
+		boolean startOver = true;
 		
 		System.out.println("\n\t Enter the date the service was provided." 
 						 + "\n\t (Format: MM/DD/YYYY): ");
 		// get the date
-		openMenuProviderDirectory(provider, 1);
-		System.out.print("\n\t Which service do you want to register? ");
-		// get the service code
-		System.out.println("\n\t The service keyed was: " + " === SERVICE NAME === ");
-		System.out.print("Confirm? (Y/N)");
+		while(startOver) {
+			openMenuProviderDirectory(provider, 1);
+			System.out.print("\n\t Which service do you want to register? ");
+			// get the service code
+			System.out.println("\n\t The service keyed was: " + " === SERVICE NAME === ");
+			System.out.print("\t Confirm? (Y/N): ");
+			while(notValid) {
+				in = sc.nextLine();
+				if(!in.equals("") || in.equalsIgnoreCase("Y") || in.equalsIgnoreCase("N")) {
+					notValid = false;
+				} else System.out.print("\t Invalid option. Re-enter: ");
+			}
+			
+			if(in.equalsIgnoreCase("Y"))
+				startOver = false;
+			else {
+				System.out.println("\n\t 1. Return to menu" 
+								 + "\n\t 2. Look up the Provider Directory again");
+				notValid = true;
+				while(notValid) {
+					in = sc.nextLine();
+					if(!in.equals("") || in.equalsIgnoreCase("1") || in.equalsIgnoreCase("2")) {
+						notValid = false;
+					} else System.out.print("\t Invalid option. Re-enter: ");
+				}
+				
+				if(in.equalsIgnoreCase("1"))
+					startOver = false;
+			}
+		}
+		if(in.equalsIgnoreCase("1"))
+			startMenuProvider(provider);
+		
+		// alterei aqui
+			
 		System.out.println("\n\t Comments: ");
 		// get the comments
 		System.out.println("\n\t Current date and time === SHOW === ");

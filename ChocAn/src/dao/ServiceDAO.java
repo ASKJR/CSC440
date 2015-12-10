@@ -5,12 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import com.mysql.jdbc.Statement;
-
-import beans.Provider;
 import beans.Service;
-import beans.User;
 import util.ConnectionFactory;
 
 public class ServiceDAO {
@@ -56,7 +52,7 @@ public class ServiceDAO {
         Connection connection = ConnectionFactory.openConnection(); 		// Connection to the database
         ResultSet rsListing = null;											// ResultSet to receive the selected data
         PreparedStatement pstListing = null;								// PreparedStatement to process the SQL
-        ArrayList<Service> serviceList = new ArrayList();
+        ArrayList<Service> serviceList = new ArrayList<Service>();
 
         try {
             
