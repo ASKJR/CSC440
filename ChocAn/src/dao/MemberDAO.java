@@ -145,7 +145,7 @@ public class MemberDAO {
             
         	pstSelecting = connection.prepareStatement(""
             		+ "SELECT * "
-            		+ "FROM user"
+            		+ "FROM user "
             		+ "WHERE id_user = ?");							// SQL itself being prepared
 
 
@@ -168,7 +168,7 @@ public class MemberDAO {
             	
             	pstSelecting = connection.prepareStatement(""
                 		+ "SELECT * "
-                		+ "FROM member"
+                		+ "FROM member "
                 		+ "WHERE fk_id_member = ?");							// SQL itself being prepared
 
 
@@ -184,7 +184,6 @@ public class MemberDAO {
             }
             else
             {
-            	System.out.println("The system could not find any member.");
             	return null;
             }
 
