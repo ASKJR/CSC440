@@ -1,13 +1,24 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import beans.ServiceProvided;
+import controller.MemberCtrl;
+import controller.ProviderCtrl;
+import controller.ServiceCtrl;
+import beans.Member;
+import beans.Provider;
+import beans.Service;
 import util.ConnectionFactory;
 
 public class ServiceProvidedDAO {
+	
 	public int iOne(ServiceProvided serviceProvided){
 
         Connection connection = ConnectionFactory.openConnection();						// Connection to the database
@@ -42,4 +53,55 @@ public class ServiceProvidedDAO {
         ConnectionFactory.closeConnection(connection, pstInserting);					// Closing connection to the DBMS
         return 0;																		// Method finished successfully
 	}
+	
+	public ArrayList<ServiceProvided> sLastWeek(Member member){
+		
+		Connection connection = ConnectionFactory.openConnection();
+		PreparedStatement pstListing = null;
+		ResultSet rsListing = null;
+		ProviderCtrl providerCtrl = new ProviderCtrl();
+		MemberCtrl memberCtrl = new MemberCtrl();
+		ServiceCtrl serviceCtrl = new ServiceCtrl();
+		ArrayList<ServiceProvided> serviceProvidedList = new ArrayList();
+
+		try{
+			pstListing = connection.prepareStatement(""
+					+ "SELECT "
+					+ "fk_id_provider, fk_id_service, fk_id_member, current_date, occurrence_date, `comment` "
+					+ "FROM "
+					+ "service_provided "
+					+ "WHERE "
+					+ "fk_id_member = ? "
+					+ "AND occurrence_date >= curdate() - INTERVAL DAYOFWEEK(curdate())+6 DAY "
+					+ "AND occurrence_date < curdate() - INTERVAL DAYOFWEEK(curdate())-1 DAY");
+
+			pstListing.setInt(1, member.getFkIdMember());
+			rsListing = pstListing.executeQuery();
+			
+			while(rsListing.next()){
+				serviceProvidedList.add
+				(
+					new ServiceProvided
+					(
+						providerCtrl.sOne(rsListing.getInt("fk_id_provider")), 
+						memberCtrl.sOne(rsListing.getInt("fk_id_member")),
+						serviceCtrl.sOne(rsListing.getInt("fk_id_service")),
+						rsListing.getTimestamp("current_date"),
+						rsListing.getDate("occurrence_date"),
+						rsListing.getString("comment")
+					)
+				);
+			}
+			
+		}catch(SQLException sqle){
+			System.err.println(sqle.getMessage());
+	        ConnectionFactory.closeConnection(connection, pstListing, rsListing);
+			return null;
+		}
+		
+		ConnectionFactory.closeConnection(connection, pstListing, rsListing);			// Closing connection to the DBMS
+		
+		return serviceProvidedList;
+	}
+	
 }
