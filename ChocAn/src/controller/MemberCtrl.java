@@ -7,7 +7,6 @@ public class MemberCtrl {
 	
 	public int iOne
 		(
-			int fkIdMember,
 			int status,
 			String stAddr,
 			String addrComp,
@@ -24,9 +23,7 @@ public class MemberCtrl {
 	{
 		MemberDAO memberDAO = new MemberDAO();
 		Member member = new Member();
-		
-		member.setFkIdMember(fkIdMember);
-		member.setIdUser(fkIdMember);
+
 		member.setStatus(status);
 		member.setStAddr(stAddr);
 		member.setAddrComp(addrComp);

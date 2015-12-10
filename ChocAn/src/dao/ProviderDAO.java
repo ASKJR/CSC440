@@ -62,9 +62,10 @@ public class ProviderDAO {
                 		+ " INSERT INTO `provider`("
                 		+ " fk_id_provider, `status`) "
                 		+ " VALUES "
-                		+ " (?)");											// SQL itself being prepared
+                		+ " (?, ?)");											// SQL itself being prepared
 
                 pstInserting.setInt(1, generatedId);						// Replacing each ? with the correct value
+                pstInserting.setInt(2, provider.getStatus());
                 pstInserting.executeUpdate();								// SQL being executed
             }
             else

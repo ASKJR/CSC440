@@ -7,7 +7,6 @@ public class ProviderCtrl {
 	
 	public int iOne
 		(
-			int fkIdProvider,
 			int status,
 			String stAddr,
 			String addrComp,
@@ -26,8 +25,6 @@ public class ProviderCtrl {
 		ProviderDAO providerDAO = new ProviderDAO();
 		Provider provider = new Provider();
 		
-		provider.setFkIdProvider(fkIdProvider);
-		provider.setIdUser(fkIdProvider);
 		provider.setStatus(status);
 		provider.setStAddr(stAddr);
 		provider.setAddrComp(addrComp);
