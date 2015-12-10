@@ -184,7 +184,6 @@ public class MemberDAO {
             }
             else
             {
-            	System.out.println("The system could not find any member.");
             	return null;
             }
 

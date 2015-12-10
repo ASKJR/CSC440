@@ -2,7 +2,9 @@ package view;
 
 import java.util.Scanner;
 
+import beans.Member;
 import beans.User;
+import controller.MemberCtrl;
 import util.Utility;
 
 public class ProviderMenu {
@@ -30,7 +32,7 @@ public class ProviderMenu {
 		System.out.print("\t Option: ");
 		while(notValid) {
 			in = sc.nextLine();
-			if(u.isNumeric(in) && (in.equals("1") || in.equals("2") || in.equals("3")) || in.equals("4") || in.equals("5")) {
+			if(u.isNumeric(in) && ((in.equals("1") || in.equals("2") || in.equals("3")) || in.equals("4") || in.equals("5"))) {
 				notValid = false;
 			} else
 				System.out.print("\t Invalid option. Re-enter: ");
@@ -47,7 +49,7 @@ public class ProviderMenu {
 			openMenuProviderDirectory(provider, 0);
 		else if(inInt == 5) {
 			System.out.println("\n\t Good bye!");
-			return;
+			System.exit(0);;
 		}
 			
 	}
@@ -62,23 +64,29 @@ public class ProviderMenu {
 		System.out.print("\t Insert the ID: ");
 		while(notValid) {
 			in = sc.nextLine();
-			if(u.isNumeric(in) || !in.equals("")) {
+			if(u.isNumeric(in) && !in.equals("")) {
 				notValid = false;
 			} else 
 				System.out.print("\t Invalid login. Re-enter: ");
 		}
-		
 		inInt = Integer.valueOf(in);
 		
-		// verificar status do membro e salvar na variavel "status"
-		status = 0; // verificar status pra executar a funcao correta
-		System.out.println("\t Status of the Member: " + " === NAME === ");
+		MemberCtrl memberCtrl = new MemberCtrl();
+		Member member = new Member();
+		member = memberCtrl.sOne(inInt);
+		if(member != null)
+			status = member.getStatus();
+		else
+			status = 2;
+		
 		if(status == 1) {
+			System.out.println("\n\t Status of the Member: " + member.getFstName() + " " + member.getLstName());
 			System.out.println("\t Member Validated!"); // if validated
 			System.out.print("\n\t Do you want to start a service with this member? (Y/N): ");
+			notValid = true;
 			while(notValid) {
 				in = sc.nextLine();
-				if(!in.equals("") || in.equalsIgnoreCase("Y") || in.equalsIgnoreCase("N")) {
+				if(!in.equals("") && (in.equalsIgnoreCase("Y") || in.equalsIgnoreCase("N"))) {
 					notValid = false;
 				} else System.out.print("\t Invalid option. Re-enter: ");
 			}
@@ -88,14 +96,15 @@ public class ProviderMenu {
 			else
 				startMenu(provider);
 		}			
-		else if(status == 2)
-			System.out.println("\t Invalid number!"); // if not valid
-		else if(status == 3)
+		else if(status == 3) {
+			System.out.println("\n\t Status of the Member: " + member.getFstName() + " " + member.getLstName());
 			System.out.println("\t Member Suspended!"); // if suspended
+		}
+		else
+			System.out.println("\n\t Invalid Number!"); // if invalid
 		System.out.print("\n\t Press ENTER to return to menu ");
 		sc.nextLine();
 		startMenu(provider);
-		// complete the method
 	}
 	
 	public void openMenuRegisterService(User provider, int ID) {
@@ -112,9 +121,10 @@ public class ProviderMenu {
 			// get the service code
 			System.out.println("\n\t The service keyed was: " + " === SERVICE NAME === ");
 			System.out.print("\t Confirm? (Y/N): ");
+			notValid = true;
 			while(notValid) {
 				in = sc.nextLine();
-				if(!in.equals("") || in.equalsIgnoreCase("Y") || in.equalsIgnoreCase("N")) {
+				if(!in.equals("") && (in.equalsIgnoreCase("Y") || in.equalsIgnoreCase("N"))) {
 					notValid = false;
 				} else System.out.print("\t Invalid option. Re-enter: ");
 			}
@@ -124,10 +134,11 @@ public class ProviderMenu {
 			else {
 				System.out.println("\n\t 1. Return to menu" 
 								 + "\n\t 2. Look up the Provider Directory again");
+				System.out.print("\n\t Option: ");
 				notValid = true;
 				while(notValid) {
 					in = sc.nextLine();
-					if(!in.equals("") || in.equalsIgnoreCase("1") || in.equalsIgnoreCase("2")) {
+					if(!in.equals("") && (in.equalsIgnoreCase("1") || in.equalsIgnoreCase("2"))) {
 						notValid = false;
 					} else System.out.print("\t Invalid option. Re-enter: ");
 				}
@@ -148,9 +159,10 @@ public class ProviderMenu {
 		System.out.println("\t Service code === SHOW === ");
 		System.out.println("\t Comments === SHOW === ");
 		System.out.println("\n\t Confirm registration of this service? (Y/N): ");
+		notValid = true;
 		while(notValid) {
 			in = sc.nextLine();
-			if(!in.equals("") || in.equalsIgnoreCase("Y") || in.equalsIgnoreCase("N")) {
+			if(!in.equals("") && (in.equalsIgnoreCase("Y") || in.equalsIgnoreCase("N"))) {
 				notValid = false;
 			} else System.out.print("\t Invalid option. Re-enter: ");
 		}
@@ -203,7 +215,7 @@ public class ProviderMenu {
 	public void openMenuProviderDirectory(User provider, int status) { // status: se o provider solicitou o directory do menu principal, status = 0
 																	   //         se o provider iniciou um registro de servico, status = 1
 		System.out.println("\n\t Provider Directory");
-		System.out.println(" === SHOWS SERVICES AVAILABLES === ");     // solicitar do banco
+		System.out.println("\t === SHOWS SERVICES AVAILABLES === ");     // solicitar do banco
 		if(status == 0) {
 			System.out.print("\n\t Press ENTER to return to menu ");
 			sc.nextLine();
