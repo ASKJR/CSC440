@@ -3,10 +3,12 @@ package view;
 import java.util.Scanner;
 
 import beans.User;
+import util.*;
 
 public class OperatorMenu {
 	
-	Scanner sc = new Scanner(System.in);
+	Scanner sc =  new Scanner(System.in);
+	Utility u  =  new Utility();
 	
 	//************************ operator
 	public void startMenu(User operator) {
@@ -27,7 +29,7 @@ public class OperatorMenu {
 		System.out.print("\t Option: ");
 		while(notValid) {
 			in = sc.nextLine();
-			if(Menu.isNumeric(in) && (in.equals("1") || in.equals("2") || in.equals("3"))) {
+			if(u.isNumeric(in) && (in.equals("1") || in.equals("2") || in.equals("3"))) {
 				notValid = false;
 			} else
 				System.out.print("\t Invalid option. Re-enter: ");
@@ -53,7 +55,7 @@ public class OperatorMenu {
 		System.out.print("\t Option: ");
 		while(notValid) {
 			in = sc.nextLine();
-			if(Menu.isNumeric(in) && (in.equals("1") || in.equals("2") || in.equals("3") || in.equals("4"))) {
+			if(u.isNumeric(in) && (in.equals("1") || in.equals("2") || in.equals("3") || in.equals("4"))) {
 				notValid = false;
 			} else
 				System.out.print("\t Invalid option. Re-enter: ");
@@ -95,7 +97,7 @@ public class OperatorMenu {
 		System.out.print("\t Enter the ID: ");
 		while(notValid) {
 			in = sc.nextLine();
-			if(Menu.isNumeric(in)) { // valid ID
+			if(u.isNumeric(in)) { // valid ID
 				notValid = false;
 			} else
 				System.out.print("\t Invalid ID. Re-enter: ");
@@ -134,7 +136,7 @@ public class OperatorMenu {
 		System.out.print("\t Enter the ID: ");
 		while(notValid) {
 			in = sc.nextLine();
-			if(Menu.isNumeric(in)) { // valid ID
+			if(u.isNumeric(in)) { // valid ID
 				notValid = false;
 			} else
 				System.out.print("\t Invalid ID. Re-enter: ");

@@ -3,10 +3,12 @@ package view;
 import java.util.Scanner;
 
 import beans.User;
+import util.Utility;
 
 public class ProviderMenu {
 	
 	Scanner sc = new Scanner(System.in);
+	Utility u  =  new Utility();
 	
 	//************************ provider
 	public void startMenu(User provider) {
@@ -28,7 +30,7 @@ public class ProviderMenu {
 		System.out.print("\t Option: ");
 		while(notValid) {
 			in = sc.nextLine();
-			if(Menu.isNumeric(in) && (in.equals("1") || in.equals("2") || in.equals("3")) || in.equals("4") || in.equals("5")) {
+			if(u.isNumeric(in) && (in.equals("1") || in.equals("2") || in.equals("3")) || in.equals("4") || in.equals("5")) {
 				notValid = false;
 			} else
 				System.out.print("\t Invalid option. Re-enter: ");
@@ -60,7 +62,7 @@ public class ProviderMenu {
 		System.out.print("\t Insert the ID: ");
 		while(notValid) {
 			in = sc.nextLine();
-			if(Menu.isNumeric(in) || !in.equals("")) {
+			if(u.isNumeric(in) || !in.equals("")) {
 				notValid = false;
 			} else 
 				System.out.print("\t Invalid login. Re-enter: ");

@@ -3,13 +3,16 @@ package view;
 import java.util.*;
 import beans.*;
 import controller.*;
+import util.*;
 
 public class Menu {
 	
 	Scanner sc ;
+	Utility u ;
 	
 	public Menu() {
 		sc = new Scanner (System.in);
+		u  = new Utility();
 	}
 	
 	//************************ login and password
@@ -26,7 +29,7 @@ public class Menu {
 			System.out.print("\t Login: ");
 			while(true) {
 				login = sc.nextLine();
-				if(isNumeric(login) && !login.equals("")) {
+				if(u.isNumeric(login) && !login.equals("")) {
 					break;
 				} else System.out.print("\t Invalid login. Re-enter: ");
 			}
@@ -59,18 +62,4 @@ public class Menu {
 			providerMenu.startMenu(user);
 	    }
 	}	
-
-	
-
-	
-
-	
-	public static boolean isNumeric(String str) { // verifies the input  
-		try {  
-			Integer.parseInt(str);
-		} catch(NumberFormatException nfe) {  
-			return false;  
-		}  
-		return true;  
-	}
 }
