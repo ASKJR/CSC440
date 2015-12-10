@@ -1,7 +1,8 @@
 package view;
 
-import java.util.Scanner;
-import beans.User;
+import java.util.*;
+import beans.*;
+import controller.*;
 
 public class Menu {
 	
@@ -12,27 +13,50 @@ public class Menu {
 	}
 	
 	//************************ login and password
-	public String InputLogin() {
-		String in = "";
-		boolean notValid = true;
+	public void startSystem() {
+		String login = "";
+		String password = "";
+		LoginCtrl loginctrl = new LoginCtrl(); 
+		User user = null;
+		Login lg = new Login();
 		
-		System.out.print("\t Login: ");
-		while(notValid) {
-			in = sc.nextLine();
-			if(isNumeric(in) && !in.equals("")) {
-				notValid = false;
-			} else System.out.print("\t Invalid login. Re-enter: ");
+		//Login Logic;
+		
+		while(true){
+			System.out.print("\t Login: ");
+			while(true) {
+				login = sc.nextLine();
+				if(isNumeric(login) && !login.equals("")) {
+					break;
+				} else System.out.print("\t Invalid login. Re-enter: ");
+			}
+			System.out.print("\t Password: ");
+			password = sc.nextLine();
+			
+			lg.setFkIdUser(Integer.parseInt(login));
+			lg.setPassword(password);
+			
+			if(loginctrl.verifyLogin(lg.getFkIdUser(),lg.getPassword()) == 1) {
+			    	user =  loginctrl.retrieveUserType(lg);
+					break;
+			}
+			else{
+				System.out.println("Fail to log in!");
+			}
 		}
-		return in; // return the input id -- WHAT TO DO NOW?
-	}
-	
-	public String InputPassword() {
-		String in = "";
-		System.out.print("\t Password: ");
-		in = sc.nextLine();
-		return in; // return the input password -- WHAT TO DO NOW?
-	}
-	
+		//END login--------------------------------------------
+		
+		
+		//Define user type
+		if(user instanceof Operator){
+			startMenuOperator(user);
+		}else if (user instanceof Manager){
+			startMenuManager(user);
+		}
+		else{
+			startMenuProvider(user);
+	    }
+	}	
 	//************************ operator
 	public void startMenuOperator(User operator) {
 		System.out.println("\n\t Operator: " + operator.getFstName());
@@ -64,7 +88,7 @@ public class Menu {
 		else if(inInt == 2)
 			option = "provider";
 		else if(inInt == 3) {
-			System.out.println("\n\t Good bye!."); // fix this. It should return to Login screen
+			System.out.println("\n\t Good bye!");
 			return;
 		}
 			
@@ -222,7 +246,7 @@ public class Menu {
 		else if(inInt == 4)
 			openMenuProviderDirectory(provider, 0);
 		else if(inInt == 5) {
-			System.out.println("\n\t Good bye!."); // fix this. It should return to Login screen
+			System.out.println("\n\t Good bye!");
 			return;
 		}
 			
