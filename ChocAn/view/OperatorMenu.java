@@ -327,7 +327,7 @@ public class OperatorMenu {
 				userData[6] = in;
 			}
 		
-			System.out.print("\t Last name    : ");
+			System.out.print("\t Last name     : ");
 			in = sc.nextLine();
 			
 			if(in.equals("")){
@@ -423,7 +423,7 @@ public class OperatorMenu {
 			in = sc.nextLine();
 			
 			if(in.equals("")){
-				userData[4] = State;
+				userData[4] = ZipCode;
 			}
 			else{
 				userData[4] = in;
