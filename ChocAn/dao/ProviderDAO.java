@@ -10,6 +10,7 @@ import com.mysql.jdbc.Statement;
 
 import beans.Member;
 import beans.Provider;
+import beans.User;
 import util.ConnectionFactory;
 
 public class ProviderDAO {
@@ -258,7 +259,11 @@ public class ProviderDAO {
         			+ ""
         			+ "WHERE "
         			+ ""
-        			+ "p.fk_id_provider = u.id_user");
+        			+ "p.fk_id_provider = u.id_user "
+        			+ ""
+        			+ "AND "
+        			+ ""
+        			+ "p.status = " + User.STATUS_VALID);
         	
             rsSearching = pstSearching.executeQuery();						// SQL being executed and results being assigned to ResultSet
 

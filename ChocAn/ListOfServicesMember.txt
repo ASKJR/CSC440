@@ -1,0 +1,19 @@
+
+		 <br>Member Information
+	 <br><br>ID: 3
+	 <br>First Name: null
+	 <br>Last Name: null
+	 <br>Street Address: null
+	 <br>City: null
+	 <br>State: null
+	 <br>ZIP Code: null
+
+		 <br><br>Services used in the last week
+
+	 <br><br>Date of Service: 12/03/2015
+	 <br>Provider Name: Maru
+	 <br>Service Name: nutritionist
+
+	 <br><br>Date of Service: 12/03/2015
+	 <br>Provider Name: Steven
+	 <br>Service Name: personal trainer

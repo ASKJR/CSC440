@@ -36,10 +36,6 @@ public class ChocAn {
 		ArrayList<Provider> providerList = providerDAO.sAll();
 		
 		for(Provider provider : providerList){
-			System.out.println(provider.getStatus());
-		}
-		
-		for(Provider provider : providerList){
 			
 			int totalFee = 0;
 			
@@ -49,11 +45,10 @@ public class ChocAn {
 				totalFee += serviceProvided.getService().getFee();
 			}
 			
-System.out.println(provider.getLstName());
-			
-			writeFile.println(provider.getLstName());
-			writeFile.println(provider.getFkIdProvider());
-			writeFile.println(totalFee);
+			writeFile.print("\n");
+			writeFile.print(provider.getLstName() + ";");
+			writeFile.print(provider.getFkIdProvider() + ";");
+			writeFile.print(totalFee + ";");
 			
 		}
 		
@@ -68,7 +63,6 @@ System.out.println(provider.getLstName());
 	}
 
 	public int printWeeklyReports() {
-		
 		return 0;
 	}
 
@@ -88,7 +82,7 @@ System.out.println(provider.getLstName());
 		// Creating the file pointer
 		FileWriter file;
 		try {
-			file = new FileWriter("ListOfServices.txt");
+			file = new FileWriter("ListOfServicesMember.txt");
 		} catch (IOException e) {
 			file = null;
 			return ERR_CREATING_FILE;
@@ -96,21 +90,21 @@ System.out.println(provider.getLstName());
 		PrintWriter writeFile = new PrintWriter(file);
 		
 		// Filling the file with the requested information
-		writeFile.printf("\n\t\t Member Information");
-		writeFile.printf("\n\t ID: " + member.getFkIdMember());
-		writeFile.printf("\n\t First Name: " + member.getFstName()); 
-		writeFile.printf("\n\t Last Name: " + member.getLstName());
-		writeFile.printf("\n\t Street Address: " + member.getStAddr());
-		writeFile.printf("\n\t City: " + member.getCity());
-		writeFile.printf("\n\t State: " + member.getState());
-		writeFile.printf("\n\t ZIP Code: " + member.getZipCode());
+		writeFile.printf("\n\t\t <br>Member Information");
+		writeFile.printf("\n\t <br><br>ID: " + member.getFkIdMember());
+		writeFile.printf("\n\t <br>First Name: " + member.getFstName()); 
+		writeFile.printf("\n\t <br>Last Name: " + member.getLstName());
+		writeFile.printf("\n\t <br>Street Address: " + member.getStAddr());
+		writeFile.printf("\n\t <br>City: " + member.getCity());
+		writeFile.printf("\n\t <br>State: " + member.getState());
+		writeFile.printf("\n\t <br>ZIP Code: " + member.getZipCode());
 		
-		writeFile.printf("\n\n\t\t Services used in the last week");
+		writeFile.printf("\n\n\t\t <br><br>Services used in the last week");
 		
 		for(ServiceProvided serviceProvided : serviceProvidedList){
-			writeFile.printf("\n\n\t Date of Service: " + dateFormat.format(serviceProvided.getOccurrenceDate()));
-			writeFile.printf("\n\t Provider Name: " + serviceProvided.getProvider().getFstName());
-			writeFile.printf("\n\t Service Name: " + serviceProvided.getService().getName());	
+			writeFile.printf("\n\n\t <br><br>Date of Service: " + dateFormat.format(serviceProvided.getOccurrenceDate()));
+			writeFile.printf("\n\t <br>Provider Name: " + serviceProvided.getProvider().getFstName());
+			writeFile.printf("\n\t <br>Service Name: " + serviceProvided.getService().getName());	
 		}
 		
 		// Closing the file pointer
@@ -162,7 +156,7 @@ System.out.println(provider.getLstName());
 		// Creating the file pointer
 		FileWriter file;
 		try {
-			file = new FileWriter("ListOfServices.txt");
+			file = new FileWriter("ListOfServicesProvider.txt");
 		} catch (IOException e) {
 			file = null;
 			return ERR_CREATING_FILE;
@@ -170,32 +164,32 @@ System.out.println(provider.getLstName());
 		PrintWriter writeFile = new PrintWriter(file);
 		
 		// Filling the file with the requested information
-		writeFile.printf("\n\t\t Provider Information");
-		writeFile.printf("\n\n\t ID: " + provider.getFkIdProvider());
-		writeFile.printf("\n\t First Name: " + provider.getFstName() + " " + provider.getLstName());
-		writeFile.printf("\n\t Street Address: " + provider.getStAddr());
-		writeFile.printf("\n\t City: " + provider.getCity());
-		writeFile.printf("\n\t State: " + provider.getState());
-		writeFile.printf("\n\t ZIP Code: " + provider.getZipCode());
+		writeFile.printf("\n\t\t <br>Provider Information");
+		writeFile.printf("\n\n\t <br><br>ID: " + provider.getFkIdProvider());
+		writeFile.printf("\n\t <br>First Name: " + provider.getFstName() + " " + provider.getLstName());
+		writeFile.printf("\n\t <br>Street Address: " + provider.getStAddr());
+		writeFile.printf("\n\t <br>City: " + provider.getCity());
+		writeFile.printf("\n\t <br>State: " + provider.getState());
+		writeFile.printf("\n\t <br>ZIP Code: " + provider.getZipCode());
 		
-		writeFile.printf("\n\n\t\t Services provided in the last week");
+		writeFile.printf("\n\n\t\t <br><br>Services provided in the last week");
 		
 		double totalFee = 0;
 		int numberOfConsultations = 0;
 		for(ServiceProvided serviceProvided : serviceProvidedList){
-			writeFile.printf("\n\n\t Date of Service: " + dateFormat.format(serviceProvided.getOccurrenceDate()));
-			writeFile.printf("\n\t Date and Time of Registration: " + dateFormat.format(serviceProvided.getCurrentDate()));
-			writeFile.printf("\n\t Member Name: " + serviceProvided.getMember().getFstName() + " " + serviceProvided.getMember().getLstName());
-			writeFile.printf("\n\t Member ID: " + serviceProvided.getMember().getFkIdMember());
-			writeFile.printf("\n\t Service Name: " + serviceProvided.getService().getName());
-			writeFile.printf("\n\t Service ID: " + serviceProvided.getService().getIdService());
-			writeFile.printf("\n\t Fee: " + serviceProvided.getService().getFee());
+			writeFile.printf("\n\n\t <br><br>Date of Service: " + dateFormat.format(serviceProvided.getOccurrenceDate()));
+			writeFile.printf("\n\t <br>Date and Time of Registration: " + dateFormat.format(serviceProvided.getCurrentDate()));
+			writeFile.printf("\n\t <br>Member Name: " + serviceProvided.getMember().getFstName() + " " + serviceProvided.getMember().getLstName());
+			writeFile.printf("\n\t <br>Member ID: " + serviceProvided.getMember().getFkIdMember());
+			writeFile.printf("\n\t <br>Service Name: " + serviceProvided.getService().getName());
+			writeFile.printf("\n\t <br>Service ID: " + serviceProvided.getService().getIdService());
+			writeFile.printf("\n\t <br>Fee: " + serviceProvided.getService().getFee());
 			totalFee += serviceProvided.getService().getFee();
 			numberOfConsultations++;
 		}
 		
-		writeFile.printf("\n\n\t Number of Consultations: " + numberOfConsultations);
-		writeFile.printf("\n\n\t Total fee: " + totalFee);
+		writeFile.printf("\n\n\t <br><br>Number of Consultations: " + numberOfConsultations);
+		writeFile.printf("\n\n\t <br>Total fee: " + totalFee);
 		
 		// Closing the file pointer
 		try {
@@ -233,11 +227,6 @@ System.out.println(provider.getLstName());
 			"rso_oliver@hotmail.com"
 			//member.getEmail()
 		);
-	}
-
-	
-	public int validateMember() {
-		return 0;
 	}
 
 }
