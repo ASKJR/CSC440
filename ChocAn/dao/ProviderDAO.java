@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.mysql.jdbc.Statement;
 
@@ -234,5 +235,61 @@ public class ProviderDAO {
         
         return provider;
     }
-	
+
+    public ArrayList<Provider> sAll()
+    {
+        Connection connection = ConnectionFactory.openConnection(); 		// Connection to the database
+        ResultSet rsSearching = null;										// ResultSet to receive the selected data
+        PreparedStatement pstSearching = null;								// PreparedStatement to process the SQL
+        ArrayList<Provider> providerList = new ArrayList();
+
+        try {
+
+        	pstSearching = connection.prepareStatement(""
+        			+ "SELECT "
+        			+ ""
+        			+ "u.addr_comp, u.cell_phone, u.city, u.email, "
+        			+ "u.fst_name, u.lst_name, u.home_phone, u.id_user, u.st_addr, "
+        			+ "u.state, u.work_phone, u.zip_code, p.fk_id_provider, p.status "
+        			+ ""
+        			+ "FROM "
+        			+ ""
+        			+ "provider as p, user as u "
+        			+ ""
+        			+ "WHERE "
+        			+ ""
+        			+ "p.fk_id_provider = u.id_user");
+        	
+            rsSearching = pstSearching.executeQuery();						// SQL being executed and results being assigned to ResultSet
+           
+            Provider provider = new Provider();
+            while (rsSearching.next()) {
+            	provider.setAddrComp(rsSearching.getString("addr_comp"));
+            	provider.setCellPhone(rsSearching.getString("cell_phone"));
+            	provider.setCity(rsSearching.getString("city"));
+            	provider.setEmail(rsSearching.getString("email"));
+            	provider.setFstName(rsSearching.getString("fst_name"));
+            	provider.setLstName(rsSearching.getString("lst_name"));
+            	provider.setHomePhone(rsSearching.getString("home_phone"));
+            	provider.setIdUser(rsSearching.getInt("id_user"));
+            	provider.setStatus(rsSearching.getInt("status"));
+            	provider.setFkIdProvider(rsSearching.getInt("fk_id_provider"));
+            	provider.setStAddr(rsSearching.getString("st_addr"));
+            	provider.setState(rsSearching.getString("state"));
+            	provider.setWorkPhone(rsSearching.getString("work_phone"));
+            	provider.setZipCode(rsSearching.getString("zip_code"));
+            	providerList.add(provider);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());								// Error Treatment
+            return null;
+        }
+
+        ConnectionFactory.closeConnection(
+        		connection, pstSearching, rsSearching);						// Closing connection to the DBMS
+        
+        return providerList;
+    }
+    
 }

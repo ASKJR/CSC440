@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import dao.ProviderDAO;
 import dao.ServiceProvidedDAO;
 import util.EmailSender;
 
@@ -19,6 +20,29 @@ public class ChocAn {
 	private final int ERR_READING_FILE = -3;
 
 	public int createEFT() {
+		
+		// Creating the file pointer
+		FileWriter file;
+		try {
+			file = new FileWriter("ListOfServices.txt");
+		} catch (IOException e) {
+			file = null;
+			return ERR_CREATING_FILE;
+		} 
+		PrintWriter writeFile = new PrintWriter(file);
+		
+		ProviderDAO providerDAO = new ProviderDAO();
+		ArrayList<Provider> providerList = providerDAO.sAll();
+		
+System.out.println("SIZE: " + providerList.size());
+		
+		writeFile.close();
+		try {
+			file.close();
+		} catch (IOException e) {
+			return ERR_CLOSING_FILE;
+		}
+		
 		return 0;
 	}
 
