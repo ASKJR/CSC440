@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path=""/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+<<<<<<< HEAD
+	<classpathentry kind="lib" path="C:/Users/Jorge/workspace/mysql-connector-java-5.1.37/mysql-connector-java-5.1.37-bin.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/Users/rso_o/Desktop/Drive/Archive/carrollu/software_engineering/final_project/CSC440/lib/mysql-connector-java-5.1.37/mysql-connector-java-5.1.37-bin.jar"/>
 	<classpathentry kind="lib" path="C:/Users/rso_o/Desktop/Drive/Archive/carrollu/software_engineering/final_project/CSC440/lib/javax.mail.jar"/>
-	<classpathentry kind="lib" path="C:/Users/rso_o/Desktop/Drive/Archive/carrollu/software_engineering/final_project/CSC440/lib/mysql-connector-java-5.1.37-bin.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+>>>>>>> origin/master
 	<classpathentry kind="output" path="bin"/>
 </classpath>

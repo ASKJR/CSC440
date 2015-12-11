@@ -14,33 +14,16 @@ import util.EmailSender;
 
 public class ChocAn {
 	
-	public final int ERR_CREATING_FILE = -1;
-	public final int ERR_CLOSING_FILE = -2;
-	public final int ERR_READING_FILE = -3;
-	
-	public final double PROVIDER_PERCENTAGE = 0.4; 
+	private final int ERR_CREATING_FILE = -1;
+	private final int ERR_CLOSING_FILE = -2;
+	private final int ERR_READING_FILE = -3;
 
 	public int createEFT() {
-		// Creating the file pointer
-		FileWriter file;
-		try {
-			file = new FileWriter("ListOfServices.txt");
-		} catch (IOException e) {
-			file = null;
-			return ERR_CREATING_FILE;
-		} 
-		PrintWriter writeFile = new PrintWriter(file);
-		
-		writeFile.close();
-		try {
-			file.close();
-		} catch (IOException e) {
-			return ERR_CLOSING_FILE;
-		}
 		return 0;
 	}
 
 	public int printWeeklyReports() {
+		
 		return 0;
 	}
 
