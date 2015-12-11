@@ -12,11 +12,12 @@ public abstract class User {
 	public static final int OPERATOR = 7;
 	public static final int MEMBER = 8;
 	
+	public static final int SUCCESSFUL_SQL_QUERY = 0;
+	
 	public static final int NOT_FOUND = -1;
 	public static final int TYPE_ERROR = -2;
-	
 	public static final int UNSUCCESSFUL_SQL_QUERY = -3;
-	public static final int SUCCESSFUL_SQL_QUERY = -4;
+	
 	
 	private int idUser;
 	private String stAddr;
