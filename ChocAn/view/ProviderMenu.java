@@ -12,6 +12,7 @@ import beans.ServiceProvided;
 import beans.User;
 import controller.MemberCtrl;
 import controller.ServiceCtrl;
+import controller.ServiceProvidedCtrl;
 import util.Utility;
 
 public class ProviderMenu {
@@ -119,18 +120,21 @@ public class ProviderMenu {
 	public void openMenuRegisterService(User provider, Member member) {
 		String in = "";
 		int inInt = 0;
+		int logStatus = 0;
 		boolean notValid = true;
 		boolean startOver = true;
 		ServiceCtrl serviceCtrl = new ServiceCtrl();
 		Service service = null;
 		ServiceProvided serviceProvided = new ServiceProvided();
-		//Date dateOccurrence = null;
+		//Date occurrenceDate = null;
 		Date date = null;
 		Timestamp currentDate = null;
+		ServiceProvidedCtrl serviceProvidedCtrl = new ServiceProvidedCtrl();
+		DecimalFormat money = new DecimalFormat("$##0.00");
 		
 		System.out.print("\n\t Enter the date the service was provided." 
 						 + "\n\t (Format: MM/DD/YYYY): ");
-		in = sc.nextLine();
+		//in = sc.nextLine();
 		
 		while(startOver) {
 			openMenuProviderDirectory(provider, 1);
@@ -196,23 +200,30 @@ public class ProviderMenu {
 		if(in.equalsIgnoreCase("1"))
 			startMenu(provider);
 			
-		System.out.println("\n\t Comments (optional): ");
+		System.out.print("\n\t Comments (optional): ");
+		serviceProvided.setComment(sc.nextLine());
 		date = new Date();
 		currentDate = new Timestamp(date.getTime());
-		
-		serviceProvided.setComment(sc.nextLine());
 		serviceProvided.setCurrentDate(currentDate);
+		serviceProvided.setOccurrenceDate(java.sql.Date.valueOf("2010-10-10"));
 		serviceProvided.setProvider((Provider) provider);
 		serviceProvided.setMember(member);
 		
 		Utility.clearScreen();
-		System.out.println("\n\t Current date and time " + serviceProvided.getCurrentDate());
-		System.out.println("\t Date service was provided " + serviceProvided);
-		System.out.println("\t Provider number === SHOW === ");
-		System.out.println("\t Member number === SHOW === ");
-		System.out.println("\t Service code === SHOW === ");
-		System.out.println("\t Comments === SHOW === ");
+		System.out.println("\n\t     === Register of Service === ");
+		System.out.println("\n\t Current date and time: " + serviceProvided.getCurrentDate());
+		System.out.println("\t Date service was provided: === TODO ===");
+		System.out.println("\t Provider number: " + serviceProvided.getProvider().getIdUser());
+		System.out.println("\t Provider name: " + serviceProvided.getProvider().getFstName() + " " + serviceProvided.getProvider().getLstName());
+		System.out.println("\t Member number: " + serviceProvided.getMember().getIdUser());
+		System.out.println("\t Member name: " + serviceProvided.getMember().getFstName() + " " + serviceProvided.getMember().getLstName());
+		System.out.println("\t Service code: " + serviceProvided.getService().getIdService());
+		System.out.println("\t Comments: " + serviceProvided.getComment());
+		System.out.println("\t The fee to be paid for this service is: " + money.format(serviceProvided.getService().getFee()));
 		System.out.print("\n\t Confirm registration of this service? (Y/N): ");
+		
+		//provider name; member name; 
+		
 		notValid = true;
 		while(notValid) {
 			in = sc.nextLine();
@@ -222,27 +233,41 @@ public class ProviderMenu {
 		}
 		
 		if(in.equalsIgnoreCase("Y")) {
-			openVerificationForm(provider);
+			logStatus = serviceProvidedCtrl.iOne(serviceProvided);
+			if(logStatus == 0) {
+				System.out.println("\t Registered successfully!");
+			} else {
+				System.out.println("\t There is an error in registering this service. Contact the support.");
+			}
+			System.out.print("\n\t Press ENTER to return to menu ");
+			sc.nextLine();
 		} else {
-			Utility.clearScreen();
-			startMenu(provider);
+			System.out.println("\n\t Do you really want to cancel this service?"
+					         + "\n\t All the work will be lost."
+							 + "\n\t 1. Return to menu"
+							 + "\n\t 2. Register the service");
+			System.out.print("\n\t Option: ");
+			notValid = true;
+			while(notValid) {
+				in = sc.nextLine();
+				if(!in.equals("") && (in.equalsIgnoreCase("1") || in.equalsIgnoreCase("2"))) {
+					notValid = false;
+				} else System.out.print("\t Invalid option. Re-enter: ");
+			}
+			
+			if(in.equalsIgnoreCase("2")) {
+				logStatus = serviceProvidedCtrl.iOne(serviceProvided);
+				if(logStatus == 0) {
+					System.out.println("\t Registered successfully!");
+				} else {
+					System.out.println("\t There is an error in registering this service. Contact the support.");
+				}
+				System.out.print("\n\t Press ENTER to return to menu ");
+				sc.nextLine();
+			}
 		}
-	}
-	
-	public void openVerificationForm(User provider) {
-		System.out.println("\t Registered successfully!");
-		System.out.println("\n\t The fee to be paid for this service is === SHOW FEE RECEIVED BY PROVIDER === ");
-		System.out.println("\n\t Please, fill the verification form: ");
-		System.out.println("\t (Once filled, it cannot be changed)");
-		System.out.print("\n\t Current date (MM/DD/YYYY): ");
-		System.out.print("\t Current time (HH:MM am or pm): ");
-		System.out.print("\t Date service was provided: ");
-		System.out.print("\t Member name: ");
-		System.out.print("\t Member number: ");
-		System.out.print("\t Service code: ");
-		System.out.print("\t Fee: ");
-		System.out.print("\n\t Confirm? (Y/N): ");
-		
+		Utility.clearScreen();
+		startMenu(provider);
 	}
 	
 	public void openMenuCheckFees(User provider) {
@@ -263,6 +288,10 @@ public class ProviderMenu {
 		System.out.println("\t   Fee to be paid === SHOW === ");
 		System.out.println("\n\t Total number of consultations with members === SHOW === ");
 		System.out.println("\t Total fee for week === SHOW === ");
+		System.out.print("\n\t Press ENTER to return to menu ");
+		sc.nextLine();
+		Utility.clearScreen();
+		startMenu(provider);
 	}
 	
 	public void openMenuProviderDirectory(User provider, int status) { // status: if requested by menu, status == 0, if requested by start service, status != 0
