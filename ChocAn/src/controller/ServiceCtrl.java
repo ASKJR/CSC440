@@ -27,4 +27,15 @@ public class ServiceCtrl {
 		return serviceDAO.sAll();
 	}
 	
+	public Service sOne(int fkIdService){
+		
+		Service service = new Service();
+		ServiceDAO serviceDAO = new ServiceDAO();
+		
+		service.setIdService(fkIdService);
+		serviceDAO.sOne(service);
+		
+		return service;
+	}
+	
 }

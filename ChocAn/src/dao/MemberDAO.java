@@ -150,7 +150,7 @@ public class MemberDAO {
 
 
             pstSelecting.setInt(1, member.getFkIdMember());					// Replacing each ? with the correct value
-            
+
             rsSelecting = pstSelecting.executeQuery();						// SQL being executed
         	
             if (rsSelecting.next()) {
@@ -173,7 +173,7 @@ public class MemberDAO {
 
 
                 pstSelecting.setInt(1, member.getFkIdMember());					// Replacing each ? with the correct value
-                
+    
                 rsSelecting = pstSelecting.executeQuery();						// SQL being executed
                 
                 if(rsSelecting.next()){
