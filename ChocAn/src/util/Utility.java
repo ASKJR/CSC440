@@ -9,10 +9,16 @@ public class Utility {
 		}  
 		return true;  
 	}
-	public static boolean isValidStr(String in){
-		if(in.equals("")){
+	
+	public static boolean isValidStr(String str){
+		if(str.equals("")){
 			return false;
 		}
 		else return true;
+	}
+	
+	public static void clearScreen() {
+		for(int i = 0; i < 30; i++)
+			System.out.println();
 	}
 }

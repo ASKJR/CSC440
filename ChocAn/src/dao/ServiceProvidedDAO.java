@@ -1,20 +1,15 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-
 import beans.ServiceProvided;
 import controller.MemberCtrl;
 import controller.ProviderCtrl;
 import controller.ServiceCtrl;
 import beans.Member;
-import beans.Provider;
-import beans.Service;
 import util.ConnectionFactory;
 
 public class ServiceProvidedDAO {
@@ -62,7 +57,7 @@ public class ServiceProvidedDAO {
 		ProviderCtrl providerCtrl = new ProviderCtrl();
 		MemberCtrl memberCtrl = new MemberCtrl();
 		ServiceCtrl serviceCtrl = new ServiceCtrl();
-		ArrayList<ServiceProvided> serviceProvidedList = new ArrayList();
+		ArrayList<ServiceProvided> serviceProvidedList = new ArrayList<ServiceProvided>();
 
 		try{
 			pstListing = connection.prepareStatement(""
