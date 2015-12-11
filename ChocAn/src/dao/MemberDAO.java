@@ -179,6 +179,8 @@ public class MemberDAO {
                 if(rsSelecting.next()){
                 	member.setStatus(rsSelecting.getInt("status"));
                 	member.setFkIdMember(rsSelecting.getInt("fk_id_member"));
+                }else{
+                	return null;
                 }
             	
             }
