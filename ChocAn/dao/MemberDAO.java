@@ -91,19 +91,19 @@ public class MemberDAO {
         	pstUpdating = connection.prepareStatement(""
             		+ "UPDATE `user` "
             		+ "SET "
-            		+ "st_addr = ? "
-            		+ "addr_comp =? "
-            		+ "city = ? "
-            		+ "state = ? "
-            		+ "zip_code = ? "
-            		+ "lst_name = ? "
-            		+ "fst_name = ? "
-            		+ "cell_phone = ? "
-            		+ "home_phone = ? "
-            		+ "work_phone = ? "
+            		+ "st_addr = ?, "
+            		+ "addr_comp = ?, "
+            		+ "city = ?, "
+            		+ "state = ?, "
+            		+ "zip_code = ?, "
+            		+ "lst_name = ?, "
+            		+ "fst_name = ?, "
+            		+ "cell_phone = ?, "
+            		+ "home_phone = ?, "
+            		+ "work_phone = ?, "
             		+ "email = ? "
             		+ "WHERE "
-            		+ "user.id_user = ?");									// SQL itself being prepared
+            		+ "user.id_user = ?", Statement.RETURN_GENERATED_KEYS);									// SQL itself being prepared
 
 
         	pstUpdating.setString(1, member.getStAddr());					// Replacing each ? with the correct value
@@ -125,7 +125,8 @@ public class MemberDAO {
 
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());								// Error Treatment
+            System.out.println(e.getMessage());	
+            System.out.println("oiiii");// Error Treatment
             return Member.UNSUCCESSFUL_SQL_QUERY;								// Method finished UNsuccessfully
         }
         

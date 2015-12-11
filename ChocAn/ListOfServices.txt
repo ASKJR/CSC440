@@ -1,23 +1,39 @@
 
-		 Provider Information
+		 <br>Provider Information
 
-	 ID: 16
-	 First Name: Maru Ponce
-	 Street Address: 100 Freedom Avenue
-	 City: New York
-	 State: NY
-	 ZIP Code: 16543
+	 <br><br>ID: 16
+	 <br>First Name: null null
+	 <br>Street Address: null
+	 <br>City: null
+	 <br>State: null
+	 <br>ZIP Code: null
 
-		 Services provided in the last week
+		 <br><br>Services provided in the last week
 
-	 Date of Service: 12/03/2015
-	 Date and Time of Registration: 12/11/2015
-	 Member Name: Jorge Ribeiro
-	 Member ID: 2
-	 Service Name: nutritionist
-	 Service ID: 1
-	 Fee: 100.0
+	 <br><br>Date of Service: 12/03/2015
+	 <br>Date and Time of Registration: 12/11/2015
+	 <br>Member Name: Jorge Ribeiro
+	 <br>Member ID: 2
+	 <br>Service Name: nutritionist
+	 <br>Service ID: 1
+	 <br>Fee: 100.0
 
-	 Number of Consultations: 1
+	 <br><br>Date of Service: 12/03/2015
+	 <br>Date and Time of Registration: 12/11/2015
+	 <br>Member Name: Alberto Kato
+	 <br>Member ID: 3
+	 <br>Service Name: nutritionist
+	 <br>Service ID: 1
+	 <br>Fee: 100.0
 
-	 Total fee: 100.0
+	 <br><br>Date of Service: 12/03/2015
+	 <br>Date and Time of Registration: 12/11/2015
+	 <br>Member Name: Jorge Ribeiro
+	 <br>Member ID: 2
+	 <br>Service Name: psychologist
+	 <br>Service ID: 3
+	 <br>Fee: 75.5
+
+	 <br><br>Number of Consultations: 3
+
+	 <br>Total fee: 275.5

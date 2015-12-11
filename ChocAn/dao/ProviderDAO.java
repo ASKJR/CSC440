@@ -10,6 +10,7 @@ import com.mysql.jdbc.Statement;
 
 import beans.Member;
 import beans.Provider;
+import beans.User;
 import util.ConnectionFactory;
 
 public class ProviderDAO {
@@ -95,19 +96,19 @@ public class ProviderDAO {
         	pstUpdating = connection.prepareStatement(""
             		+ "UPDATE `user` "
             		+ "SET "
-            		+ "st_addr = ? "
-            		+ "addr_comp =? "
-            		+ "city = ? "
-            		+ "state = ? "
-            		+ "zip_code = ? "
-            		+ "lst_name = ? "
-            		+ "fst_name = ? "
-            		+ "cell_phone = ? "
-            		+ "home_phone = ? "
-            		+ "work_phone = ? "
+            		+ "st_addr = ?, "
+            		+ "addr_comp = ?, "
+            		+ "city = ?, "
+            		+ "state = ?, "
+            		+ "zip_code = ?, "
+            		+ "lst_name = ?, "
+            		+ "fst_name = ?, "
+            		+ "cell_phone = ?, "
+            		+ "home_phone = ?, "
+            		+ "work_phone = ?, "
             		+ "email = ? "
             		+ "WHERE "
-            		+ "user.id_user = ?");									// SQL itself being prepared
+            		+ "user.id_user = ?", Statement.RETURN_GENERATED_KEYS);									// SQL itself being prepared
 
 
         	pstUpdating.setString(1, provider.getStAddr());					// Replacing each ? with the correct value
@@ -258,12 +259,16 @@ public class ProviderDAO {
         			+ ""
         			+ "WHERE "
         			+ ""
-        			+ "p.fk_id_provider = u.id_user");
+        			+ "p.fk_id_provider = u.id_user "
+        			+ ""
+        			+ "AND "
+        			+ ""
+        			+ "p.status = " + User.STATUS_VALID);
         	
             rsSearching = pstSearching.executeQuery();						// SQL being executed and results being assigned to ResultSet
-           
-            Provider provider = new Provider();
+
             while (rsSearching.next()) {
+            	Provider provider = new Provider();
             	provider.setAddrComp(rsSearching.getString("addr_comp"));
             	provider.setCellPhone(rsSearching.getString("cell_phone"));
             	provider.setCity(rsSearching.getString("city"));
