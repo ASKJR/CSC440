@@ -104,11 +104,15 @@ public class ServiceDAO {
         	
             rsListing = pstListing.executeQuery();									// SQL being executed and results being assigned to ResultSet
             
-            while (rsListing.next()) 
+            if (rsListing.next()) 
             {
             	service.setIdService(rsListing.getInt("id_service"));
     			service.setName(rsListing.getString("name"));
     			service.setFee(rsListing.getDouble("fee"));
+            } 
+            else
+            {
+            	return null;
             }
             
         } catch (SQLException e) {

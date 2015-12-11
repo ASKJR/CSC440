@@ -1,16 +1,19 @@
 package view;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
-
 import beans.Member;
+import beans.Service;
 import beans.User;
 import controller.MemberCtrl;
+import controller.ServiceCtrl;
 import util.Utility;
 
 public class ProviderMenu {
 	
 	Scanner sc = new Scanner(System.in);
-	Utility u  =  new Utility();
+	Utility u = new Utility();
 	
 	//************************ provider
 	public void startMenu(User provider) {
@@ -32,7 +35,7 @@ public class ProviderMenu {
 		System.out.print("\t Option: ");
 		while(notValid) {
 			in = sc.nextLine();
-			if(u.isNumeric(in) && ((in.equals("1") || in.equals("2") || in.equals("3")) || in.equals("4") || in.equals("5"))) {
+			if(Utility.isNumeric(in) && ((in.equals("1") || in.equals("2") || in.equals("3")) || in.equals("4") || in.equals("5"))) {
 				notValid = false;
 			} else
 				System.out.print("\t Invalid option. Re-enter: ");
@@ -64,7 +67,7 @@ public class ProviderMenu {
 		System.out.print("\t Insert the ID: ");
 		while(notValid) {
 			in = sc.nextLine();
-			if(u.isNumeric(in) && !in.equals("")) {
+			if(Utility.isNumeric(in) && !in.equals("")) {
 				notValid = false;
 			} else 
 				System.out.print("\t Invalid login. Re-enter: ");
@@ -109,8 +112,11 @@ public class ProviderMenu {
 	
 	public void openMenuRegisterService(User provider, int ID) {
 		String in = "";
+		int inInt = 0;
 		boolean notValid = true;
 		boolean startOver = true;
+		ServiceCtrl serviceCtrl = new ServiceCtrl();
+		Service service = null;
 		
 		System.out.println("\n\t Enter the date the service was provided." 
 						 + "\n\t (Format: MM/DD/YYYY): ");
@@ -118,33 +124,49 @@ public class ProviderMenu {
 		while(startOver) {
 			openMenuProviderDirectory(provider, 1);
 			System.out.print("\n\t Which service do you want to register? ");
-			// get the service code
-			System.out.println("\n\t The service keyed was: " + " === SERVICE NAME === ");
-			System.out.print("\t Confirm? (Y/N): ");
 			notValid = true;
 			while(notValid) {
 				in = sc.nextLine();
-				if(!in.equals("") && (in.equalsIgnoreCase("Y") || in.equalsIgnoreCase("N"))) {
+				if(Utility.isNumeric(in)) {
 					notValid = false;
-				} else System.out.print("\t Invalid option. Re-enter: ");
+				} else
+					System.out.print("\t Invalid option. Re-enter: ");
 			}
 			
-			if(in.equalsIgnoreCase("Y"))
-				startOver = false;
-			else {
-				System.out.println("\n\t 1. Return to menu" 
-								 + "\n\t 2. Look up the Provider Directory again");
-				System.out.print("\n\t Option: ");
+			inInt = Integer.valueOf(in);
+			service = serviceCtrl.sOne(inInt);
+			if(service != null) {
+				System.out.println("\n\t The service keyed was: " + service.getName());
+				System.out.print("\t Confirm? (Y/N): ");
 				notValid = true;
 				while(notValid) {
 					in = sc.nextLine();
-					if(!in.equals("") && (in.equalsIgnoreCase("1") || in.equalsIgnoreCase("2"))) {
+					if(!in.equals("") && (in.equalsIgnoreCase("Y") || in.equalsIgnoreCase("N"))) {
 						notValid = false;
 					} else System.out.print("\t Invalid option. Re-enter: ");
 				}
 				
-				if(in.equalsIgnoreCase("1"))
+				if(in.equalsIgnoreCase("Y"))
 					startOver = false;
+				else {
+					System.out.println("\n\t 1. Return to menu" 
+									 + "\n\t 2. Look up the Provider Directory again");
+					System.out.print("\n\t Option: ");
+					notValid = true;
+					while(notValid) {
+						in = sc.nextLine();
+						if(!in.equals("") && (in.equalsIgnoreCase("1") || in.equalsIgnoreCase("2"))) {
+							notValid = false;
+						} else System.out.print("\t Invalid option. Re-enter: ");
+					}
+					
+					if(in.equalsIgnoreCase("1"))
+						startOver = false;
+				}
+			} else {
+				System.out.println("\n\t Service number not found! ");
+				System.out.print("\t Press ENTER to look up the Provider Directory again");
+				sc.nextLine();
 			}
 		}
 		if(in.equalsIgnoreCase("1"))
@@ -212,10 +234,23 @@ public class ProviderMenu {
 		System.out.println("\t Total fee for week === SHOW === ");
 	}
 	
-	public void openMenuProviderDirectory(User provider, int status) { // status: se o provider solicitou o directory do menu principal, status = 0
-																	   //         se o provider iniciou um registro de servico, status = 1
+	public void openMenuProviderDirectory(User provider, int status) { // status: if requested by menu, status == 0, if requested by start service, status != 0
+		ServiceCtrl serviceCtrl = new ServiceCtrl();
+		ArrayList<Service> serviceList = serviceCtrl.sAll();
+		DecimalFormat money = new DecimalFormat("$##0.00");
+		
 		System.out.println("\n\t Provider Directory");
-		System.out.println("\t === SHOWS SERVICES AVAILABLES === ");     // solicitar do banco
+		if(serviceList != null) {
+			for(Service i : serviceList) {
+				System.out.println("\t "    + i.getIdService()
+									+ " - " + i.getName()
+									+ " "   + money.format(i.getFee()));
+			}
+		}
+		else {
+			System.out.println("\t There are no services to exhibit.");
+			status = 0;
+		}
 		if(status == 0) {
 			System.out.print("\n\t Press ENTER to return to menu ");
 			sc.nextLine();

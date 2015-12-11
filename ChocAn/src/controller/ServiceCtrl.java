@@ -33,9 +33,8 @@ public class ServiceCtrl {
 		ServiceDAO serviceDAO = new ServiceDAO();
 		
 		service.setIdService(fkIdService);
-		serviceDAO.sOne(service);
 		
-		return service;
+		return serviceDAO.sOne(service);
 	}
 	
 }

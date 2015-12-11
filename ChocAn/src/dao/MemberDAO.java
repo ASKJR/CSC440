@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import com.mysql.jdbc.Statement;
-
 import beans.Member;
 import util.ConnectionFactory;
 
@@ -188,11 +186,12 @@ public class MemberDAO {
             }
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());									// Error Treatment
             return null;														// Method finished UNsuccessfully
         }
         
-        ConnectionFactory.closeConnection(connection, pstSelecting);			// Closing connection to the DBMS
+        ConnectionFactory.closeConnection(
+        		connection, pstSelecting, rsSelecting);							// Closing connection to the DBMS
+        
         return member;															// Method finished successfully
 	}
 	
