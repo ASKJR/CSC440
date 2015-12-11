@@ -1,21 +1,20 @@
 package view;
 
 import beans.ChocAn;
-import beans.Member;
-import controller.MemberCtrl;
+import beans.Provider;
+import controller.ProviderCtrl;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
 		ChocAn chocAn = new ChocAn();
-		Member member = new Member();
-		MemberCtrl memberCtrl = new MemberCtrl();
+		Provider provider = new Provider();
+		ProviderCtrl providerCtrl = new ProviderCtrl();
 
-		member = memberCtrl.sOne(2);
-		if(chocAn.sendListOfServices(member) == 0){
+		provider = providerCtrl.sOne(16);
+		if(chocAn.sendListOfServices(provider) == 0){
 			System.out.println("Report Sent Successfully");
 		}
 	}
-
 }
