@@ -180,7 +180,6 @@ public class MemberDAO {
                 }else{
                 	return null;
                 }
-            	
             }
             else
             {
