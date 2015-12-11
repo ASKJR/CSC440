@@ -1,10 +1,14 @@
 package view;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 import beans.Member;
+import beans.Provider;
 import beans.Service;
+import beans.ServiceProvided;
 import beans.User;
 import controller.MemberCtrl;
 import controller.ServiceCtrl;
@@ -94,8 +98,9 @@ public class ProviderMenu {
 				} else System.out.print("\t Invalid option. Re-enter: ");
 			}
 			
+			Utility.clearScreen();
 			if(in.equalsIgnoreCase("Y"))
-				openMenuRegisterService(provider, inInt);
+				openMenuRegisterService(provider, member);
 			else
 				startMenu(provider);
 		}			
@@ -107,20 +112,26 @@ public class ProviderMenu {
 			System.out.println("\n\t Invalid Number!"); // if invalid
 		System.out.print("\n\t Press ENTER to return to menu ");
 		sc.nextLine();
+		Utility.clearScreen();															//************ add to the other lines that need ************//
 		startMenu(provider);
 	}
 	
-	public void openMenuRegisterService(User provider, int ID) {
+	public void openMenuRegisterService(User provider, Member member) {
 		String in = "";
 		int inInt = 0;
 		boolean notValid = true;
 		boolean startOver = true;
 		ServiceCtrl serviceCtrl = new ServiceCtrl();
 		Service service = null;
+		ServiceProvided serviceProvided = new ServiceProvided();
+		//Date dateOccurrence = null;
+		Date date = null;
+		Timestamp currentDate = null;
 		
-		System.out.println("\n\t Enter the date the service was provided." 
+		System.out.print("\n\t Enter the date the service was provided." 
 						 + "\n\t (Format: MM/DD/YYYY): ");
-		// get the date
+		in = sc.nextLine();
+		
 		while(startOver) {
 			openMenuProviderDirectory(provider, 1);
 			System.out.print("\n\t Which service do you want to register? ");
@@ -146,8 +157,10 @@ public class ProviderMenu {
 					} else System.out.print("\t Invalid option. Re-enter: ");
 				}
 				
-				if(in.equalsIgnoreCase("Y"))
+				if(in.equalsIgnoreCase("Y")) {
+					serviceProvided.setService(service);
 					startOver = false;
+				}
 				else {
 					System.out.println("\n\t 1. Return to menu" 
 									 + "\n\t 2. Look up the Provider Directory again");
@@ -165,22 +178,41 @@ public class ProviderMenu {
 				}
 			} else {
 				System.out.println("\n\t Service number not found! ");
-				System.out.print("\t Press ENTER to look up the Provider Directory again");
-				sc.nextLine();
+				System.out.println("\n\t 1. Return to menu" 
+						         + "\n\t 2. Look up the Provider Directory again");
+				System.out.print("\n\t Option: ");
+				notValid = true;
+				while(notValid) {
+					in = sc.nextLine();
+					if(!in.equals("") && (in.equalsIgnoreCase("1") || in.equalsIgnoreCase("2"))) {
+						notValid = false;
+					} else System.out.print("\t Invalid option. Re-enter: ");
+				}
+				
+				if(in.equalsIgnoreCase("1"))
+					startOver = false;
 			}
 		}
 		if(in.equalsIgnoreCase("1"))
 			startMenu(provider);
 			
-		System.out.println("\n\t Comments: ");
-		// get the comments
-		System.out.println("\n\t Current date and time === SHOW === ");
-		System.out.println("\t Date service was provided === SHOW === ");
+		System.out.println("\n\t Comments (optional): ");
+		date = new Date();
+		currentDate = new Timestamp(date.getTime());
+		
+		serviceProvided.setComment(sc.nextLine());
+		serviceProvided.setCurrentDate(currentDate);
+		serviceProvided.setProvider((Provider) provider);
+		serviceProvided.setMember(member);
+		
+		Utility.clearScreen();
+		System.out.println("\n\t Current date and time " + serviceProvided.getCurrentDate());
+		System.out.println("\t Date service was provided " + serviceProvided);
 		System.out.println("\t Provider number === SHOW === ");
 		System.out.println("\t Member number === SHOW === ");
 		System.out.println("\t Service code === SHOW === ");
 		System.out.println("\t Comments === SHOW === ");
-		System.out.println("\n\t Confirm registration of this service? (Y/N): ");
+		System.out.print("\n\t Confirm registration of this service? (Y/N): ");
 		notValid = true;
 		while(notValid) {
 			in = sc.nextLine();
@@ -190,17 +222,16 @@ public class ProviderMenu {
 		}
 		
 		if(in.equalsIgnoreCase("Y")) {
-			// register service in database
-			// if success print
-			System.out.println("\t Registered successfully!");
-			System.out.println("\n\t The fee to be paid for this service is === SHOW FEE RECEIVED BY PROVIDER === ");
-		}
-		else
+			openVerificationForm(provider);
+		} else {
+			Utility.clearScreen();
 			startMenu(provider);
-		
+		}
 	}
 	
 	public void openVerificationForm(User provider) {
+		System.out.println("\t Registered successfully!");
+		System.out.println("\n\t The fee to be paid for this service is === SHOW FEE RECEIVED BY PROVIDER === ");
 		System.out.println("\n\t Please, fill the verification form: ");
 		System.out.println("\t (Once filled, it cannot be changed)");
 		System.out.print("\n\t Current date (MM/DD/YYYY): ");

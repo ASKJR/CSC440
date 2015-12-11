@@ -21,4 +21,8 @@ public class Utility {
 		for(int i = 0; i < 30; i++)
 			System.out.println();
 	}
+	
+	public static void validDate(String str) {
+		
+	}
 }
