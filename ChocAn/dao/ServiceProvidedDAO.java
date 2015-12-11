@@ -25,18 +25,34 @@ public class ServiceProvidedDAO {
             
         	pstInserting = connection.prepareStatement(""
             		+ " INSERT INTO `service_provided`("
+<<<<<<< HEAD
+            		+ " fk_id_provider"
+            		+ ", fk_id_service"
+            		+ ", fk_id_member"
+=======
             		+ " `fk_id_provider`"
             		+ ", `fk_id_service`"
             		+ ", `fk_id_member`"
+>>>>>>> 76fdd5537d15a3d86ba08279cff731edf978744e
             		+ ", `current_date`"
             		+ ", `occurrence_date`"
             		+ ", `comment`) "
             		+ " VALUES "
             		+ " (?, ?, ?, now(), ?, ?)");											// SQL itself being prepared
 
-            pstInserting.setInt(1, serviceProvided.getProvider().getFkIdProvider());	// Replacing each ? with the correct value
+            pstInserting.setInt(1, serviceProvided.getProvider().getIdUser());	// Replacing each ? with the correct value
             pstInserting.setInt(2, serviceProvided.getService().getIdService());
             pstInserting.setInt(3, serviceProvided.getMember().getFkIdMember());
+<<<<<<< HEAD
+            pstInserting.setTimestamp(4, serviceProvided.getCurrentDate());
+            pstInserting.setDate(5, serviceProvided.getOccurrenceDate());
+            pstInserting.setString(6, serviceProvided.getComment());
+System.out.println(pstInserting.toString());
+            pstInserting.executeUpdate();												// SQL being executed
+
+        } catch (SQLException e) {
+            return -1;																	// Method finished UNsuccessfully
+=======
             pstInserting.setDate(4, serviceProvided.getOccurrenceDate());
             pstInserting.setString(5, serviceProvided.getComment());
 
@@ -45,6 +61,7 @@ public class ServiceProvidedDAO {
         } catch (SQLException e) {
             System.out.println(e.getMessage());											// Error Treatment
             return User.UNSUCCESSFUL_SQL_QUERY;																	// Method finished UNsuccessfully
+>>>>>>> 76fdd5537d15a3d86ba08279cff731edf978744e
         }
         
         ConnectionFactory.closeConnection(connection, pstInserting);					// Closing connection to the DBMS

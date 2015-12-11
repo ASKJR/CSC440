@@ -32,6 +32,12 @@ public class ServiceProvidedCtrl {
 		return serviceProvidedDAO.iOne(serviceProvided);
 	}
 	
+	public int iOne(ServiceProvided serviceProvided) {
+		ServiceProvidedDAO serviceProvidedDAO = new ServiceProvidedDAO();
+		
+		return serviceProvidedDAO.iOne(serviceProvided);
+	}
+	
 	public ArrayList<ServiceProvided> sSome(int fkIdMember){
 		
 		Member member = new Member();
