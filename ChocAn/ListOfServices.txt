@@ -1,15 +1,23 @@
 
-		 Member Information
-	 ID: 2
-	 First Name: Jorge
-	 Last Name: Ribeiro
-	 Street Address: 100 North East Avenue
-	 City: Waukesha
-	 State: WI
-	 ZIP Code: 53186
+		 Provider Information
 
-		 Services used in the last week
+	 ID: 16
+	 First Name: Maru Ponce
+	 Street Address: 100 Freedom Avenue
+	 City: New York
+	 State: NY
+	 ZIP Code: 16543
+
+		 Services provided in the last week
 
 	 Date of Service: 12/03/2015
-	 Provider Name: Maru
+	 Date and Time of Registration: 12/11/2015
+	 Member Name: Jorge Ribeiro
+	 Member ID: 2
 	 Service Name: nutritionist
+	 Service ID: 1
+	 Fee: 100.0
+
+	 Number of Consultations: 1
+
+	 Total fee: 100.0

@@ -23,6 +23,7 @@ public class ChocAn {
 	}
 
 	public int printWeeklyReports() {
+		
 		return 0;
 	}
 
@@ -30,8 +31,6 @@ public class ChocAn {
 		return 0;
 	}
 
-	
-	
 	public int sendListOfServices(Member member) {
 
 		ServiceProvidedDAO serviceProvidedDAO = new ServiceProvidedDAO();
@@ -106,13 +105,92 @@ public class ChocAn {
 			//member.getEmail()
 		);
 	}
-
-	
 	
 	public int sendListOfServices(Provider provider) {
-		return 0;
+		ServiceProvidedDAO serviceProvidedDAO = new ServiceProvidedDAO();
+		
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		
+		ArrayList<ServiceProvided> serviceProvidedList = serviceProvidedDAO.sLastWeek(provider);
+		String content = "";
+		
+		// Creating the file pointer
+		FileWriter file;
+		try {
+			file = new FileWriter("ListOfServices.txt");
+		} catch (IOException e) {
+			file = null;
+			return ERR_CREATING_FILE;
+		} 
+		PrintWriter writeFile = new PrintWriter(file);
+		
+		// Filling the file with the requested information
+		writeFile.printf("\n\t\t Provider Information");
+		writeFile.printf("\n\n\t ID: " + provider.getFkIdProvider());
+		writeFile.printf("\n\t First Name: " + provider.getFstName() + " " + provider.getLstName());
+		writeFile.printf("\n\t Street Address: " + provider.getStAddr());
+		writeFile.printf("\n\t City: " + provider.getCity());
+		writeFile.printf("\n\t State: " + provider.getState());
+		writeFile.printf("\n\t ZIP Code: " + provider.getZipCode());
+		
+		writeFile.printf("\n\n\t\t Services provided in the last week");
+		
+		double totalFee = 0;
+		int numberOfConsultations = 0;
+		for(ServiceProvided serviceProvided : serviceProvidedList){
+			writeFile.printf("\n\n\t Date of Service: " + dateFormat.format(serviceProvided.getOccurrenceDate()));
+			writeFile.printf("\n\t Date and Time of Registration: " + dateFormat.format(serviceProvided.getCurrentDate()));
+			writeFile.printf("\n\t Member Name: " + serviceProvided.getMember().getFstName() + " " + serviceProvided.getMember().getLstName());
+			writeFile.printf("\n\t Member ID: " + serviceProvided.getMember().getFkIdMember());
+			writeFile.printf("\n\t Service Name: " + serviceProvided.getService().getName());
+			writeFile.printf("\n\t Service ID: " + serviceProvided.getService().getIdService());
+			writeFile.printf("\n\t Fee: " + serviceProvided.getService().getFee());
+			totalFee += serviceProvided.getService().getFee();
+			numberOfConsultations++;
+		}
+		
+		writeFile.printf("\n\n\t Number of Consultations: " + numberOfConsultations);
+		writeFile.printf("\n\n\t Total fee: " + totalFee);
+		
+		// Closing the file pointer
+		try {
+			file.close();
+		} catch (IOException e) {
+			return ERR_CLOSING_FILE;
+		}
+		
+		// Reading the stored file and appending to a single String variable
+		BufferedReader bufferedReader;
+		try 
+		{
+			bufferedReader = new BufferedReader
+					(
+						new FileReader("ListOfServices.txt")
+					);
+			
+			String line = "";
+			while ((line = bufferedReader.readLine()) != null)
+				content += line;
+			
+			bufferedReader.close();
+		} 
+		catch (IOException e) 
+		{
+			return ERR_READING_FILE;
+		}
+
+		// Sending the information via email
+		EmailSender emailSender = new EmailSender();
+		return emailSender.sendMessage
+		(
+			"List Of Services", 
+			content,
+			"rso_oliver@hotmail.com"
+			//member.getEmail()
+		);
 	}
 
+	
 	public int validateMember() {
 		return 0;
 	}
