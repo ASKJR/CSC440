@@ -5,6 +5,8 @@ import javax.mail.internet.*;
 
 public class EmailSender {
 
+	private final int EMAIL_NOT_SENT = -1; 
+	
     private final static String SENDER_ADDRESS = "rsoliveira.computacao@gmail.com";
     private final static String PASSWORD = "fusrohdah";
     
@@ -35,7 +37,7 @@ public class EmailSender {
 				)
 			);
 		} catch (MessagingException e1) {
-			return -1;
+			return EMAIL_NOT_SENT;
 		}
         
         // sending the message
@@ -52,7 +54,7 @@ public class EmailSender {
 	        Transport.send(message);
 
 	    }catch(MessagingException e){
-	        return -1;
+	        return EMAIL_NOT_SENT;
 	    }
 	    return 0;
     }

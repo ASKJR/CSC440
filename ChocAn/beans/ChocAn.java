@@ -1,7 +1,6 @@
 package beans;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,8 +16,7 @@ public class ChocAn {
 	
 	private final int ERR_CREATING_FILE = -1;
 	private final int ERR_CLOSING_FILE = -2;
-	private final int ERR_SENDING_EMAIL = -3;
-	private final int ERR_READING_FILE = -4;
+	private final int ERR_READING_FILE = -3;
 
 	public int createEFT() {
 		return 0;
@@ -32,6 +30,8 @@ public class ChocAn {
 		return 0;
 	}
 
+	
+	
 	public int sendListOfServices(Member member) {
 
 		ServiceProvidedDAO serviceProvidedDAO = new ServiceProvidedDAO();
@@ -39,7 +39,9 @@ public class ChocAn {
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		
 		ArrayList<ServiceProvided> serviceProvidedList = serviceProvidedDAO.sLastWeek(member);
+		String content = "";
 		
+		// Creating the file pointer
 		FileWriter file;
 		try {
 			file = new FileWriter("ListOfServices.txt");
@@ -47,9 +49,9 @@ public class ChocAn {
 			file = null;
 			return ERR_CREATING_FILE;
 		} 
-		
 		PrintWriter writeFile = new PrintWriter(file);
 		
+		// Filling the file with the requested information
 		writeFile.printf("\n\t\t Member Information");
 		writeFile.printf("\n\t ID: " + member.getFkIdMember());
 		writeFile.printf("\n\t First Name: " + member.getFstName()); 
@@ -67,39 +69,46 @@ public class ChocAn {
 			writeFile.printf("\n\t Service Name: " + serviceProvided.getService().getName());	
 		}
 		
+		// Closing the file pointer
 		try {
 			file.close();
 		} catch (IOException e) {
 			return ERR_CLOSING_FILE;
 		}
 		
-		String content = "";
-		BufferedReader br;
-		try {
-			br = new BufferedReader(new FileReader("ListOfServices.txt"));
-			String line = null;
-			while ((line = br.readLine()) != null) {
+		// Reading the stored file and appending to a single String variable
+		BufferedReader bufferedReader;
+		try 
+		{
+			bufferedReader = new BufferedReader
+					(
+						new FileReader("ListOfServices.txt")
+					);
+			
+			String line = "";
+			while ((line = bufferedReader.readLine()) != null)
 				content += line;
-			}
-			br.close();
-		} catch (FileNotFoundException e) {
-			return ERR_READING_FILE;
-		} catch (IOException e) {
+			
+			bufferedReader.close();
+		} 
+		catch (IOException e) 
+		{
 			return ERR_READING_FILE;
 		}
 
+		// Sending the information via email
 		EmailSender emailSender = new EmailSender();
-		emailSender.sendMessage
+		return emailSender.sendMessage
 		(
 			"List Of Services", 
 			content,
 			"rso_oliver@hotmail.com"
 			//member.getEmail()
 		);
-
-		return 0;
 	}
 
+	
+	
 	public int sendListOfServices(Provider provider) {
 		return 0;
 	}

@@ -13,9 +13,9 @@ public class Main {
 		MemberCtrl memberCtrl = new MemberCtrl();
 
 		member = memberCtrl.sOne(2);
-		chocAn.sendListOfServices(member);
-
-		
+		if(chocAn.sendListOfServices(member) == 0){
+			System.out.println("Report Sent Successfully");
+		}
 	}
 
 }
