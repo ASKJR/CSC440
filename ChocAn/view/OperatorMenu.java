@@ -199,26 +199,44 @@ public class OperatorMenu {
 	
 	public void openMenuUpdate(String user) {
 		String in = "";
+		String ID = "";
 		boolean notValid  = true;
 		Member member     = null;
 		Provider provider = null;
+		String userData[] = new String[11];
+		
+		
+		String AddrComp  ;
+		String CellPhone ;
+		String HomePhone ;
+		String WorkPhone ;
+		String Email     ;
+		String City      ;
+		String ZipCode   ;
+		String State     ;
+		String StAddr    ;
+		String FstName   ;
+		String LstName   ;
+		
+		
+		
 		
 		System.out.println("\n\t Operation: Update " + user);
 		System.out.print("\t Enter the ID: ");
 		
 		//-----------------ID validation-----------------
 		while(notValid) {
-			in = sc.nextLine();
-			if(u.isNumeric(in)) { // valid ID
+			ID = sc.nextLine();
+			if(u.isNumeric(ID)) { // valid ID
 				if(user.equals("member")){
-					member = memberCtrl.sOne(Integer.parseInt(in));
+					member = memberCtrl.sOne(Integer.parseInt(ID));
 					if(member != null){
 						notValid = false;
 					}
 				}
 				//It's a provider
 				else{
-					provider = providerCtrl.sOne(Integer.parseInt(in));
+					provider = providerCtrl.sOne(Integer.parseInt(ID));
 					if(provider != null){
 						notValid= false;
 					}
@@ -237,53 +255,199 @@ public class OperatorMenu {
 		if(member != null){
 			
 			//Check possible null fields
-			String AddrComp  = (member.getAddrComp()  == null) ? "" : member.getAddrComp(); 
-			String CellPhone = (member.getCellPhone() == null) ? "" : member.getCellPhone();
-			String HomePhone = (member.getHomePhone() == null) ? "" : member.getHomePhone();
-			String WorkPhone = (member.getWorkPhone() == null) ? "" : member.getWorkPhone();
-			String Email     = (member.getEmail()     == null) ? "" : member.getEmail();
-			
-			
+			 AddrComp  = (member.getAddrComp()  == null) ? "" : member.getAddrComp(); 
+			 CellPhone = (member.getCellPhone() == null) ? "" : member.getCellPhone();
+			 HomePhone = (member.getHomePhone() == null) ? "" : member.getHomePhone();
+			 WorkPhone = (member.getWorkPhone() == null) ? "" : member.getWorkPhone();
+			 Email     = (member.getEmail()     == null) ? "" : member.getEmail();
+			 City      = (member.getCity()      == null) ? "" : member.getCity();
+			 ZipCode   = (member.getZipCode()   == null) ? "" : member.getZipCode();
+			 State     = (member.getState()     == null) ? "" : member.getState();
+			 StAddr    = (member.getStAddr()    == null) ? "" : member.getStAddr();
+			 FstName   = (member.getFstName()   == null) ? "" : member.getFstName();
+			 LstName   = (member.getLstName()   == null) ? "" : member.getLstName();
+ 			
 			System.out.println("\n\t--- Member Info ---\n");
-			System.out.println("\t First name    : "    + member.getFstName());
-			System.out.println("\t Last name     : "    + member.getLstName());
+			System.out.println("\t First name    : "    + FstName);
+			System.out.println("\t Last name     : "    + LstName);
 			System.out.println("\t Email         : "    + Email);
 			System.out.println("\t Cell phone    : "    + CellPhone);
 			System.out.println("\t Home phone    : "    + HomePhone);
 			System.out.println("\t Work phone    : "    + WorkPhone);
-			System.out.println("\t Address       : "    + member.getStAddr());
+			System.out.println("\t Address       : "    + StAddr);
 			System.out.println("\t Address line 2: "    + AddrComp);
-			System.out.println("\t City          : "    + member.getCity());
-			System.out.println("\t State         : "    + member.getState());
-			System.out.println("\t Zip code      : "    + member.getZipCode());
+			System.out.println("\t City          : "    + City);
+			System.out.println("\t State         : "    + State);
+			System.out.println("\t Zip code      : "    + ZipCode);
 			System.out.println("\n\t-------------------\n");
 		}
 		 // Display the data of the provider
 		else{
 			
 			//Check possible null fields
-			String AddrComp  = (provider.getAddrComp()  == null) ? "" : provider.getAddrComp(); 
-			String CellPhone = (provider.getCellPhone() == null) ? "" : provider.getCellPhone();
-			String HomePhone = (provider.getHomePhone() == null) ? "" : provider.getHomePhone();
-			String WorkPhone = (provider.getWorkPhone() == null) ? "" : provider.getWorkPhone();
-			String Email     = (provider.getEmail()     == null) ? "" : provider.getEmail();
+			 AddrComp  = (provider.getAddrComp()  == null) ? "" : provider.getAddrComp(); 
+			 CellPhone = (provider.getCellPhone() == null) ? "" : provider.getCellPhone();
+			 HomePhone = (provider.getHomePhone() == null) ? "" : provider.getHomePhone();
+			 WorkPhone = (provider.getWorkPhone() == null) ? "" : provider.getWorkPhone();
+			 Email     = (provider.getEmail()     == null) ? "" : provider.getEmail();
+			 City      = (provider.getCity()      == null) ? "" : provider.getCity();
+			 ZipCode   = (provider.getZipCode()   == null) ? "" : provider.getZipCode();
+			 State     = (provider.getState()     == null) ? "" : provider.getState();
+			 StAddr    = (provider.getStAddr()    == null) ? "" : provider.getStAddr();
+			 FstName   = (provider.getFstName()   == null) ? "" : provider.getFstName();
+			 LstName   = (provider.getLstName()   == null) ? "" : provider.getLstName();
+
 			
 			System.out.println("\n\t--- Provider Info ---\n");
-			System.out.println("\t First name    : "    + provider.getFstName());
-			System.out.println("\t Last name     : "    + provider.getLstName());
+			System.out.println("\t First name    : "    + FstName);
+			System.out.println("\t Last name     : "    + LstName);
 			System.out.println("\t Email         : "    + Email);
 			System.out.println("\t Cell phone    : "    + CellPhone);
 			System.out.println("\t Home phone    : "    + HomePhone);
 			System.out.println("\t Work phone    : "    + WorkPhone);
-			System.out.println("\t Address       : "    + provider.getStAddr());
+			System.out.println("\t Address       : "    + StAddr);
 			System.out.println("\t Address line 2: "    + AddrComp);
-			System.out.println("\t City          : "    + provider.getCity());
-			System.out.println("\t State         : "    + provider.getState());
-			System.out.println("\t Zip code      : "    + provider.getZipCode());
+			System.out.println("\t City          : "    + City);
+			System.out.println("\t State         : "    + State);
+			System.out.println("\t Zip code      : "    + ZipCode);
 			System.out.println("\n\t-------------------\n");
 		}
 		
 		//-----------------END DISPLAY INFORMATION (member or provider)-------------
+		
+
+		//---------------------------START UPDATE-----------------------------------
+			System.out.print("\t First name    : ");
+			in = sc.nextLine();
+			
+			if(in.equals("")){
+				userData[6] = FstName;
+			}
+			else{
+				userData[6] = in;
+			}
+		
+			System.out.print("\t Last name    : ");
+			in = sc.nextLine();
+			
+			if(in.equals("")){
+				userData[5] = LstName;
+			}
+			else{
+				userData[5] = in;
+			}
+			
+			
+			System.out.print("\t Email         : ");
+			in = sc.nextLine();
+			
+			if(in.equals("")){
+				userData[10] = Email;
+			}
+			else{
+				userData[10] = in;
+			}
+			
+			System.out.print("\t Cell phone    : ");
+			in = sc.nextLine();
+			
+			if(in.equals("")){
+				userData[7] = CellPhone;
+			}
+			else{
+				userData[7] = in;
+			}
+			
+			System.out.print("\t Home phone    : ");
+			in = sc.nextLine();
+			
+			if(in.equals("")){
+				userData[8] = HomePhone;
+			}
+			else{
+				userData[8] = in;
+			}
+			
+			System.out.print("\t Work phone    : ");
+			in = sc.nextLine();
+			
+			if(in.equals("")){
+				userData[9] = WorkPhone;
+			}
+			else{
+				userData[9] = in;
+			}
+			
+			System.out.print("\t Address       : ");
+			in = sc.nextLine();
+			
+			if(in.equals("")){
+				userData[0] = StAddr;
+			}
+			else{
+				userData[0] = in;
+			}
+			
+			
+			System.out.print("\t Address line 2: ");
+			in = sc.nextLine();
+			
+			if(in.equals("")){
+				userData[1] = AddrComp;
+			}
+			else{
+				userData[1] = in;
+			}
+			
+			System.out.print("\t City          : ");
+			in = sc.nextLine();
+			
+			if(in.equals("")){
+				userData[2] = City;
+			}
+			else{
+				userData[2] = in;
+			}
+			
+			System.out.print("\t State         : ");
+			in = sc.nextLine();
+			
+			if(in.equals("")){
+				userData[3] = State;
+			}
+			else{
+				userData[3] = in;
+			}
+			
+			System.out.print("\t Zip code      : ");
+			in = sc.nextLine();
+			
+			if(in.equals("")){
+				userData[4] = State;
+			}
+			else{
+				userData[4] = in;
+			}
+		if(user.equals("member")){
+			if(memberCtrl.uOne(Integer.parseInt(ID),1,userData[0],userData[1],userData[2],userData[3],
+					userData[4],userData[5],userData[6],userData[7],
+					userData[8],userData[9],userData[10]) == User.SUCCESSFUL_SQL_QUERY){
+				System.out.println("Updated sucessfully");
+			}
+			else{
+				System.out.println("SQL Error:");
+			}
+		}
+		else{
+			if(providerCtrl.uOne(Integer.parseInt(ID),1,userData[0],userData[1],userData[2],userData[3],
+					userData[4],userData[5],userData[6],userData[7],
+					userData[8],userData[9],userData[10]) == User.SUCCESSFUL_SQL_QUERY){
+				System.out.println("Updated sucessfully");
+			}
+			else{
+				System.out.println("SQL Error:");
+			}
+		}
 	}
 	public void openMenuDelete(String user) {
 		String in = "";
