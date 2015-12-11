@@ -212,7 +212,7 @@ public class ProviderMenu {
 		Utility.clearScreen();
 		System.out.println("\n\t     === Register of Service === ");
 		System.out.println("\n\t Current date and time: " + serviceProvided.getCurrentDate());
-		System.out.println("\t Date service was provided: === TODO ===");
+		System.out.println("\t Date service was provided: " + serviceProvided.getOccurrenceDate());
 		System.out.println("\t Provider number: " + serviceProvided.getProvider().getIdUser());
 		System.out.println("\t Provider name: " + serviceProvided.getProvider().getFstName() + " " + serviceProvided.getProvider().getLstName());
 		System.out.println("\t Member number: " + serviceProvided.getMember().getIdUser());
