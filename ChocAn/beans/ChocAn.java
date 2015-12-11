@@ -24,7 +24,7 @@ public class ChocAn {
 		// Creating the file pointer
 		FileWriter file;
 		try {
-			file = new FileWriter("ListOfServices.txt");
+			file = new FileWriter("EFT.txt");
 		} catch (IOException e) {
 			file = null;
 			return ERR_CREATING_FILE;
@@ -32,9 +32,30 @@ public class ChocAn {
 		PrintWriter writeFile = new PrintWriter(file);
 		
 		ProviderDAO providerDAO = new ProviderDAO();
+		ServiceProvidedDAO serviceProvidedDAO = new ServiceProvidedDAO();
 		ArrayList<Provider> providerList = providerDAO.sAll();
 		
-System.out.println("SIZE: " + providerList.size());
+		for(Provider provider : providerList){
+			System.out.println(provider.getStatus());
+		}
+		
+		for(Provider provider : providerList){
+			
+			int totalFee = 0;
+			
+			ArrayList<ServiceProvided> serviceProvidedList = serviceProvidedDAO.sAll(provider);
+			
+			for(ServiceProvided serviceProvided : serviceProvidedList){
+				totalFee += serviceProvided.getService().getFee();
+			}
+			
+System.out.println(provider.getLstName());
+			
+			writeFile.println(provider.getLstName());
+			writeFile.println(provider.getFkIdProvider());
+			writeFile.println(totalFee);
+			
+		}
 		
 		writeFile.close();
 		try {

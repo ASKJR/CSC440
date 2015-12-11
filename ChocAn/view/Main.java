@@ -3,6 +3,7 @@ package view;
 import beans.ChocAn;
 import beans.Provider;
 import controller.ProviderCtrl;
+import dao.ProviderDAO;
 
 public class Main {
 
@@ -12,9 +13,6 @@ public class Main {
 		Provider provider = new Provider();
 		ProviderCtrl providerCtrl = new ProviderCtrl();
 
-		provider = providerCtrl.sOne(16);
-		if(chocAn.sendListOfServices(provider) == 0){
-			System.out.println("Report Sent Successfully");
-		}
+		chocAn.createEFT();
 	}
 }

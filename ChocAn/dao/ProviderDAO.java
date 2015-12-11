@@ -261,9 +261,9 @@ public class ProviderDAO {
         			+ "p.fk_id_provider = u.id_user");
         	
             rsSearching = pstSearching.executeQuery();						// SQL being executed and results being assigned to ResultSet
-           
-            Provider provider = new Provider();
+
             while (rsSearching.next()) {
+            	Provider provider = new Provider();
             	provider.setAddrComp(rsSearching.getString("addr_comp"));
             	provider.setCellPhone(rsSearching.getString("cell_phone"));
             	provider.setCity(rsSearching.getString("city"));
