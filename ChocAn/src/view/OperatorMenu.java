@@ -2,7 +2,7 @@ package view;
 
 import java.util.Scanner;
 
-import beans.User;
+import beans.*;
 import util.*;
 import controller.*;
 
@@ -198,14 +198,33 @@ public class OperatorMenu {
 	
 	public void openMenuUpdate(String user) {
 		String in = "";
-		boolean notValid = true;
+		boolean notValid  = true;
+		Member member     = null;
+		Provider provider = null;
 		
 		System.out.println("\n\t Operation: Update " + user);
 		System.out.print("\t Enter the ID: ");
 		while(notValid) {
 			in = sc.nextLine();
 			if(u.isNumeric(in)) { // valid ID
-				notValid = false;
+				if(user.equals("member")){
+					member = memberCtrl.sOne(Integer.parseInt(in));
+					if(member != null)
+						if(member.getFkIdMember() != 0){
+							System.out.println(member.getFkIdMember());
+							notValid = false;
+						}
+				}
+				//It's a provider
+				else{
+					provider = providerCtrl.sOne(Integer.parseInt(in));
+					if(provider != null){
+						if(provider.getFkIdProvider() != 0)
+							notValid= false;
+					}
+				}
+				if(notValid)
+					System.out.print("\t Invalid ID. Re-enter: ");
 			} else
 				System.out.print("\t Invalid ID. Re-enter: ");
 		}
@@ -221,7 +240,7 @@ public class OperatorMenu {
 		System.out.print("\t State         : ");
 		System.out.print("\t Zip code      : ");
 		
-		System.out.print("\t First name    : "); // fields to update data
+		/*System.out.print("\t First name    : "); // fields to update data
 		System.out.print("\t Last name     : ");
 		System.out.print("\t Email         : ");
 		System.out.print("\t Cell phone    : ");
@@ -232,7 +251,7 @@ public class OperatorMenu {
 		System.out.print("\t City          : ");
 		System.out.print("\t State         : ");
 		System.out.print("\t Zip code      : ");
-		System.out.print("\n\t Do you want to update this " + user + "? (Y/N): ");
+		System.out.print("\n\t Do you want to update this " + user + "? (Y/N): ");*/
 	}
 	
 	public void openMenuDelete(String user) {

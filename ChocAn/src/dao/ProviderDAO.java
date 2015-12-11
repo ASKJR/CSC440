@@ -218,6 +218,10 @@ public class ProviderDAO {
             
             if (rsSearching.next()) {
             	provider.setStatus(rsSearching.getInt("status"));
+            	provider.setFkIdProvider(rsSearching.getInt("fk_id_provider"));
+            	provider.setIdUser(rsSearching.getInt("fk_id_provider"));
+            }else{
+            	return null;
             }
             
         } catch (SQLException e) {
