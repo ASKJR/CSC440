@@ -39,22 +39,18 @@ public class Utility {
 		if(str.length() != 10) return false;
 		else {
 			if(str.charAt(2) == '/' && str.charAt(5) == '/') {
-				System.out.println("OK 1 !");
 				mm += str.charAt(0);
 				mm += str.charAt(1);
 				dd += str.charAt(3);
 				dd += str.charAt(4);
 				yyyy = str.substring(6);
 				if(isNumeric(mm) && isNumeric(dd) && isNumeric(yyyy)) {
-					System.out.println("OK 2 !");
 					numY = Integer.valueOf(yyyy);
 					numD = Integer.valueOf(dd);
 					numM = Integer.valueOf(mm);
 					
 					if(numD > 31 || numM > 12)
 						return false;
-					
-					System.out.println("OK 3 !");
 					
 					if((numY % 4 == 0) && (numY % 100 != 0))
 						leapYear = true;
@@ -72,19 +68,20 @@ public class Utility {
 					else
 						validDate = false;
 					
-					System.out.println("OK 4 ! validDate = " + validDate);
-					
 					if(validDate) {
 						currentDate = new Date();
 						timeStamp = new Timestamp(currentDate.getTime());
 						if(str.compareTo(dateFormat.format(timeStamp)) > 0)
 							return false;						
 					}
-					
-					
 				} else return false;
 			}
 		}
 		return validDate;
+	}
+	
+	public static Timestamp currentDate() {
+		Date currDate = new Date();
+		return new Timestamp(currDate.getTime());		
 	}
 }
