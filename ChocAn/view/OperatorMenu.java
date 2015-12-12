@@ -432,7 +432,7 @@ public class OperatorMenu {
 			if(memberCtrl.uOne(Integer.parseInt(ID),1,userData[0],userData[1],userData[2],userData[3],
 					userData[4],userData[5],userData[6],userData[7],
 					userData[8],userData[9],userData[10]) == User.SUCCESSFUL_SQL_QUERY){
-				System.out.println("Updated sucessfully");
+				System.out.println("Member Updated sucessfully");
 			}
 			else{
 				System.out.println("SQL Error:");
@@ -442,12 +442,13 @@ public class OperatorMenu {
 			if(providerCtrl.uOne(Integer.parseInt(ID),1,userData[0],userData[1],userData[2],userData[3],
 					userData[4],userData[5],userData[6],userData[7],
 					userData[8],userData[9],userData[10]) == User.SUCCESSFUL_SQL_QUERY){
-				System.out.println("Updated sucessfully");
+				System.out.println("Provider Updated sucessfully");
 			}
 			else{
 				System.out.println("SQL Error:");
 			}
 		}
+		//----------------------------END UPDATE-----------------------------------
 	}
 	public void openMenuDelete(String user) {
 		String in = "";
