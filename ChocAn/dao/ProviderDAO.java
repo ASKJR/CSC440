@@ -169,7 +169,7 @@ public class ProviderDAO {
         ConnectionFactory.closeConnection(connection, pstUpdating);			// Closing connection to the DBMS
         return Member.SUCCESSFUL_SQL_QUERY;									// Method finished successfully
 	}
-	
+
     public Provider sOne(Provider provider)
     {
         Connection connection = ConnectionFactory.openConnection(); 		// Connection to the database
@@ -211,8 +211,10 @@ public class ProviderDAO {
             
         	pstSearching = connection.prepareStatement(""
         			+ "SELECT * "
-        			+ "FROM provider "
-        			+ "WHERE provider.fk_id_provider = ? ");				// SQL itself being prepared 
+        			+ "FROM provider as p, user as u "
+					+ "WHERE u.id_user = ? "
+					+ "AND p.status = " + User.STATUS_VALID + " "
+					+ "AND u.id_user = p.fk_id_provider");							// SQL itself being prepared
 
         	pstSearching.setInt(1, provider.getFkIdProvider());
         	
