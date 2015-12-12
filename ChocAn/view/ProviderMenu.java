@@ -257,25 +257,34 @@ public class ProviderMenu {
 	}
 	
 	public void openMenuCheckFees(User provider) {
-		System.out.println("\n\t Fee's total of current week");
-		// get the report of the current week for that provider passed as parameter
-		System.out.println("\n\t Provider name === SHOW === ");
-		System.out.println("\t Provider number === SHOW === ");
-		System.out.println("\t Provider street address === SHOW === ");
-		System.out.println("\t Provider city === SHOW === ");
-		System.out.println("\t Provider state === SHOW === ");
-		System.out.println("\t Provider ZIP code === SHOW === ");
-		// make a loop between all the services of the current week
-		System.out.println("\t   Date of service === SHOW === ");
-		System.out.println("\t   Date and time data were receive by the computer === SHOW === ");
-		System.out.println("\t   Member name === SHOW === ");
-		System.out.println("\t   Member number === SHOW === ");
-		System.out.println("\t   Service code === SHOW === ");
-		System.out.println("\t   Fee to be paid === SHOW === ");
-		System.out.println("\n\t Total number of consultations with members === SHOW === ");
-		System.out.println("\t Total fee for week === SHOW === ");
-		System.out.print("\n\t Press ENTER to return to menu ");
-		sc.nextLine();
+		ServiceProvidedCtrl serviceProvidedCtrl = new ServiceProvidedCtrl();
+		ArrayList<ServiceProvided> serviceProvidedList = null;
+		
+		Utility.clearScreen();
+		serviceProvidedList = serviceProvidedCtrl.sLastWeekProvider(provider.getIdUser());
+		if(!serviceProvidedList.isEmpty()) {
+			System.out.println("\n\t Fee's total of current week");
+			System.out.println("\n\t Provider name: " + provider.getFstName() + " " + provider.getLstName());
+			System.out.println("\t Provider number: " + provider.getIdUser());
+			System.out.println("\t Provider street address: " + provider.getStAddr());
+			System.out.println("\t Provider city: " + provider.getCity());
+			System.out.println("\t Provider state: " + provider.getState());
+			System.out.println("\t Provider ZIP code: " + provider.getZipCode());
+			// make a loop between all the services of the current week
+			for(ServiceProvided serviceProvided : serviceProvidedList) {
+				
+			}
+			System.out.println("\t   Date of service === SHOW === ");
+			System.out.println("\t   Date and time data were receive by the computer === SHOW === ");
+			System.out.println("\t   Member name === SHOW === ");
+			System.out.println("\t   Member number === SHOW === ");
+			System.out.println("\t   Service code === SHOW === ");
+			System.out.println("\t   Fee to be paid === SHOW === ");
+			System.out.println("\n\t Total number of consultations with members === SHOW === ");
+			System.out.println("\t Total fee for week === SHOW === ");
+			System.out.print("\n\t Press ENTER to return to menu ");
+			sc.nextLine();
+		}
 		Utility.clearScreen();
 		startMenu(provider);
 	}
