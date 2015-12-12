@@ -80,6 +80,12 @@ public class Utility {
 		return validDate;
 	}
 	
+	public static String convertDate(String str) {
+		String toReturn = "";
+		
+		return toReturn;
+	}
+	
 	public static Timestamp currentDate() {
 		Date currDate = new Date();
 		return new Timestamp(currDate.getTime());		
