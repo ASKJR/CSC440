@@ -211,8 +211,10 @@ public class ProviderDAO {
             
         	pstSearching = connection.prepareStatement(""
         			+ "SELECT * "
-        			+ "FROM provider "
-        			+ "WHERE provider.fk_id_provider = ? ");				// SQL itself being prepared 
+            		+ "FROM member as m, user as u "
+            		+ "WHERE fk_id_member = ? "
+            		+ "AND m.status = " + User.STATUS_VALID + " "
+            		+ "AND m.fk_id_member = u.id_user");							// SQL itself being prepared
 
         	pstSearching.setInt(1, provider.getFkIdProvider());
         	

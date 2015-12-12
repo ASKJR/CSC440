@@ -167,8 +167,10 @@ public class MemberDAO {
             	
             	pstSelecting = connection.prepareStatement(""
                 		+ "SELECT * "
-                		+ "FROM member "
-                		+ "WHERE fk_id_member = ?");							// SQL itself being prepared
+                		+ "FROM member as m, user as u "
+                		+ "WHERE fk_id_member = ? "
+                		+ "AND m.status = " + User.STATUS_VALID + " "
+                		+ "AND m.fk_id_member = u.id_user");							// SQL itself being prepared
 
 
                 pstSelecting.setInt(1, member.getFkIdMember());					// Replacing each ? with the correct value
