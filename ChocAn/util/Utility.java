@@ -1,6 +1,8 @@
 package util;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Utility {
@@ -29,32 +31,60 @@ public class Utility {
 		String mm = "", dd = "", yyyy = "";
 		int numM, numD, numY;
 		boolean leapYear = false;
+		boolean validDate = false;
 		Date currentDate;
 		Timestamp timeStamp;
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		
 		if(str.length() != 10) return false;
 		else {
 			if(str.charAt(2) == '/' && str.charAt(5) == '/') {
+				System.out.println("OK 1 !");
 				mm += str.charAt(0);
 				mm += str.charAt(1);
 				dd += str.charAt(3);
 				dd += str.charAt(4);
 				yyyy = str.substring(6);
 				if(isNumeric(mm) && isNumeric(dd) && isNumeric(yyyy)) {
+					System.out.println("OK 2 !");
 					numY = Integer.valueOf(yyyy);
 					numD = Integer.valueOf(dd);
 					numM = Integer.valueOf(mm);
+					
+					if(numD > 31 || numM > 12)
+						return false;
+					
+					System.out.println("OK 3 !");
 					
 					if((numY % 4 == 0) && (numY % 100 != 0))
 						leapYear = true;
 					else if(numY % 400 == 0)
 						leapYear = true;
-					for(int i = 1; i <= 12; i++) {
-						
+					
+					if(numM % 2 == 0 && numD <= 31)
+						validDate = true;
+					else if(numM % 2 != 0 && numD <= 30)
+						validDate = true;
+					else if(leapYear && numM == 2 && numD <= 29)
+						validDate = true;
+					else if(!leapYear && numM == 2 && numD <= 28)
+						validDate = true;
+					else
+						validDate = false;
+					
+					System.out.println("OK 4 ! validDate = " + validDate);
+					
+					if(validDate) {
+						currentDate = new Date();
+						timeStamp = new Timestamp(currentDate.getTime());
+						if(str.compareTo(dateFormat.format(timeStamp)) > 0)
+							return false;						
 					}
-				}				
+					
+					
+				} else return false;
 			}
 		}
-		return false;
+		return validDate;
 	}
 }

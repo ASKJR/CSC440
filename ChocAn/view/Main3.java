@@ -1,14 +1,20 @@
 package view;
 
-import java.util.Date;
-import java.sql.Timestamp;
+import java.util.Scanner;
+import util.Utility;
 
 public class Main3 {
 
 	public static void main(String[] args) {
-		//Menu menu = new Menu();		
-		Date date = new Date();
-		System.out.println(new Timestamp(date.getTime()));
+		//Menu menu = new Menu();	
+		Scanner in = new Scanner(System.in);
+		String str = in.nextLine();
+		while(!Utility.validateDate(str)) {
+			System.out.print("Invalid! Re-enter: ");
+			str = in.nextLine();
+		}
+		in.close();
+		System.out.println("Validated!");
 		//menu.startSystem();
 	}
 
