@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -63,20 +64,16 @@ public class ChocAn {
 		return 0;
 	}
 
-	public int printWeeklyReports() {
-		return 0;
-	}
-
-	public String createAccountPayableReportFile() {
+	public String weeklyReportsFile() {
 
 		ProviderDAO providerDAO = new ProviderDAO();
 
 		ArrayList<Provider> providerList = providerDAO.sAll();
 		ArrayList<String> fileNameList = new ArrayList();
-		String reportFileName = "Manager_Accounts_Payable_Report.txt";
+		String reportFileName = "Manager_Weekly_Providers_Report.txt";
 		
 		for(Provider provider : providerList)
-			fileNameList.add(createListOfServicesReportFile(provider));
+			fileNameList.add(lastWeekServicesFile(provider));
 		
 		// Creating the file pointer
 		FileWriter file;
@@ -102,7 +99,7 @@ public class ChocAn {
 				
 				String line = "";
 				while ((line = bufferedReader.readLine()) != null)
-					content += line;
+					content += "\n" + line;
 				
 				bufferedReader.close();
 			} 
@@ -120,9 +117,43 @@ public class ChocAn {
 		writeFile.close();
 		
 		return reportFileName;
+
 	}
 
-	public String createListOfServicesReportFile(Member member) {
+	public String accountsPayableSummaryFile() {
+		ProviderDAO providerDAO = new ProviderDAO();
+		ServiceProvidedDAO serviceProvidedDAO = new ServiceProvidedDAO();
+
+		ArrayList<Provider> providerList = providerDAO.sAll();
+		ArrayList<String> fileNameList = new ArrayList();
+		String reportFileName = "Manager_Accounts_Payable_Summary_Report.txt";
+		
+		DecimalFormat decimalFormat = new DecimalFormat("#.##");
+		
+		int totalAmountOfConsultations = 0;
+		for(Provider provider : providerList){
+			double totalFee = 0;
+			int amountOfConsultations = 0;
+			ArrayList<ServiceProvided> serviceProvidedList = serviceProvidedDAO.sLastWeek(provider);
+			for(ServiceProvided serviceProvided : serviceProvidedList){
+				amountOfConsultations++;
+				totalFee += (serviceProvided.getService().getFee() * Provider.PERCENTAGE);
+			}
+			totalAmountOfConsultations += amountOfConsultations;
+			System.out.println(provider.getFstName());
+			System.out.println(totalFee);
+			System.out.println(totalFee*(5/2));
+			System.out.println(amountOfConsultations);
+		}
+		
+		System.out.println(providerList.size());
+		System.out.println();
+		
+		
+		return null;
+	}
+
+	public String lastWeekServicesFile(Member member) {
 
 		ServiceProvidedDAO serviceProvidedDAO = new ServiceProvidedDAO();
 		
@@ -170,11 +201,12 @@ public class ChocAn {
 		
 	}
 	
-	public String createListOfServicesReportFile(Provider provider) {
+	public String lastWeekServicesFile(Provider provider) {
 		
 		ServiceProvidedDAO serviceProvidedDAO = new ServiceProvidedDAO();
 		
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		DecimalFormat decimalFormat = new DecimalFormat("#.##");
 		
 		ArrayList<ServiceProvided> serviceProvidedList = serviceProvidedDAO.sLastWeek(provider);
 		String fileName = "Provider_" + provider.getLstName() + "_" + provider.getFkIdProvider() + "_" + "_Services.txt";
@@ -209,13 +241,13 @@ public class ChocAn {
 			writeFile.printf("\n\t <br>Member ID: " + serviceProvided.getMember().getFkIdMember());
 			writeFile.printf("\n\t <br>Service Name: " + serviceProvided.getService().getName());
 			writeFile.printf("\n\t <br>Service ID: " + serviceProvided.getService().getIdService());
-			writeFile.printf("\n\t <br>Fee: " + serviceProvided.getService().getFee());
-			totalFee += serviceProvided.getService().getFee();
+			writeFile.printf("\n\t <br>Fee: <b>US$" + decimalFormat.format(serviceProvided.getService().getFee() * (double) Provider.PERCENTAGE) + "</b>");
+			totalFee += serviceProvided.getService().getFee() * (double) Provider.PERCENTAGE;
 			numberOfConsultations++;
 		}
 		
 		writeFile.printf("\n\n\t <br><br>Number of Consultations: " + numberOfConsultations);
-		writeFile.printf("\n\n\t <br>Total fee: " + totalFee);
+		writeFile.printf("\n\n\t <br>Total fee: <b>US$" + decimalFormat.format(totalFee) + "</b>");
 		
 		// Closing the file pointer
 		try {
