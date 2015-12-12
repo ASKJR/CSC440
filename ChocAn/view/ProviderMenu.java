@@ -126,7 +126,7 @@ public class ProviderMenu {
 		ServiceCtrl serviceCtrl = new ServiceCtrl();
 		Service service = null;
 		ServiceProvided serviceProvided = new ServiceProvided();
-		//Date occurrenceDate = null;
+		Date occurrenceDate = null;
 		Date date = null;
 		Timestamp currentDate = null;
 		ServiceProvidedCtrl serviceProvidedCtrl = new ServiceProvidedCtrl();
@@ -134,7 +134,15 @@ public class ProviderMenu {
 		
 		System.out.print("\n\t Enter the date the service was provided." 
 						 + "\n\t (Format: MM/DD/YYYY): ");
-		//in = sc.nextLine();
+		notValid = true;
+		while(notValid) {
+			in = sc.nextLine();
+			if(Utility.validateDate(in)) {
+				notValid = false;
+			} else
+				System.out.print("\t Invalid date. Re-enter: ");
+		}
+		occurrenceDate = java.sql.Date.valueOf(in);
 		
 		while(startOver) {
 			openMenuProviderDirectory(provider, 1);
@@ -205,7 +213,7 @@ public class ProviderMenu {
 		date = new Date();
 		currentDate = new Timestamp(date.getTime());
 		serviceProvided.setCurrentDate(currentDate);
-		serviceProvided.setOccurrenceDate(java.sql.Date.valueOf("2010-10-10"));
+		serviceProvided.setOccurrenceDate((java.sql.Date) occurrenceDate);  // verify
 		serviceProvided.setProvider((Provider) provider);
 		serviceProvided.setMember(member);
 		
