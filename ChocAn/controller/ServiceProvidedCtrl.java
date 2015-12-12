@@ -49,4 +49,24 @@ public class ServiceProvidedCtrl {
 		return serviceProvidedList;
 	}
 	
+	public ArrayList<ServiceProvided> sLastWeekMember(int fkIdMember){
+		ServiceProvidedDAO serviceProvidedDAO = new ServiceProvidedDAO();
+		Member member = new Member();
+		
+		member.setIdUser(fkIdMember);
+		member.setFkIdMember(fkIdMember);
+		
+		return serviceProvidedDAO.sLastWeek(member); 
+	}
+	
+	public ArrayList<ServiceProvided> sLastWeekProvider(int fkIdProvider){
+		ServiceProvidedDAO serviceProvidedDAO = new ServiceProvidedDAO();
+		Provider provider = new Provider();
+		
+		provider.setIdUser(fkIdProvider);
+		provider.setFkIdProvider(fkIdProvider);
+		
+		return serviceProvidedDAO.sLastWeek(provider); 
+	}
+	
 }

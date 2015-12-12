@@ -150,7 +150,7 @@ public class ProviderDAO {
             		+ "SET "
             		+ "`status` = ? "
             		+ "WHERE "
-            		+ "provider.fk_id_provider = ?");						// SQL itself being prepared
+            		+ "provider.fk_id_provider = ?", Statement.RETURN_GENERATED_KEYS);						// SQL itself being prepared
 
 
         	pstUpdating.setInt(1, provider.getStatus());					// Replacing each ? with the correct value

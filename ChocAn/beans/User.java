@@ -18,7 +18,6 @@ public abstract class User {
 	public static final int TYPE_ERROR = -2;
 	public static final int UNSUCCESSFUL_SQL_QUERY = -3;
 	
-	
 	private int idUser;
 	private String stAddr;
 	private String addrComp;

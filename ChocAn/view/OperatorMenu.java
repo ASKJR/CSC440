@@ -70,7 +70,7 @@ public class OperatorMenu {
 		else if(inInt == 2)
 			openMenuUpdate(option);
 		else if(inInt == 3)
-			openMenuDelete(option);
+			openMenuDelete(option,operator);
 		else if(inInt == 4)
 			startMenu(operator);
 			
@@ -438,12 +438,13 @@ public class OperatorMenu {
 		}
 		//----------------------------END UPDATE-----------------------------------
 	}
-	public void openMenuDelete(String user) {
+	public void openMenuDelete(String user,User operator) {
 		String in = "";
 		String ID = "";
 		boolean notValid  = true;
 		Member member     = null;
 		Provider provider = null;
+		
 		
 		String AddrComp  ;
 		String CellPhone ;
@@ -544,8 +545,35 @@ public class OperatorMenu {
 		
 		//---------------------------START DELETE-----------------------------------
 		
-		
-
+		System.out.print("Do you want to delete this "+ user + " ? Y-N: ");
+		if(u.validInput().equalsIgnoreCase("Y")){
+			if(user.equals("member")){
+				if(memberCtrl.alterStatus(Integer.parseInt(ID),User.STATUS_DELETED)
+						== User.SUCCESSFUL_SQL_QUERY){
+					u.clearScreen();
+					System.out.println("Member sucessfully deleted.");
+					startMenu(operator);
+				}
+				else{
+					System.out.println("SQL error:");
+				}
+			}
+			else{
+				if(providerCtrl.alterStatus(Integer.parseInt(ID),User.STATUS_DELETED)
+						== User.SUCCESSFUL_SQL_QUERY){
+					u.clearScreen();
+					System.out.println("Provider successfully deleted.");
+					startMenu(operator);
+				}
+				else{
+					System.out.println("SQL error:");
+				}
+			}
+		}
+		else{
+			u.clearScreen();
+			startMenu(operator);
+		}
 		//---------------------------END DELETE-------------------------------------
 	}
 	

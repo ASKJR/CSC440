@@ -1,5 +1,7 @@
 package view;
 
+import java.util.Scanner;
+
 import beans.*;
 import dao.*;
 
@@ -21,9 +23,18 @@ public class Main {
 		member = memberDAO.sOne(member);
 		provider = providerDAO.sOne(provider);
 		
-		String fileName = chocAn.createAccountPayableReportFile();
-		chocAn.sendReportViaEmail(fileName, "rso_oliver@hotmail.com", "Accounts Payable Report");
+		Manager manager = new Manager();
+		String fileName = manager.requestWeeklyReportsFile();
 		
+		Scanner scanner = new Scanner(System.in);
+		
+		String yesNo = "";
+		System.out.println("\n\n\t Do you want to receive this report via email (yes/no) ?");
+		yesNo = scanner.nextLine();
+		
+		if(yesNo.equals("YES") || yesNo.equals("yes")){
+			chocAn.sendReportViaEmail(fileName, "rso_oliver@hotmail.com", "Accounts Payable Report");
+		}
 
 	}
 }

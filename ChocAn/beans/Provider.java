@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class Provider extends User {
 	
+	public static final double PERCENTAGE = 0.4;
+	
 	private int fkIdProvider;
 	private int status;
 	private ArrayList<Service> serviceList;
