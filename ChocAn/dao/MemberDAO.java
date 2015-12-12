@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import com.mysql.jdbc.Statement;
 import beans.Member;
+import beans.Provider;
 import beans.User;
 import util.ConnectionFactory;
 
@@ -198,6 +199,38 @@ public class MemberDAO {
         		connection, pstSelecting, rsSelecting);							// Closing connection to the DBMS
         
         return member;															// Method finished successfully
+	}
+	
+	public int alterStatus(Member member){
+
+        Connection connection = ConnectionFactory.openConnection();			// Connection to the database
+        PreparedStatement pstUpdating = null;								// PreparedStatement to process the SQL
+
+        try {
+            
+        	pstUpdating = connection.prepareStatement(""
+            		+ "UPDATE `member` "
+            		+ "SET "
+            		+ "`status` = ? "
+            		+ "WHERE "
+            		+ "member.fk_id_member = ?");							// SQL itself being prepared
+
+
+        	pstUpdating.setInt(1, member.getStatus());					// Replacing each ? with the correct value
+        	pstUpdating.setInt(2, member.getFkIdMember());
+            
+            pstUpdating.executeUpdate();									// SQL being executed
+            pstUpdating.getGeneratedKeys();
+
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());								// Error Treatment
+            return Member.UNSUCCESSFUL_SQL_QUERY;								// Method finished UNsuccessfully
+        }
+        
+        ConnectionFactory.closeConnection(connection, pstUpdating);			// Closing connection to the DBMS
+        return Member.SUCCESSFUL_SQL_QUERY;									// Method finished successfully
 	}
 	
 }

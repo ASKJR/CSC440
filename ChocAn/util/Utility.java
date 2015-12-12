@@ -4,8 +4,25 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Utility {
+	Scanner sc;
+	public Utility(){
+		sc = new Scanner(System.in);
+	}
+	
+	public String validInput(){
+		String in ="";
+		boolean notValid = true;
+		while(notValid) {
+			in = sc.nextLine();
+			if(!in.equals("") && (in.equalsIgnoreCase("Y") || in.equalsIgnoreCase("N"))) {
+				notValid = false;
+			} else System.out.print("\t Invalid option. Re-enter: ");
+		}
+		return in;
+	}
 	public static boolean isNumeric(String str) { // verifies the input  
 		try {  
 			Integer.parseInt(str);

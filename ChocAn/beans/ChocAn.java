@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -66,26 +67,77 @@ public class ChocAn {
 		return 0;
 	}
 
-	public int sendAccountPayableReport(Manager manager) {
-		return 0;
+	public String createAccountPayableReportFile() {
+
+		ProviderDAO providerDAO = new ProviderDAO();
+
+		ArrayList<Provider> providerList = providerDAO.sAll();
+		ArrayList<String> fileNameList = new ArrayList();
+		String reportFileName = "Manager_Accounts_Payable_Report.txt";
+		
+		for(Provider provider : providerList)
+			fileNameList.add(createListOfServicesReportFile(provider));
+		
+		// Creating the file pointer
+		FileWriter file;
+		try {
+			file = new FileWriter(reportFileName);
+		} catch (IOException e) {
+			file = null;
+			return null;
+		} 
+		PrintWriter writeFile = new PrintWriter(file);
+		
+		for(String fileName : fileNameList)
+		{
+			String content = "";
+			// Reading the stored file and appending to a single String variable
+			BufferedReader bufferedReader;
+			try 
+			{
+				bufferedReader = new BufferedReader
+				(
+					new FileReader(fileName)
+				);
+				
+				String line = "";
+				while ((line = bufferedReader.readLine()) != null)
+					content += line;
+				
+				bufferedReader.close();
+			} 
+			catch (IOException e) {
+				return null;
+			}
+				
+			
+			File tempFile = new File(fileName);
+			tempFile.delete();
+			
+			writeFile.println("\n\n<BR><BR>========================== NEW PROVIDER ==========================<BR><BR>" + content);
+		}
+		
+		writeFile.close();
+		
+		return reportFileName;
 	}
 
-	public int sendListOfServices(Member member) {
+	public String createListOfServicesReportFile(Member member) {
 
 		ServiceProvidedDAO serviceProvidedDAO = new ServiceProvidedDAO();
 		
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		
 		ArrayList<ServiceProvided> serviceProvidedList = serviceProvidedDAO.sLastWeek(member);
-		String content = "";
+		String fileName = "Member_" + member.getLstName() + "_" + member.getFkIdMember() + "_" + "_Services.txt";
 		
 		// Creating the file pointer
 		FileWriter file;
 		try {
-			file = new FileWriter("ListOfServicesMember.txt");
+			file = new FileWriter(fileName);
 		} catch (IOException e) {
 			file = null;
-			return ERR_CREATING_FILE;
+			return null;
 		} 
 		PrintWriter writeFile = new PrintWriter(file);
 		
@@ -111,55 +163,29 @@ public class ChocAn {
 		try {
 			file.close();
 		} catch (IOException e) {
-			return ERR_CLOSING_FILE;
-		}
-		
-		// Reading the stored file and appending to a single String variable
-		BufferedReader bufferedReader;
-		try 
-		{
-			bufferedReader = new BufferedReader
-					(
-						new FileReader("ListOfServices.txt")
-					);
-			
-			String line = "";
-			while ((line = bufferedReader.readLine()) != null)
-				content += line;
-			
-			bufferedReader.close();
-		} 
-		catch (IOException e) 
-		{
-			return ERR_READING_FILE;
+			return null;
 		}
 
-		// Sending the information via email
-		EmailSender emailSender = new EmailSender();
-		return emailSender.sendMessage
-		(
-			"List Of Services", 
-			content,
-			"rso_oliver@hotmail.com"
-			//member.getEmail()
-		);
+		return fileName;
+		
 	}
 	
-	public int sendListOfServices(Provider provider) {
+	public String createListOfServicesReportFile(Provider provider) {
+		
 		ServiceProvidedDAO serviceProvidedDAO = new ServiceProvidedDAO();
 		
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		
 		ArrayList<ServiceProvided> serviceProvidedList = serviceProvidedDAO.sLastWeek(provider);
-		String content = "";
+		String fileName = "Provider_" + provider.getLstName() + "_" + provider.getFkIdProvider() + "_" + "_Services.txt";
 		
 		// Creating the file pointer
 		FileWriter file;
 		try {
-			file = new FileWriter("ListOfServicesProvider.txt");
+			file = new FileWriter(fileName);
 		} catch (IOException e) {
 			file = null;
-			return ERR_CREATING_FILE;
+			return null;
 		} 
 		PrintWriter writeFile = new PrintWriter(file);
 		
@@ -195,17 +221,26 @@ public class ChocAn {
 		try {
 			file.close();
 		} catch (IOException e) {
-			return ERR_CLOSING_FILE;
+			return null;
 		}
+
+		return fileName;
+
+	}
+	
+	public int sendReportViaEmail(String fileName, String destinationAddress, String subject){
 		
+		destinationAddress = "rso_oliver@hotmail.com";
+		
+		String content = "";
 		// Reading the stored file and appending to a single String variable
 		BufferedReader bufferedReader;
 		try 
 		{
 			bufferedReader = new BufferedReader
-					(
-						new FileReader("ListOfServices.txt")
-					);
+			(
+				new FileReader(fileName)
+			);
 			
 			String line = "";
 			while ((line = bufferedReader.readLine()) != null)
@@ -217,16 +252,16 @@ public class ChocAn {
 		{
 			return ERR_READING_FILE;
 		}
-
+		
 		// Sending the information via email
 		EmailSender emailSender = new EmailSender();
 		return emailSender.sendMessage
 		(
-			"List Of Services", 
+			subject, 
 			content,
-			"rso_oliver@hotmail.com"
-			//member.getEmail()
+			destinationAddress
 		);
+		
 	}
 
 }
