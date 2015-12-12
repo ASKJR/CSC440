@@ -251,7 +251,7 @@ public class OperatorMenu {
 		
 		//-----------------DISPLAY INFORMATION (member or provider)-----------------
 		
-		 // Display the data of the member
+		 // Get the data of the member
 		if(member != null){
 			
 			//Check possible null fields
@@ -266,22 +266,10 @@ public class OperatorMenu {
 			 StAddr    = (member.getStAddr()    == null) ? "" : member.getStAddr();
 			 FstName   = (member.getFstName()   == null) ? "" : member.getFstName();
 			 LstName   = (member.getLstName()   == null) ? "" : member.getLstName();
- 			
-			System.out.println("\n\t--- Member Info ---\n");
-			System.out.println("\t First name    : "    + FstName);
-			System.out.println("\t Last name     : "    + LstName);
-			System.out.println("\t Email         : "    + Email);
-			System.out.println("\t Cell phone    : "    + CellPhone);
-			System.out.println("\t Home phone    : "    + HomePhone);
-			System.out.println("\t Work phone    : "    + WorkPhone);
-			System.out.println("\t Address       : "    + StAddr);
-			System.out.println("\t Address line 2: "    + AddrComp);
-			System.out.println("\t City          : "    + City);
-			System.out.println("\t State         : "    + State);
-			System.out.println("\t Zip code      : "    + ZipCode);
-			System.out.println("\n\t-------------------\n");
+			 
+			 System.out.println("\n\t--- Member Info ---\n");
 		}
-		 // Display the data of the provider
+		 // Get the data of the provider
 		else{
 			
 			//Check possible null fields
@@ -297,21 +285,21 @@ public class OperatorMenu {
 			 FstName   = (provider.getFstName()   == null) ? "" : provider.getFstName();
 			 LstName   = (provider.getLstName()   == null) ? "" : provider.getLstName();
 
-			
-			System.out.println("\n\t--- Provider Info ---\n");
-			System.out.println("\t First name    : "    + FstName);
-			System.out.println("\t Last name     : "    + LstName);
-			System.out.println("\t Email         : "    + Email);
-			System.out.println("\t Cell phone    : "    + CellPhone);
-			System.out.println("\t Home phone    : "    + HomePhone);
-			System.out.println("\t Work phone    : "    + WorkPhone);
-			System.out.println("\t Address       : "    + StAddr);
-			System.out.println("\t Address line 2: "    + AddrComp);
-			System.out.println("\t City          : "    + City);
-			System.out.println("\t State         : "    + State);
-			System.out.println("\t Zip code      : "    + ZipCode);
-			System.out.println("\n\t-------------------\n");
+			 System.out.println("\n\t--- Provider Info ---\n");
 		}
+		//Display data
+		System.out.println("\t First name    : "    + FstName);
+		System.out.println("\t Last name     : "    + LstName);
+		System.out.println("\t Email         : "    + Email);
+		System.out.println("\t Cell phone    : "    + CellPhone);
+		System.out.println("\t Home phone    : "    + HomePhone);
+		System.out.println("\t Work phone    : "    + WorkPhone);
+		System.out.println("\t Address       : "    + StAddr);
+		System.out.println("\t Address line 2: "    + AddrComp);
+		System.out.println("\t City          : "    + City);
+		System.out.println("\t State         : "    + State);
+		System.out.println("\t Zip code      : "    + ZipCode);
+		System.out.println("\n\t-------------------\n");
 		
 		//-----------------END DISPLAY INFORMATION (member or provider)-------------
 		
@@ -452,30 +440,113 @@ public class OperatorMenu {
 	}
 	public void openMenuDelete(String user) {
 		String in = "";
-		boolean notValid = true;
+		String ID = "";
+		boolean notValid  = true;
+		Member member     = null;
+		Provider provider = null;
+		
+		String AddrComp  ;
+		String CellPhone ;
+		String HomePhone ;
+		String WorkPhone ;
+		String Email     ;
+		String City      ;
+		String ZipCode   ;
+		String State     ;
+		String StAddr    ;
+		String FstName   ;
+		String LstName   ;
+		
+		
+		
 		
 		System.out.println("\n\t Operation: Delete " + user);
 		System.out.print("\t Enter the ID: ");
+		
+		//-----------------ID validation-----------------
 		while(notValid) {
-			in = sc.nextLine();
-			if(u.isNumeric(in)) { // valid ID
-				notValid = false;
+			ID = sc.nextLine();
+			if(u.isNumeric(ID)) { // valid ID
+				if(user.equals("member")){
+					member = memberCtrl.sOne(Integer.parseInt(ID));
+					if(member != null){
+						notValid = false;
+					}
+				}
+				//It's a provider
+				else{
+					provider = providerCtrl.sOne(Integer.parseInt(ID));
+					if(provider != null){
+						notValid= false;
+					}
+				}
+				if(notValid)
+					System.out.print("\t Invalid ID. Re-enter: ");
 			} else
 				System.out.print("\t Invalid ID. Re-enter: ");
 		}
-		System.out.print("\t First name    : ");
-		System.out.print("\t Last name     : ");
-		System.out.print("\t Email         : ");
-		System.out.print("\t Cell phone    : ");
-		System.out.print("\t Home phone    : ");
-		System.out.print("\t Work phone    : ");
-		System.out.print("\t Address       : ");
-		System.out.print("\t Address line 2: ");
-		System.out.print("\t City          : ");
-		System.out.print("\t State         : ");
-		System.out.print("\t Zip code      : ");
-		System.out.print("\n\t Do you want to delete this " + user + "? (Y/N): ");
+		//-----------------END validation----------------
 		
+		
+		//-----------------DISPLAY INFORMATION (member or provider)-----------------
+		
+		 // Get the data of the member
+		if(member != null){
+			
+			//Check possible null fields
+			 AddrComp  = (member.getAddrComp()  == null) ? "" : member.getAddrComp(); 
+			 CellPhone = (member.getCellPhone() == null) ? "" : member.getCellPhone();
+			 HomePhone = (member.getHomePhone() == null) ? "" : member.getHomePhone();
+			 WorkPhone = (member.getWorkPhone() == null) ? "" : member.getWorkPhone();
+			 Email     = (member.getEmail()     == null) ? "" : member.getEmail();
+			 City      = (member.getCity()      == null) ? "" : member.getCity();
+			 ZipCode   = (member.getZipCode()   == null) ? "" : member.getZipCode();
+			 State     = (member.getState()     == null) ? "" : member.getState();
+			 StAddr    = (member.getStAddr()    == null) ? "" : member.getStAddr();
+			 FstName   = (member.getFstName()   == null) ? "" : member.getFstName();
+			 LstName   = (member.getLstName()   == null) ? "" : member.getLstName();
+			 
+			 System.out.println("\n\t--- Member Info ---\n");
+		}
+		 // Get the data of the provider
+		else{
+			
+			//Check possible null fields
+			 AddrComp  = (provider.getAddrComp()  == null) ? "" : provider.getAddrComp(); 
+			 CellPhone = (provider.getCellPhone() == null) ? "" : provider.getCellPhone();
+			 HomePhone = (provider.getHomePhone() == null) ? "" : provider.getHomePhone();
+			 WorkPhone = (provider.getWorkPhone() == null) ? "" : provider.getWorkPhone();
+			 Email     = (provider.getEmail()     == null) ? "" : provider.getEmail();
+			 City      = (provider.getCity()      == null) ? "" : provider.getCity();
+			 ZipCode   = (provider.getZipCode()   == null) ? "" : provider.getZipCode();
+			 State     = (provider.getState()     == null) ? "" : provider.getState();
+			 StAddr    = (provider.getStAddr()    == null) ? "" : provider.getStAddr();
+			 FstName   = (provider.getFstName()   == null) ? "" : provider.getFstName();
+			 LstName   = (provider.getLstName()   == null) ? "" : provider.getLstName();
+
+			 System.out.println("\n\t--- Provider Info ---\n");
+		}
+		//Display data
+		System.out.println("\t First name    : "    + FstName);
+		System.out.println("\t Last name     : "    + LstName);
+		System.out.println("\t Email         : "    + Email);
+		System.out.println("\t Cell phone    : "    + CellPhone);
+		System.out.println("\t Home phone    : "    + HomePhone);
+		System.out.println("\t Work phone    : "    + WorkPhone);
+		System.out.println("\t Address       : "    + StAddr);
+		System.out.println("\t Address line 2: "    + AddrComp);
+		System.out.println("\t City          : "    + City);
+		System.out.println("\t State         : "    + State);
+		System.out.println("\t Zip code      : "    + ZipCode);
+		System.out.println("\n\t-------------------\n");
+		
+		//-----------------END DISPLAY INFORMATION (member or provider)-------------
+		
+		//---------------------------START DELETE-----------------------------------
+		
+		
+
+		//---------------------------END DELETE-------------------------------------
 	}
 	
 }
