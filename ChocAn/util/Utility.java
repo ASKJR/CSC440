@@ -7,14 +7,15 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Utility {
-	Scanner sc;
+	static Scanner sc;
 	public Utility(){
 		sc = new Scanner(System.in);
 	}
 	
-	public String validInput(){
-		String in ="";
+	public static String validInput(){
+		String in = "";
 		boolean notValid = true;
+		
 		while(notValid) {
 			in = sc.nextLine();
 			if(!in.equals("") && (in.equalsIgnoreCase("Y") || in.equalsIgnoreCase("N"))) {

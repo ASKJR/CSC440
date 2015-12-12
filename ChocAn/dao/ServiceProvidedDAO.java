@@ -32,7 +32,7 @@ public class ServiceProvidedDAO {
             		+ ", `occurrence_date`"
             		+ ", `comment`) "
             		+ " VALUES "
-            		+ " (?, ?, ?, now(), ?, ?)");											// SQL itself being prepared
+            		+ " (?, ?, ?, ?, ?, ?)");											// SQL itself being prepared
 
             pstInserting.setInt(1, serviceProvided.getProvider().getIdUser());				// Replacing each ? with the correct value
             pstInserting.setInt(2, serviceProvided.getService().getIdService());
