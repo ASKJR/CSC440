@@ -1,8 +1,9 @@
 package view;
 
-import java.sql.Timestamp;
-import java.util.Date;
+import java.sql.Date;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 import beans.Member;
@@ -70,6 +71,7 @@ public class ProviderMenu {
 		
 		System.out.println("\n\t Check member's status");
 		System.out.print("\t Insert the ID: ");
+		notValid = true;
 		while(notValid) {
 			in = sc.nextLine();
 			if(Utility.isNumeric(in) && !in.equals("")) {
@@ -91,15 +93,8 @@ public class ProviderMenu {
 			System.out.println("\n\t Status of the Member: " + member.getFstName() + " " + member.getLstName());
 			System.out.println("\t Member Validated!"); // if validated
 			System.out.print("\n\t Do you want to start a service with this member? (Y/N): ");
-			notValid = true;
-			while(notValid) {
-				in = sc.nextLine();
-				if(!in.equals("") && (in.equalsIgnoreCase("Y") || in.equalsIgnoreCase("N"))) {
-					notValid = false;
-				} else System.out.print("\t Invalid option. Re-enter: ");
-			}
+			in = Utility.validInput();
 			
-			Utility.clearScreen();
 			if(in.equalsIgnoreCase("Y"))
 				openMenuRegisterService(provider, member);
 			else
@@ -127,10 +122,10 @@ public class ProviderMenu {
 		Service service = null;
 		ServiceProvided serviceProvided = new ServiceProvided();
 		Date occurrenceDate = null;
-		Date date = null;
-		Timestamp currentDate = null;
 		ServiceProvidedCtrl serviceProvidedCtrl = new ServiceProvidedCtrl();
 		DecimalFormat money = new DecimalFormat("$##0.00");
+		DateFormat dateTimeFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		
 		System.out.print("\n\t Enter the date the service was provided." 
 						 + "\n\t (Format: MM/DD/YYYY): ");
@@ -142,7 +137,7 @@ public class ProviderMenu {
 			} else
 				System.out.print("\t Invalid date. Re-enter: ");
 		}
-		occurrenceDate = java.sql.Date.valueOf(in);
+		occurrenceDate = Date.valueOf(Utility.convertDate(in));
 		
 		while(startOver) {
 			openMenuProviderDirectory(provider, 1);
@@ -161,13 +156,7 @@ public class ProviderMenu {
 			if(service != null) {
 				System.out.println("\n\t The service keyed was: " + service.getName());
 				System.out.print("\t Confirm? (Y/N): ");
-				notValid = true;
-				while(notValid) {
-					in = sc.nextLine();
-					if(!in.equals("") && (in.equalsIgnoreCase("Y") || in.equalsIgnoreCase("N"))) {
-						notValid = false;
-					} else System.out.print("\t Invalid option. Re-enter: ");
-				}
+				in = Utility.validInput();
 				
 				if(in.equalsIgnoreCase("Y")) {
 					serviceProvided.setService(service);
@@ -210,17 +199,15 @@ public class ProviderMenu {
 			
 		System.out.print("\n\t Comments (optional): ");
 		serviceProvided.setComment(sc.nextLine());
-		date = new Date();
-		currentDate = new Timestamp(date.getTime());
-		serviceProvided.setCurrentDate(currentDate);
-		serviceProvided.setOccurrenceDate((java.sql.Date) occurrenceDate);  // verify
+		serviceProvided.setCurrentDate(Utility.currentDate());
+		serviceProvided.setOccurrenceDate((java.sql.Date) occurrenceDate);
 		serviceProvided.setProvider((Provider) provider);
 		serviceProvided.setMember(member);
 		
 		Utility.clearScreen();
 		System.out.println("\n\t     === Register of Service === ");
-		System.out.println("\n\t Current date and time: " + serviceProvided.getCurrentDate());
-		System.out.println("\t Date service was provided: " + serviceProvided.getOccurrenceDate());
+		System.out.println("\n\t Current date and time: " + dateTimeFormat.format(serviceProvided.getCurrentDate()));
+		System.out.println("\t Date service was provided: " + dateFormat.format(serviceProvided.getOccurrenceDate()));
 		System.out.println("\t Provider number: " + serviceProvided.getProvider().getIdUser());
 		System.out.println("\t Provider name: " + serviceProvided.getProvider().getFstName() + " " + serviceProvided.getProvider().getLstName());
 		System.out.println("\t Member number: " + serviceProvided.getMember().getIdUser());
@@ -229,16 +216,7 @@ public class ProviderMenu {
 		System.out.println("\t Comments: " + serviceProvided.getComment());
 		System.out.println("\t The fee to be paid for this service is: " + money.format(serviceProvided.getService().getFee()));
 		System.out.print("\n\t Confirm registration of this service? (Y/N): ");
-		
-		//provider name; member name; 
-		
-		notValid = true;
-		while(notValid) {
-			in = sc.nextLine();
-			if(!in.equals("") && (in.equalsIgnoreCase("Y") || in.equalsIgnoreCase("N"))) {
-				notValid = false;
-			} else System.out.print("\t Invalid option. Re-enter: ");
-		}
+		in = Utility.validInput();
 		
 		if(in.equalsIgnoreCase("Y")) {
 			logStatus = serviceProvidedCtrl.iOne(serviceProvided);
@@ -307,6 +285,7 @@ public class ProviderMenu {
 		ArrayList<Service> serviceList = serviceCtrl.sAll();
 		DecimalFormat money = new DecimalFormat("$##0.00");
 		
+		Utility.clearScreen();
 		System.out.println("\n\t Provider Directory");
 		if(serviceList != null) {
 			for(Service i : serviceList) {

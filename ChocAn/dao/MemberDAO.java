@@ -213,7 +213,7 @@ public class MemberDAO {
             		+ "SET "
             		+ "`status` = ? "
             		+ "WHERE "
-            		+ "member.fk_id_member = ?");							// SQL itself being prepared
+            		+ "member.fk_id_member = ?", Statement.RETURN_GENERATED_KEYS);							// SQL itself being prepared
 
 
         	pstUpdating.setInt(1, member.getStatus());					// Replacing each ? with the correct value
