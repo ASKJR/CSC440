@@ -12,8 +12,8 @@ public class Utility {
 		sc = new Scanner(System.in);
 	}
 	
-	public boolean validInput(){
-		String in;
+	public String validInput(){
+		String in ="";
 		boolean notValid = true;
 		while(notValid) {
 			in = sc.nextLine();
@@ -21,9 +21,7 @@ public class Utility {
 				notValid = false;
 			} else System.out.print("\t Invalid option. Re-enter: ");
 		}
-		notValid = true;
-		return notValid;
-		
+		return in;
 	}
 	public static boolean isNumeric(String str) { // verifies the input  
 		try {  
