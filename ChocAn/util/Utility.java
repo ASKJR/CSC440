@@ -1,7 +1,7 @@
 package util;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -49,9 +49,8 @@ public class Utility {
 		int numM, numD, numY;
 		boolean leapYear = false;
 		boolean validDate = false;
-		Date currentDate;
-		Timestamp timeStamp;
-		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Timestamp currentDate;
+		Date inputDate;
 		
 		if(str.length() != 10) return false;
 		else {
@@ -74,22 +73,25 @@ public class Utility {
 					else if(numY % 400 == 0)
 						leapYear = true;
 					
-					if(numM % 2 == 0 && numD <= 31)
-						validDate = true;
-					else if(numM % 2 != 0 && numD <= 30)
-						validDate = true;
-					else if(leapYear && numM == 2 && numD <= 29)
+					if(leapYear && numM == 2 && numD <= 29)
 						validDate = true;
 					else if(!leapYear && numM == 2 && numD <= 28)
 						validDate = true;
-					else
-						validDate = false;
+					else if(numM != 2 && numM % 2 == 0 && numD <= 31)
+						validDate = true;
+					else if(numM % 2 != 0 && numD <= 30)
+						validDate = true;
 					
 					if(validDate) {
-						currentDate = new Date();
-						timeStamp = new Timestamp(currentDate.getTime());
-						if(str.compareTo(dateFormat.format(timeStamp)) > 0)
-							return false;						
+						currentDate = currentDate();
+						inputDate = null;
+						SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+						try {
+							inputDate = formatter.parse(str);
+						} catch (ParseException e) {
+							System.out.println("Error!");
+						}
+						return inputDate.before(currentDate);
 					}
 				} else return false;
 			}
@@ -99,7 +101,11 @@ public class Utility {
 	
 	public static String convertDate(String str) {
 		String toReturn = "";
-		
+		toReturn += str.substring(6);
+		toReturn += "-";
+		toReturn += str.substring(0, 2);
+		toReturn += "-";
+		toReturn += str.substring(3, 5);
 		return toReturn;
 	}
 	
