@@ -1,7 +1,9 @@
 package controller;
 
 import beans.Member;
+import beans.Provider;
 import dao.MemberDAO;
+import dao.ProviderDAO;
 
 public class MemberCtrl {
 	
@@ -92,5 +94,23 @@ public class MemberCtrl {
 		
 		return memberDAO.sOne(member);
 	}
+	
+	public int alterStatus
+	(
+		int fkIdMember, 
+		int status
+	)
+{
+	Member member = new Member();
+	MemberDAO memberDAO = new MemberDAO();
+	
+	member.setStatus(status);
+	member.setFkIdMember(fkIdMember);
+
+	member.setFkIdMember(fkIdMember);
+	member.setStatus(status);
+	
+	return memberDAO.alterStatus(member);
+}
 	
 }

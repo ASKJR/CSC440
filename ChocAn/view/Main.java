@@ -15,17 +15,15 @@ public class Main {
 		Member member = new Member();
 		MemberDAO memberDAO = new MemberDAO();
 		
-		member.setIdUser(2);
-		provider.setIdUser(16);
-		
 		member.setFkIdMember(2);
 		provider.setFkIdProvider(16);
 		
 		member = memberDAO.sOne(member);
 		provider = providerDAO.sOne(provider);
 		
-		chocAn.sendListOfServices(member);
-		chocAn.sendListOfServices(provider);
+		String fileName = chocAn.createAccountPayableReportFile();
+		chocAn.sendReportViaEmail(fileName, "rso_oliver@hotmail.com", "Accounts Payable Report");
+		
 
 	}
 }
