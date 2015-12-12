@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import com.mysql.jdbc.Statement;
 import beans.Member;
+import beans.User;
 import util.ConnectionFactory;
 
 public class MemberDAO {
