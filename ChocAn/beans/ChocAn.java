@@ -130,6 +130,17 @@ public class ChocAn {
 		
 		DecimalFormat decimalFormat = new DecimalFormat("#.##");
 		
+		// Creating the file pointer
+		FileWriter file;
+		try {
+			file = new FileWriter(reportFileName);
+		} catch (IOException e) {
+			file = null;
+			return null;
+		} 
+		PrintWriter writeFile = new PrintWriter(file);
+		
+		writeFile.println("\n\n\t <BR>Accounts Payable Summary Report");
 		int totalAmountOfConsultations = 0;
 		for(Provider provider : providerList){
 			double totalFee = 0;
@@ -140,17 +151,18 @@ public class ChocAn {
 				totalFee += (serviceProvided.getService().getFee() * Provider.PERCENTAGE);
 			}
 			totalAmountOfConsultations += amountOfConsultations;
-			System.out.println(provider.getFstName());
-			System.out.println(totalFee);
-			System.out.println(totalFee*(5/2));
-			System.out.println(amountOfConsultations);
+			writeFile.println("\n\n\t <BR><BR>First Name Provider: " + provider.getFstName());
+			writeFile.println("\n\t <BR>Total Fee to Provider: " + totalFee);
+			writeFile.println("\n\t <BR>Total Overall Fee: " + (totalFee/2)*5);
+			writeFile.println("\n\t <BR>Amount of Consultations: " + amountOfConsultations + "\n");
 		}
 		
-		System.out.println(providerList.size());
-		System.out.println();
+		writeFile.println("\n\n\t <BR><BR>Number of Providers: " + providerList.size());
+		writeFile.println("\n\t <BR>Total Amount Of Consultations: " + totalAmountOfConsultations);
 		
+		writeFile.close();
 		
-		return null;
+		return reportFileName;
 	}
 
 	public String lastWeekServicesFile(Member member) {
@@ -261,8 +273,6 @@ public class ChocAn {
 	}
 	
 	public int sendReportViaEmail(String fileName, String destinationAddress, String subject){
-		
-		destinationAddress = "rso_oliver@hotmail.com";
 		
 		String content = "";
 		// Reading the stored file and appending to a single String variable
