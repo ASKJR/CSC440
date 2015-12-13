@@ -7,12 +7,10 @@ import util.*;
 
 public class Menu {
 	
-	Scanner sc ;
-	Utility u ;
+	Scanner sc;
 	
 	public Menu() {
 		sc = new Scanner (System.in);
-		u  = new Utility();
 	}
 	
 	//************************ login and password
@@ -29,7 +27,7 @@ public class Menu {
 			System.out.print("\t Login: ");
 			while(true) {
 				login = sc.nextLine();
-				if(u.isNumeric(login) && !login.equals("")) {
+				if(Utility.isNumeric(login) && !login.equals("")) {
 					break;
 				} else System.out.print("\t Invalid login. Re-enter: ");
 			}

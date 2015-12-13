@@ -123,7 +123,7 @@ public class ProviderMenu {
 		ServiceProvided serviceProvided = new ServiceProvided();
 		Date occurrenceDate = null;
 		ServiceProvidedCtrl serviceProvidedCtrl = new ServiceProvidedCtrl();
-		DecimalFormat money = new DecimalFormat("$##0.00");
+		DecimalFormat money = new DecimalFormat("US$##0.00");
 		DateFormat dateTimeFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		
@@ -259,11 +259,16 @@ public class ProviderMenu {
 	public void openMenuCheckFees(User provider) {
 		ServiceProvidedCtrl serviceProvidedCtrl = new ServiceProvidedCtrl();
 		ArrayList<ServiceProvided> serviceProvidedList = null;
+		DecimalFormat money = new DecimalFormat("US$##0.00");
+		DateFormat dateTimeFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		double totalFee = 0;
+		int numberOfConsultations = 0;
 		
 		Utility.clearScreen();
 		serviceProvidedList = serviceProvidedCtrl.sLastWeekProvider(provider.getIdUser());
 		if(!serviceProvidedList.isEmpty()) {
-			System.out.println("\n\t Fee's total of current week");
+			System.out.println("\n\t Fee's total of last week");
 			System.out.println("\n\t Provider name: " + provider.getFstName() + " " + provider.getLstName());
 			System.out.println("\t Provider number: " + provider.getIdUser());
 			System.out.println("\t Provider street address: " + provider.getStAddr());
@@ -272,19 +277,24 @@ public class ProviderMenu {
 			System.out.println("\t Provider ZIP code: " + provider.getZipCode());
 			// make a loop between all the services of the current week
 			for(ServiceProvided serviceProvided : serviceProvidedList) {
-				
+				System.out.println("\n\t   Date of service: " + dateFormat.format(serviceProvided.getOccurrenceDate()));
+				System.out.println("\t   Date and time data were receive by the computer: " + dateTimeFormat.format(serviceProvided.getCurrentDate())); // it's printing the time 12:00:00 for every service. Why?
+				System.out.println("\t   Member name: " + serviceProvided.getMember().getFstName() + " " + serviceProvided.getMember().getLstName());
+				System.out.println("\t   Member number: " + serviceProvided.getMember().getFkIdMember());
+				System.out.println("\t   Service code: " + serviceProvided.getService().getIdService());
+				System.out.println("\t   Fee to be paid: " + money.format(serviceProvided.getService().getFee() * (double) Provider.PERCENTAGE));
+				totalFee += serviceProvided.getService().getFee() * (double) Provider.PERCENTAGE;
+				numberOfConsultations++;
+				System.out.println("\n\t ------------------------------------------------------- \n");
 			}
-			System.out.println("\t   Date of service === SHOW === ");
-			System.out.println("\t   Date and time data were receive by the computer === SHOW === ");
-			System.out.println("\t   Member name === SHOW === ");
-			System.out.println("\t   Member number === SHOW === ");
-			System.out.println("\t   Service code === SHOW === ");
-			System.out.println("\t   Fee to be paid === SHOW === ");
-			System.out.println("\n\t Total number of consultations with members === SHOW === ");
-			System.out.println("\t Total fee for week === SHOW === ");
-			System.out.print("\n\t Press ENTER to return to menu ");
-			sc.nextLine();
+			
+			System.out.println("\t Total number of consultations with members: " + numberOfConsultations);
+			System.out.println("\t Total fee for week: " + money.format(totalFee));
+		} else {
+			System.out.println("\n\t There are no services registered in the last week.");
 		}
+		System.out.print("\n\t Press ENTER to return to menu ");
+		sc.nextLine();
 		Utility.clearScreen();
 		startMenu(provider);
 	}
@@ -292,7 +302,7 @@ public class ProviderMenu {
 	public void openMenuProviderDirectory(User provider, int status) { // status: if requested by menu, status == 0, if requested by start service, status != 0
 		ServiceCtrl serviceCtrl = new ServiceCtrl();
 		ArrayList<Service> serviceList = serviceCtrl.sAll();
-		DecimalFormat money = new DecimalFormat("$##0.00");
+		DecimalFormat money = new DecimalFormat("US$##0.00");
 		
 		Utility.clearScreen();
 		System.out.println("\n\t Provider Directory");

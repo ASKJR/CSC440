@@ -1,9 +1,7 @@
 package controller;
 
 import beans.Member;
-import beans.Provider;
 import dao.MemberDAO;
-import dao.ProviderDAO;
 
 public class MemberCtrl {
 	

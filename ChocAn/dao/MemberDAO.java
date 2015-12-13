@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import com.mysql.jdbc.Statement;
 import beans.Member;
-import beans.Provider;
 import beans.User;
 import util.ConnectionFactory;
 

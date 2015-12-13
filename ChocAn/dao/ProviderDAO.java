@@ -244,7 +244,7 @@ public class ProviderDAO {
         Connection connection = ConnectionFactory.openConnection(); 		// Connection to the database
         ResultSet rsSearching = null;										// ResultSet to receive the selected data
         PreparedStatement pstSearching = null;								// PreparedStatement to process the SQL
-        ArrayList<Provider> providerList = new ArrayList();
+        ArrayList<Provider> providerList = new ArrayList<Provider>();
 
         try {
 

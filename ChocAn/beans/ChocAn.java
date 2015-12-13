@@ -69,7 +69,7 @@ public class ChocAn {
 		ProviderDAO providerDAO = new ProviderDAO();
 
 		ArrayList<Provider> providerList = providerDAO.sAll();
-		ArrayList<String> fileNameList = new ArrayList();
+		ArrayList<String> fileNameList = new ArrayList<String>();
 		String reportFileName = "Manager_Weekly_Providers_Report.txt";
 		
 		for(Provider provider : providerList)
@@ -218,7 +218,7 @@ public class ChocAn {
 		ServiceProvidedDAO serviceProvidedDAO = new ServiceProvidedDAO();
 		
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-		DecimalFormat decimalFormat = new DecimalFormat("#.##");
+		DecimalFormat decimalFormat = new DecimalFormat("US$##0.00");
 		
 		ArrayList<ServiceProvided> serviceProvidedList = serviceProvidedDAO.sLastWeek(provider);
 		String fileName = "Provider_" + provider.getLstName() + "_" + provider.getFkIdProvider() + "_" + "_Services.txt";
@@ -253,13 +253,13 @@ public class ChocAn {
 			writeFile.printf("\n\t <br>Member ID: " + serviceProvided.getMember().getFkIdMember());
 			writeFile.printf("\n\t <br>Service Name: " + serviceProvided.getService().getName());
 			writeFile.printf("\n\t <br>Service ID: " + serviceProvided.getService().getIdService());
-			writeFile.printf("\n\t <br>Fee: <b>US$" + decimalFormat.format(serviceProvided.getService().getFee() * (double) Provider.PERCENTAGE) + "</b>");
+			writeFile.printf("\n\t <br>Fee: <b>" + decimalFormat.format(serviceProvided.getService().getFee() * (double) Provider.PERCENTAGE) + "</b>");
 			totalFee += serviceProvided.getService().getFee() * (double) Provider.PERCENTAGE;
 			numberOfConsultations++;
 		}
 		
-		writeFile.printf("\n\n\t <br><br>Number of Consultations: " + numberOfConsultations);
-		writeFile.printf("\n\n\t <br>Total fee: <b>US$" + decimalFormat.format(totalFee) + "</b>");
+		writeFile.printf("\n\n\t <br><br>Total number of consultations with members: " + numberOfConsultations);
+		writeFile.printf("\n\n\t <br>Total fee for week: <b>" + decimalFormat.format(totalFee) + "</b>");
 		
 		// Closing the file pointer
 		try {
