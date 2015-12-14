@@ -45,9 +45,12 @@ public class LoginDAO {
             
         	pstLogin = connection.prepareStatement(" "
         			+ "SELECT * "
-        			+ "FROM login "
-        			+ "WHERE fk_id_user = ? "
-        			+ "AND password = (SELECT md5(?)) ");					// SQL itself being prepared
+        			+ "FROM login as l, user as u, provider as p "
+        			+ "WHERE l.fk_id_user = ? "
+        			+ "AND l.password = (SELECT md5(?)) "
+        			+ "AND u.id_user = l.fk_id_user "
+        			+ "AND u.id_user = p.fk_id_provider "
+        			+ "AND p.status = " + User.STATUS_VALID);				// SQL itself being prepared
 
         	pstLogin.setInt(1, login.getFkIdUser());						// Replacing each ? with the correct value
         	pstLogin.setString(2, login.getPassword());						// Replacing each ? with the correct value
