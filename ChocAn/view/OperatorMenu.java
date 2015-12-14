@@ -110,7 +110,7 @@ public class OperatorMenu {
 		while(true){
 			System.out.print("\t Cell phone               : ");
 			in = sc.nextLine();
-			if(u.isValidStr(in) && u.isNumeric(in)){
+			if(u.isValidStr(in)){
 				userData[7] = in;
 				break;
 			}
@@ -118,7 +118,7 @@ public class OperatorMenu {
 		while(true){
 			System.out.print("\t Home phone               : ");
 			in = sc.nextLine();
-			if(u.isValidStr(in) && u.isNumeric(in)){
+			if(u.isValidStr(in)){
 				userData[8] = in;
 				break;
 			}
@@ -126,7 +126,7 @@ public class OperatorMenu {
 		while(true){
 			System.out.print("\t Work phone               : ");
 			in = sc.nextLine();
-			if(u.isValidStr(in) && u.isNumeric(in)){
+			if(u.isValidStr(in)){
 				userData[9] = in;
 				break;
 			}
