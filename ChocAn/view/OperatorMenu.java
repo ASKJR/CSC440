@@ -169,14 +169,14 @@ public class OperatorMenu {
 				break;
 			}
 		}
-		System.out.print("\n\t Do you really want to add this " + user + "? (Y/N): ");
+		System.out.print("\n\t Do you really want to add this " + user + "? (Y-N): ");
 		if(u.validInput().equalsIgnoreCase("Y")){
 			if(user.equals("member")){
 				if(memberCtrl.iOne(1,userData[0],userData[1],userData[2],userData[3],
 							userData[4],userData[5],userData[6],userData[7],
 							userData[8],userData[9],userData[10]) == User.SUCCESSFUL_SQL_QUERY){
 					u.clearScreen();
-					System.out.println("Member successfully inserted!");
+					System.out.println("\t Member inserted successfully.");
 					startMenu(operator);
 				}
 				else{
@@ -189,7 +189,7 @@ public class OperatorMenu {
 						userData[4],userData[5],userData[6],userData[7],
 						userData[8],userData[9],userData[10]) == User.SUCCESSFUL_SQL_QUERY){
 					u.clearScreen();
-					System.out.println("Provider successfully inserted!");					
+					System.out.println("\t Provider inserted successfully.");					
 					startMenu(operator);
 				}
 				else{
@@ -275,7 +275,7 @@ public class OperatorMenu {
 			 FstName   = (member.getFstName()   == null) ? "" : member.getFstName();
 			 LstName   = (member.getLstName()   == null) ? "" : member.getLstName();
 			 
-			 System.out.println("\n\t--- Member Info ---\n");
+			 System.out.println("\n\t === Member Info === \n");
 		}
 		 // Get the data of the provider
 		else{
@@ -293,7 +293,7 @@ public class OperatorMenu {
 			 FstName   = (provider.getFstName()   == null) ? "" : provider.getFstName();
 			 LstName   = (provider.getLstName()   == null) ? "" : provider.getLstName();
 
-			 System.out.println("\n\t--- Provider Info ---\n");
+			 System.out.println("\n\t === Provider Info === \n");
 		}
 		//Display data
 		System.out.println("\t First name    : "    + FstName);
@@ -315,7 +315,7 @@ public class OperatorMenu {
 
 		//---------------------------START UPDATE-----------------------------------
 		
-		System.out.print("Do you want to update this "+ user + " ? Y-N: ");
+		System.out.print("\t Do you want to update this "+ user + "? (Y-N): ");
 		if(u.validInput().equalsIgnoreCase("Y")){
 			System.out.print("\t First name               : ");
 			in = sc.nextLine();
@@ -458,7 +458,7 @@ public class OperatorMenu {
 					userData[4],userData[5],userData[6],userData[7],
 					userData[8],userData[9],userData[10]) == User.SUCCESSFUL_SQL_QUERY){
 				u.clearScreen();
-				System.out.println("Member Updated sucessfully");
+				System.out.println("\t Member updated sucessfully");
 				startMenu(operator);
 			}
 			else{
@@ -470,7 +470,7 @@ public class OperatorMenu {
 					userData[4],userData[5],userData[6],userData[7],
 					userData[8],userData[9],userData[10]) == User.SUCCESSFUL_SQL_QUERY){
 				u.clearScreen();
-				System.out.println("Provider Updated sucessfully");
+				System.out.println("\t Provider updated sucessfully");
 				startMenu(operator);
 			}
 			else{
@@ -554,7 +554,7 @@ public class OperatorMenu {
 			 FstName   = (member.getFstName()   == null) ? "" : member.getFstName();
 			 LstName   = (member.getLstName()   == null) ? "" : member.getLstName();
 			 
-			 System.out.println("\n\t--- Member Info ---\n");
+			 System.out.println("\n\t === Member Info === \n");
 		}
 		 // Get the data of the provider
 		else{
@@ -572,7 +572,7 @@ public class OperatorMenu {
 			 FstName   = (provider.getFstName()   == null) ? "" : provider.getFstName();
 			 LstName   = (provider.getLstName()   == null) ? "" : provider.getLstName();
 
-			 System.out.println("\n\t--- Provider Info ---\n");
+			 System.out.println("\n\t === Provider Info === \n");
 		}
 		//Display data
 		System.out.println("\t First name    : "    + FstName);
@@ -592,13 +592,13 @@ public class OperatorMenu {
 		
 		//---------------------------START DELETE-----------------------------------
 		
-		System.out.print("Do you want to delete this "+ user + " ? Y-N: ");
+		System.out.print("\t Do you want to delete this "+ user + "? (Y-N): ");
 		if(u.validInput().equalsIgnoreCase("Y")){
 			if(user.equals("member")){
 				if(memberCtrl.alterStatus(Integer.parseInt(ID),User.STATUS_DELETED)
 						== User.SUCCESSFUL_SQL_QUERY){
 					u.clearScreen();
-					System.out.println("Member sucessfully deleted.");
+					System.out.println("\t Member deleted sucessfully.");
 					startMenu(operator);
 				}
 				else{
@@ -609,7 +609,7 @@ public class OperatorMenu {
 				if(providerCtrl.alterStatus(Integer.parseInt(ID),User.STATUS_DELETED)
 						== User.SUCCESSFUL_SQL_QUERY){
 					u.clearScreen();
-					System.out.println("Provider successfully deleted.");
+					System.out.println("\t Provider deleted successfully.");
 					startMenu(operator);
 				}
 				else{
