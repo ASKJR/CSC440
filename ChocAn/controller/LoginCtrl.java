@@ -2,6 +2,7 @@ package controller;
 
 import beans.*;
 import dao.LoginDAO;
+import dao.UserDAO;
 
 public class LoginCtrl {
 
@@ -28,10 +29,15 @@ public class LoginCtrl {
 		)
 	{
 		LoginDAO loginDAO = new LoginDAO();
+		UserDAO userDAO = new UserDAO();
 		Login login = new Login();
 		
 		login.setFkIdUser(fkIdUser);
 		login.setPassword(password);
+		
+		User user = loginDAO.retrieveUserType(login);
+		
+		login.setUser(user);
 		
 		return loginDAO.verifyLogin(login);
 	}
