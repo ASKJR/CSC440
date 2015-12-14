@@ -68,7 +68,7 @@ public class OperatorMenu {
 		if(inInt == 1)
 			openMenuAdd(option);
 		else if(inInt == 2)
-			openMenuUpdate(option);
+			openMenuUpdate(option,operator);
 		else if(inInt == 3)
 			openMenuDelete(option,operator);
 		else if(inInt == 4)
@@ -197,7 +197,7 @@ public class OperatorMenu {
 	}
 	
 	
-	public void openMenuUpdate(String user) {
+	public void openMenuUpdate(String user,User operator) {
 		String in = "";
 		String ID = "";
 		boolean notValid  = true;
@@ -303,8 +303,12 @@ public class OperatorMenu {
 		
 		//-----------------END DISPLAY INFORMATION (member or provider)-------------
 		
+		
 
 		//---------------------------START UPDATE-----------------------------------
+		
+		System.out.print("Do you want to update this "+ user + " ? Y-N: ");
+		if(u.validInput().equalsIgnoreCase("Y")){
 			System.out.print("\t First name    : ");
 			in = sc.nextLine();
 			
@@ -420,7 +424,9 @@ public class OperatorMenu {
 			if(memberCtrl.uOne(Integer.parseInt(ID),1,userData[0],userData[1],userData[2],userData[3],
 					userData[4],userData[5],userData[6],userData[7],
 					userData[8],userData[9],userData[10]) == User.SUCCESSFUL_SQL_QUERY){
+				u.clearScreen();
 				System.out.println("Member Updated sucessfully");
+				startMenu(operator);
 			}
 			else{
 				System.out.println("SQL Error:");
@@ -430,12 +436,20 @@ public class OperatorMenu {
 			if(providerCtrl.uOne(Integer.parseInt(ID),1,userData[0],userData[1],userData[2],userData[3],
 					userData[4],userData[5],userData[6],userData[7],
 					userData[8],userData[9],userData[10]) == User.SUCCESSFUL_SQL_QUERY){
+				u.clearScreen();
 				System.out.println("Provider Updated sucessfully");
+				startMenu(operator);
 			}
 			else{
 				System.out.println("SQL Error:");
 			}
 		}
+	}else{
+		// Answer NO to update
+		u.clearScreen();
+		startMenu(operator);
+		
+	}
 		//----------------------------END UPDATE-----------------------------------
 	}
 	public void openMenuDelete(String user,User operator) {
