@@ -25,11 +25,11 @@ public class ServiceProvidedDAO {
             
         	pstInserting = connection.prepareStatement(""
             		+ " INSERT INTO `service_provided`("
-            		+ " `fk_id_provider`"
-            		+ ", `fk_id_service`"
-            		+ ", `fk_id_member`"
+            		+ " fk_id_provider"
+            		+ ", fk_id_service"
+            		+ ", fk_id_member"
             		+ ", `current_date`"
-            		+ ", `occurrence_date`"
+            		+ ", occurrence_date"
             		+ ", `comment`) "
             		+ " VALUES "
             		+ " (?, ?, ?, ?, ?, ?)");											// SQL itself being prepared
@@ -64,7 +64,7 @@ public class ServiceProvidedDAO {
 		try{
 			pstListing = connection.prepareStatement(""
 					+ "SELECT "
-					+ "fk_id_provider, fk_id_service, fk_id_member, current_date, occurrence_date, `comment` "
+					+ "fk_id_provider, fk_id_service, fk_id_member, `current_date`, occurrence_date, `comment` "
 					+ "FROM "
 					+ "service_provided "
 					+ "WHERE "
@@ -114,7 +114,7 @@ public class ServiceProvidedDAO {
 		try{
 			pstListing = connection.prepareStatement(""
 					+ "SELECT "
-					+ "fk_id_provider, fk_id_service, fk_id_member, current_date, occurrence_date, `comment` "
+					+ "fk_id_provider, fk_id_service, fk_id_member, `current_date`, occurrence_date, `comment` "
 					+ "FROM "
 					+ "service_provided "
 					+ "WHERE "
@@ -166,7 +166,7 @@ public class ServiceProvidedDAO {
 					+ "SELECT "
 					+ ""
 					+ "fk_id_provider, fk_id_service, fk_id_member, "
-					+ "current_date, occurrence_date, `comment` "
+					+ "`current_date`, occurrence_date, `comment` "
 					+ ""
 					+ "FROM "
 					+ ""
