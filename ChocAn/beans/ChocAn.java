@@ -152,8 +152,8 @@ public class ChocAn {
 			}
 			totalAmountOfConsultations += amountOfConsultations;
 			writeFile.println("\n\n\t <BR><BR>First Name Provider: " + provider.getFstName());
-			writeFile.println("\n\t <BR>Total Fee to Provider: " + totalFee);
-			writeFile.println("\n\t <BR>Total Overall Fee: " + (totalFee/2)*5);
+			writeFile.println("\n\t <BR>Total Fee to Provider: " + decimalFormat.format(totalFee));
+			writeFile.println("\n\t <BR>Total Overall Fee: " + decimalFormat.format((totalFee/2)*5));
 			writeFile.println("\n\t <BR>Amount of Consultations: " + amountOfConsultations + "\n");
 		}
 		

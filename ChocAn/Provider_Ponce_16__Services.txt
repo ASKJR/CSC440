@@ -1,0 +1,23 @@
+
+		 <br>Provider Information
+
+	 <br><br>ID: 16
+	 <br>First Name: Maru Ponce
+	 <br>Street Address: 100 Freedom Avenue
+	 <br>City: New York
+	 <br>State: NY
+	 <br>ZIP Code: 16543
+
+		 <br><br>Services provided in the last week
+
+	 <br><br>Date of Service: 12/12/2015
+	 <br>Date and Time of Registration: 12/13/2015 08:13:29 PM
+	 <br>Member Name: Jorge Ribeiro
+	 <br>Member ID: 2
+	 <br>Service Name: cook
+	 <br>Service ID: 5
+	 <br>Fee: <b>US$76.00</b>
+
+	 <br><br>Total number of consultations with members: 1
+
+	 <br>Total fee for week: <b>US$76.00</b>

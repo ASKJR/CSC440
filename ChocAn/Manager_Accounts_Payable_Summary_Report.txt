@@ -5,44 +5,44 @@
 
 	 <BR><BR>First Name Provider: Maru
 
-	 <BR>Total Fee to Provider: 110.2
+	 <BR>Total Fee to Provider: 76
 
-	 <BR>Total Overall Fee: 275.5
+	 <BR>Total Overall Fee: 190
 
-	 <BR>Amount of Consultations: 3
+	 <BR>Amount of Consultations: 1
 
 
 
 	 <BR><BR>First Name Provider: Marie
 
-	 <BR>Total Fee to Provider: 80.0
+	 <BR>Total Fee to Provider: 0
 
-	 <BR>Total Overall Fee: 200.0
+	 <BR>Total Overall Fee: 0
 
-	 <BR>Amount of Consultations: 2
+	 <BR>Amount of Consultations: 0
 
 
 
 	 <BR><BR>First Name Provider: Patricia
 
-	 <BR>Total Fee to Provider: 116.0
+	 <BR>Total Fee to Provider: 0
 
-	 <BR>Total Overall Fee: 290.0
+	 <BR>Total Overall Fee: 0
 
-	 <BR>Amount of Consultations: 2
+	 <BR>Amount of Consultations: 0
 
 
 
 	 <BR><BR>First Name Provider: Lucy
 
-	 <BR>Total Fee to Provider: 78.2
+	 <BR>Total Fee to Provider: 0
 
-	 <BR>Total Overall Fee: 195.5
+	 <BR>Total Overall Fee: 0
 
-	 <BR>Amount of Consultations: 2
+	 <BR>Amount of Consultations: 0
 
 
 
 	 <BR><BR>Number of Providers: 4
 
-	 <BR>Total Amount Of Consultations: 9
+	 <BR>Total Amount Of Consultations: 1
