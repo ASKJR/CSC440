@@ -42,7 +42,7 @@ public class Menu {
 					break;
 			}
 			else{
-				System.out.println("Fail to log in!");
+				System.out.println("\n\t Fail to log in!");
 			}
 		}
 		//END login--------------------------------------------
