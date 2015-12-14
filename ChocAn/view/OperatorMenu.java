@@ -66,7 +66,7 @@ public class OperatorMenu {
 		
 		inInt = Integer.valueOf(in);
 		if(inInt == 1)
-			openMenuAdd(option);
+			openMenuAdd(option,operator);
 		else if(inInt == 2)
 			openMenuUpdate(option,operator);
 		else if(inInt == 3)
@@ -76,13 +76,13 @@ public class OperatorMenu {
 			
 	}	
 	
-	public void openMenuAdd(String user) {
+	public void openMenuAdd(String user,User operator) {
 		String userData[] = new String[11];
 		String in;
 		System.out.println("\n\t Operation: Add " + user);
 		
 		while(true){
-			System.out.print("\t First name    : ");
+			System.out.print("\t First name               : ");;
 			in = sc.nextLine();
 			if(u.isValidStr(in)){
 				userData[6] = in;
@@ -91,7 +91,7 @@ public class OperatorMenu {
 		}
 		
 		while(true){
-			System.out.print("\t Last name     :");
+			System.out.print("\t Last name                : ");
 			in = sc.nextLine();
 			if(u.isValidStr(in)){
 				userData[5] = in;
@@ -100,7 +100,7 @@ public class OperatorMenu {
 		}
 		
 		while(true){
-			System.out.print("\t Email         : ");
+			System.out.print("\t Email                    : ");
 			in = sc.nextLine();
 			if(u.isValidStr(in)){
 				userData[10] = in;
@@ -108,47 +108,45 @@ public class OperatorMenu {
 			}
 		}
 		while(true){
-			System.out.print("\t Cell phone    : ");
+			System.out.print("\t Cell phone               : ");
 			in = sc.nextLine();
-			if(u.isValidStr(in)){
+			if(u.isValidStr(in) && u.isNumeric(in)){
 				userData[7] = in;
 				break;
 			}
 		}
 		while(true){
-			System.out.print("\t Home phone    : ");
+			System.out.print("\t Home phone               : ");
 			in = sc.nextLine();
-			if(u.isValidStr(in)){
+			if(u.isValidStr(in) && u.isNumeric(in)){
 				userData[8] = in;
 				break;
 			}
 		}
 		while(true){
-			System.out.print("\t Work phone    : ");
+			System.out.print("\t Work phone               : ");
 			in = sc.nextLine();
-			if(u.isValidStr(in)){
+			if(u.isValidStr(in) && u.isNumeric(in)){
 				userData[9] = in;
 				break;
 			}
 		}
 		while(true){
-			System.out.print("\t Address       : ");
+			System.out.print("\t Address                  : ");
 			in = sc.nextLine();
 			if(u.isValidStr(in)){
 				userData[0] = in;
 				break;
 			}
 		}
+		
+		//Address line 2 not mandatory
+		System.out.print("\t Address line 2           : ");
+		in = sc.nextLine();
+		userData[1] = in;
+			
 		while(true){
-			System.out.print("\t Address line 2: ");
-			in = sc.nextLine();
-			if(u.isValidStr(in)){
-				userData[1] = in;
-				break;
-			}
-		}
-		while(true){
-			System.out.print("\t City          : ");
+			System.out.print("\t City                     : ");
 			in = sc.nextLine();
 			if(u.isValidStr(in)){
 				userData[2] = in;
@@ -156,44 +154,54 @@ public class OperatorMenu {
 			}
 		}
 		while(true){
-			System.out.print("\t State         : ");
+			System.out.print("\t State (2 letters)        : ");
 			in = sc.nextLine();
-			if(u.isValidStr(in)){
-				userData[3] = in;
+			if(u.isValidStr(in) && in.length()==2 && !(u.isNumeric(in))){
+				userData[3] = in.toUpperCase();
 				break;
 			}
 		}
 		while(true){
-			System.out.print("\t Zip code      : ");
+			System.out.print("\t Zip code  (5 numbers)    : ");
 			in = sc.nextLine();
-			if(u.isValidStr(in)){
+			if(u.isValidStr(in) && u.isNumeric(in) && in.length()==5){
 				userData[4] = in;
 				break;
 			}
 		}
-		if(user.equals("member")){
-			if(memberCtrl.iOne(1,userData[0],userData[1],userData[2],userData[3],
+		System.out.print("\n\t Do you really want to add this " + user + "? (Y/N): ");
+		if(u.validInput().equalsIgnoreCase("Y")){
+			if(user.equals("member")){
+				if(memberCtrl.iOne(1,userData[0],userData[1],userData[2],userData[3],
+							userData[4],userData[5],userData[6],userData[7],
+							userData[8],userData[9],userData[10]) == User.SUCCESSFUL_SQL_QUERY){
+					u.clearScreen();
+					System.out.println("Member successfully inserted!");
+					startMenu(operator);
+				}
+				else{
+					System.out.println("Error sql:");
+				}
+				
+			}
+			else{
+				if(providerCtrl.iOne(1,userData[0],userData[1],userData[2],userData[3],
 						userData[4],userData[5],userData[6],userData[7],
 						userData[8],userData[9],userData[10]) == User.SUCCESSFUL_SQL_QUERY){
-				System.out.println("Member successfully inserted!");
+					u.clearScreen();
+					System.out.println("Provider successfully inserted!");					
+					startMenu(operator);
+				}
+				else{
+					System.out.println("Error sql:");
+				}
 			}
-			else{
-				System.out.println("Error sql:");
-			}
-			
 		}
 		else{
-			if(providerCtrl.iOne(1,userData[0],userData[1],userData[2],userData[3],
-					userData[4],userData[5],userData[6],userData[7],
-					userData[8],userData[9],userData[10]) == User.SUCCESSFUL_SQL_QUERY){
-				System.out.println("Provider successfully inserted!");
-			}
-			else{
-				System.out.println("Error sql:");
-			}
+			// Answer NO to INSERT
+			u.clearScreen();
+			startMenu(operator);
 		}
-		
-		System.out.print("\n\t Do you want to add this " + user + "? (Y/N): ");
 	}
 	
 	
