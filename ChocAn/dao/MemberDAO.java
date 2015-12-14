@@ -127,7 +127,6 @@ public class MemberDAO {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());	
-            System.out.println("oiiii");// Error Treatment
             return Member.UNSUCCESSFUL_SQL_QUERY;								// Method finished UNsuccessfully
         }
         

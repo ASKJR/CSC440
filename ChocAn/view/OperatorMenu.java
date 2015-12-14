@@ -169,7 +169,7 @@ public class OperatorMenu {
 				break;
 			}
 		}
-		System.out.print("\n\t Do you really want to add this " + user + "? (Y-N): ");
+		System.out.print("\n\t Do you really want to add this " + user + "? (Y/N): ");
 		if(u.validInput().equalsIgnoreCase("Y")){
 			if(user.equals("member")){
 				if(memberCtrl.iOne(1,userData[0],userData[1],userData[2],userData[3],
@@ -315,7 +315,7 @@ public class OperatorMenu {
 
 		//---------------------------START UPDATE-----------------------------------
 		
-		System.out.print("\t Do you want to update this "+ user + "? (Y-N): ");
+		System.out.print("\t Do you want to update this "+ user + "? (Y/N): ");
 		if(u.validInput().equalsIgnoreCase("Y")){
 			System.out.print("\t First name               : ");
 			in = sc.nextLine();
@@ -592,7 +592,7 @@ public class OperatorMenu {
 		
 		//---------------------------START DELETE-----------------------------------
 		
-		System.out.print("\t Do you want to delete this "+ user + "? (Y-N): ");
+		System.out.print("\t Do you want to delete this "+ user + "? (Y/N): ");
 		if(u.validInput().equalsIgnoreCase("Y")){
 			if(user.equals("member")){
 				if(memberCtrl.alterStatus(Integer.parseInt(ID),User.STATUS_DELETED)

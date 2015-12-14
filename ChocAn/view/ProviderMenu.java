@@ -122,7 +122,7 @@ public class ProviderMenu {
 		Date occurrenceDate = null;
 		ServiceProvidedCtrl serviceProvidedCtrl = new ServiceProvidedCtrl();
 		DecimalFormat money = new DecimalFormat("US$##0.00");
-		DateFormat dateTimeFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ssaaa");
+		DateFormat dateTimeFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss aaa");
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		
 		System.out.print("\n\t Enter the date the service was provided." 
@@ -258,7 +258,7 @@ public class ProviderMenu {
 		ServiceProvidedCtrl serviceProvidedCtrl = new ServiceProvidedCtrl();
 		ArrayList<ServiceProvided> serviceProvidedList = null;
 		DecimalFormat money = new DecimalFormat("US$##0.00");
-		DateFormat dateTimeFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ssaaa");
+		DateFormat dateTimeFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss aaa");
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		double totalFee = 0;
 		int numberOfConsultations = 0;

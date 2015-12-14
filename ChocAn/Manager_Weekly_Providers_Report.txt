@@ -1,0 +1,84 @@
+
+	 ================= NEW PROVIDER ================= 
+
+		 Provider Information
+
+	 ID: 16
+	 First Name: Maru Ponce
+	 Street Address: 100 Freedom Avenue
+	 City: New York
+	 State: NY
+	 ZIP Code: 16543
+
+		 Services provided in the last week
+
+	 Date of Service: 12/10/2015
+	 Date and Time of Registration: 12/13/2015 06:49:42 PM
+	 Member Name: Alberto Kato
+	 Member ID: 3
+	 Service Name: Psychiatrist
+	 Service ID: 4
+	 Fee: US$48.00
+
+	 Date of Service: 12/12/2015
+	 Date and Time of Registration: 12/12/2015 11:37:49 PM
+	 Member Name: Amanda Goncalves
+	 Member ID: 6
+	 Service Name: Acupuncture
+	 Service ID: 5
+	 Fee: US$76.00
+
+	 Total number of consultations with members: 2
+
+	 Total fee for week: US$124.00
+
+	 ================= NEW PROVIDER ================= 
+
+		 Provider Information
+
+	 ID: 17
+	 First Name: Marie Clemonce
+	 Street Address: 139 Bear Avenue
+	 City: Madison
+	 State: WI
+	 ZIP Code: 83486
+
+		 Services provided in the last week
+
+	 Total number of consultations with members: 0
+
+	 Total fee for week: US$0.00
+
+	 ================= NEW PROVIDER ================= 
+
+		 Provider Information
+
+	 ID: 18
+	 First Name: Patricia Megumi
+	 Street Address: 1026 Beach avenue
+	 City: Pewaukee
+	 State: WI
+	 ZIP Code: 33184
+
+		 Services provided in the last week
+
+	 Total number of consultations with members: 0
+
+	 Total fee for week: US$0.00
+
+	 ================= NEW PROVIDER ================= 
+
+		 Provider Information
+
+	 ID: 19
+	 First Name: Lucy Smith
+	 Street Address: 1688 Space Avenue
+	 City: Houston
+	 State: TX
+	 ZIP Code: 52184
+
+		 Services provided in the last week
+
+	 Total number of consultations with members: 0
+
+	 Total fee for week: US$0.00
