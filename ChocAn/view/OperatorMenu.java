@@ -317,7 +317,7 @@ public class OperatorMenu {
 		
 		System.out.print("Do you want to update this "+ user + " ? Y-N: ");
 		if(u.validInput().equalsIgnoreCase("Y")){
-			System.out.print("\t First name    : ");
+			System.out.print("\t First name               : ");
 			in = sc.nextLine();
 			
 			if(in.equals("")){
@@ -327,7 +327,7 @@ public class OperatorMenu {
 				userData[6] = in;
 			}
 		
-			System.out.print("\t Last name     : ");
+			System.out.print("\t Last name                : ");
 			in = sc.nextLine();
 			
 			if(in.equals("")){
@@ -338,7 +338,7 @@ public class OperatorMenu {
 			}
 			
 			
-			System.out.print("\t Email         : ");
+			System.out.print("\t Email                    : ");
 			in = sc.nextLine();
 			
 			if(in.equals("")){
@@ -348,7 +348,7 @@ public class OperatorMenu {
 				userData[10] = in;
 			}
 			
-			System.out.print("\t Cell phone    : ");
+			System.out.print("\t Cell phone               : ");
 			in = sc.nextLine();
 			
 			if(in.equals("")){
@@ -358,7 +358,7 @@ public class OperatorMenu {
 				userData[7] = in;
 			}
 			
-			System.out.print("\t Home phone    : ");
+			System.out.print("\t Home phone               : ");
 			in = sc.nextLine();
 			
 			if(in.equals("")){
@@ -368,7 +368,7 @@ public class OperatorMenu {
 				userData[8] = in;
 			}
 			
-			System.out.print("\t Work phone    : ");
+			System.out.print("\t Work phone               : ");
 			in = sc.nextLine();
 			
 			if(in.equals("")){
@@ -378,7 +378,8 @@ public class OperatorMenu {
 				userData[9] = in;
 			}
 			
-			System.out.print("\t Address       : ");
+
+			System.out.print("\t Address                  : ");
 			in = sc.nextLine();
 			
 			if(in.equals("")){
@@ -389,7 +390,7 @@ public class OperatorMenu {
 			}
 			
 			
-			System.out.print("\t Address line 2: ");
+			System.out.print("\t Address line 2           : ");
 			in = sc.nextLine();
 			
 			if(in.equals("")){
@@ -399,7 +400,7 @@ public class OperatorMenu {
 				userData[1] = in;
 			}
 			
-			System.out.print("\t City          : ");
+			System.out.print("\t City                     : ");
 			in = sc.nextLine();
 			
 			if(in.equals("")){
@@ -409,24 +410,48 @@ public class OperatorMenu {
 				userData[2] = in;
 			}
 			
-			System.out.print("\t State         : ");
+			System.out.print("\t State (2 letters)        : ");
 			in = sc.nextLine();
 			
 			if(in.equals("")){
 				userData[3] = State;
 			}
 			else{
-				userData[3] = in;
+				//userData[3] = in;
+				while(true){
+					if(u.isValidStr(in) && in.length()==2 && !u.isNumeric(in)){
+						userData[3] = in.toUpperCase();
+						break;
+					}
+					else{
+						System.out.print("\t State (2 letters)        : ");
+						in = sc.nextLine();
+					}
+				}
 			}
 			
-			System.out.print("\t Zip code      : ");
+			
+			
+			
+			System.out.print("\t Zip code  (5 numbers)    : ");
 			in = sc.nextLine();
+			
 			
 			if(in.equals("")){
 				userData[4] = ZipCode;
 			}
 			else{
-				userData[4] = in;
+				//userData[4] = in;
+				while(true){
+					if(u.isValidStr(in) && in.length()==5 && u.isNumeric(in)){
+						userData[4] = in;
+						break;
+					}
+					else{
+						System.out.print("\t Zip code  (5 numbers)    : ");
+						in = sc.nextLine();
+					}
+				}
 			}
 		if(user.equals("member")){
 			if(memberCtrl.uOne(Integer.parseInt(ID),1,userData[0],userData[1],userData[2],userData[3],
