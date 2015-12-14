@@ -83,11 +83,9 @@ public class ProviderMenu {
 		
 		MemberCtrl memberCtrl = new MemberCtrl();
 		Member member = new Member();
-		member = memberCtrl.sOne(inInt);
+		member = memberCtrl.checkStatus(inInt);
 		if(member != null)
 			status = member.getStatus();
-		else
-			status = 2;
 		
 		if(status == 1) {
 			System.out.println("\n\t Status of the Member: " + member.getFstName() + " " + member.getLstName());
