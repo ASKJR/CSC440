@@ -218,6 +218,7 @@ public class ChocAn {
 		ServiceProvidedDAO serviceProvidedDAO = new ServiceProvidedDAO();
 		
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		DateFormat dateTimeFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss aaa");
 		DecimalFormat decimalFormat = new DecimalFormat("US$##0.00");
 		
 		ArrayList<ServiceProvided> serviceProvidedList = serviceProvidedDAO.sLastWeek(provider);
@@ -248,7 +249,7 @@ public class ChocAn {
 		int numberOfConsultations = 0;
 		for(ServiceProvided serviceProvided : serviceProvidedList){
 			writeFile.printf("\n\n\t <br><br>Date of Service: " + dateFormat.format(serviceProvided.getOccurrenceDate()));
-			writeFile.printf("\n\t <br>Date and Time of Registration: " + dateFormat.format(serviceProvided.getCurrentDate()));
+			writeFile.printf("\n\t <br>Date and Time of Registration: " + dateTimeFormat.format(serviceProvided.getCurrentDate()));
 			writeFile.printf("\n\t <br>Member Name: " + serviceProvided.getMember().getFstName() + " " + serviceProvided.getMember().getLstName());
 			writeFile.printf("\n\t <br>Member ID: " + serviceProvided.getMember().getFkIdMember());
 			writeFile.printf("\n\t <br>Service Name: " + serviceProvided.getService().getName());
