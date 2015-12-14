@@ -200,6 +200,70 @@ public class MemberDAO {
         return member;															// Method finished successfully
 	}
 	
+	public Member checkStatus(Member member){
+
+        Connection connection = ConnectionFactory.openConnection();			// Connection to the database
+        ResultSet rsSelecting = null;
+        PreparedStatement pstSelecting = null;								// PreparedStatement to process the SQL
+
+        try {
+            
+        	pstSelecting = connection.prepareStatement(""
+            		+ "SELECT * "
+            		+ "FROM user "
+            		+ "WHERE id_user = ?");							// SQL itself being prepared
+
+
+            pstSelecting.setInt(1, member.getFkIdMember());					// Replacing each ? with the correct value
+
+            rsSelecting = pstSelecting.executeQuery();						// SQL being executed
+        	
+            if (rsSelecting.next()) {
+            	member.setStAddr(rsSelecting.getString("st_addr"));
+            	member.setAddrComp(rsSelecting.getString("addr_comp"));
+            	member.setCity(rsSelecting.getString("city"));
+            	member.setState(rsSelecting.getString("state"));
+            	member.setZipCode(rsSelecting.getString("zip_code"));
+            	member.setLstName(rsSelecting.getString("lst_name"));
+            	member.setFstName(rsSelecting.getString("fst_name"));
+            	member.setCellPhone(rsSelecting.getString("cell_phone"));
+            	member.setHomePhone(rsSelecting.getString("home_phone"));
+            	member.setWorkPhone(rsSelecting.getString("work_phone"));
+            	member.setEmail(rsSelecting.getString("email"));
+            	
+            	pstSelecting = connection.prepareStatement(""
+                		+ "SELECT * "
+                		+ "FROM member as m, user as u "
+                		+ "WHERE fk_id_member = ? "
+                		+ "AND m.fk_id_member = u.id_user");							// SQL itself being prepared
+
+
+                pstSelecting.setInt(1, member.getFkIdMember());					// Replacing each ? with the correct value
+    
+                rsSelecting = pstSelecting.executeQuery();						// SQL being executed
+                
+                if(rsSelecting.next()){
+                	member.setStatus(rsSelecting.getInt("status"));
+                	member.setFkIdMember(rsSelecting.getInt("fk_id_member"));
+                }else{
+                	return null;
+                }
+            }
+            else
+            {
+            	return null;
+            }
+
+        } catch (SQLException e) {
+            return null;														// Method finished UNsuccessfully
+        }
+        
+        ConnectionFactory.closeConnection(
+        		connection, pstSelecting, rsSelecting);							// Closing connection to the DBMS
+        
+        return member;															// Method finished successfully
+	}
+	
 	public int alterStatus(Member member){
 
         Connection connection = ConnectionFactory.openConnection();			// Connection to the database

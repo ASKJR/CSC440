@@ -80,9 +80,9 @@ public class MemberCtrl {
 	}
 	
 	public Member sOne
-	(
-		int fkIdMember
-	)
+		(
+			int fkIdMember
+		)
 	{
 		MemberDAO memberDAO = new MemberDAO();
 		Member member = new Member();
@@ -91,6 +91,20 @@ public class MemberCtrl {
 		member.setIdUser(fkIdMember);
 		
 		return memberDAO.sOne(member);
+	}
+	
+	public Member checkStatus
+		(
+			int fkIdMember
+		)
+	{
+		MemberDAO memberDAO = new MemberDAO();
+		Member member = new Member();
+		
+		member.setFkIdMember(fkIdMember);
+		member.setIdUser(fkIdMember);
+		
+		return memberDAO.checkStatus(member);
 	}
 	
 	public int alterStatus
