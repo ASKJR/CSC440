@@ -260,7 +260,7 @@ public class ProviderMenu {
 		ServiceProvidedCtrl serviceProvidedCtrl = new ServiceProvidedCtrl();
 		ArrayList<ServiceProvided> serviceProvidedList = null;
 		DecimalFormat money = new DecimalFormat("US$##0.00");
-		DateFormat dateTimeFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+		DateFormat dateTimeFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss aaa");
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		double totalFee = 0;
 		int numberOfConsultations = 0;
@@ -278,14 +278,14 @@ public class ProviderMenu {
 			// make a loop between all the services of the current week
 			for(ServiceProvided serviceProvided : serviceProvidedList) {
 				System.out.println("\n\t   Date of service: " + dateFormat.format(serviceProvided.getOccurrenceDate()));
-				System.out.println("\t   Date and time data were receive by the computer: " + dateTimeFormat.format(serviceProvided.getCurrentDate())); // it's printing the time 12:00:00 for every service. Why?
+				System.out.println("\t   Date and time data were receive by the computer: " + dateTimeFormat.format(serviceProvided.getCurrentDate())); // it's printing the time 12:00:00 + today's date for every service. Why?
 				System.out.println("\t   Member name: " + serviceProvided.getMember().getFstName() + " " + serviceProvided.getMember().getLstName());
 				System.out.println("\t   Member number: " + serviceProvided.getMember().getFkIdMember());
 				System.out.println("\t   Service code: " + serviceProvided.getService().getIdService());
 				System.out.println("\t   Fee to be paid: " + money.format(serviceProvided.getService().getFee() * (double) Provider.PERCENTAGE));
 				totalFee += serviceProvided.getService().getFee() * (double) Provider.PERCENTAGE;
 				numberOfConsultations++;
-				System.out.println("\n\t ------------------------------------------------------- \n");
+				System.out.println("\n\t ----------------------------------------------------------------------------------- \n");
 			}
 			
 			System.out.println("\t Total number of consultations with members: " + numberOfConsultations);
