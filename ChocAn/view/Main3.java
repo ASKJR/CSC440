@@ -7,5 +7,4 @@ public class Main3 {
 		
 		menu.startSystem();
 	}
-
 }

@@ -170,7 +170,7 @@ public class MemberDAO {
                 		+ "SELECT * "
                 		+ "FROM member as m, user as u "
                 		+ "WHERE fk_id_member = ? "
-                		+ "AND m.status = " + User.STATUS_VALID + " "
+                		+ "AND m.status != " + User.STATUS_DELETED + " "
                 		+ "AND m.fk_id_member = u.id_user");							// SQL itself being prepared
 
 
