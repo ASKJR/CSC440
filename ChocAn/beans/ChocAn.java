@@ -125,7 +125,6 @@ public class ChocAn {
 		ServiceProvidedDAO serviceProvidedDAO = new ServiceProvidedDAO();
 
 		ArrayList<Provider> providerList = providerDAO.sAll();
-		ArrayList<String> fileNameList = new ArrayList();
 		String reportFileName = "Manager_Accounts_Payable_Summary_Report.txt";
 		
 		DecimalFormat decimalFormat = new DecimalFormat("#.##");

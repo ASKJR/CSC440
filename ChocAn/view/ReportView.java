@@ -36,6 +36,7 @@ public class ReportView {
 			
 			switch(answer){
 			case "0":
+				System.out.println("\n\n\t\t Software Closed!\n");
 				System.exit(0);
 				break;
 			case "1":
@@ -50,8 +51,11 @@ public class ReportView {
 				provider.setFkIdProvider(16);
 				ProviderDAO providerDAO = new ProviderDAO();
 				provider = providerDAO.sOne(provider);
+				
+				System.out.println("\n\n\t The provider named \"" + provider.getFstName() + "\" will be used as example.");
+				
 				fileName = chocAn.lastWeekServicesFile(provider);
-				System.out.print("\n\n\t\t Sending Email! ");
+				System.out.print("\n\n\t\t Sending Email! \n\n");
 				chocAn.sendReportViaEmail(fileName, destinationAddress, "List Of Services Provided");
 				break;
 			case "3":
@@ -60,8 +64,11 @@ public class ReportView {
 				member.setFkIdMember(2);
 				MemberDAO memberDAO = new MemberDAO();
 				member = memberDAO.sOne(member);
+				
+				System.out.println("\n\n\t The member named \"" + member.getFstName() + "\" will be used as example.");
+				
 				fileName = chocAn.lastWeekServicesFile(member);
-				System.out.print("\n\n\t\t Sending Email! ");
+				System.out.print("\n\n\t\t Sending Email! \n\n");
 				chocAn.sendReportViaEmail(fileName, destinationAddress, "List Of Services Used By Client");
 				break;
 			case "4":
