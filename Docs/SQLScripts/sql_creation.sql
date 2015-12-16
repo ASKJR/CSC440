@@ -8,21 +8,21 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema choc_an
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema choc_an
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `choc_an` DEFAULT CHARACTER SET utf8 ;
+USE `choc_an` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`user`
+-- Table `choc_an`.`user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`user` ;
+DROP TABLE IF EXISTS `choc_an`.`user` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`user` (
+CREATE TABLE IF NOT EXISTS `choc_an`.`user` (
   `id_user` INT NOT NULL AUTO_INCREMENT,
   `st_addr` VARCHAR(100) NOT NULL,
   `addr_comp` VARCHAR(100) NULL,
@@ -40,80 +40,80 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`member`
+-- Table `choc_an`.`member`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`member` ;
+DROP TABLE IF EXISTS `choc_an`.`member` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`member` (
+CREATE TABLE IF NOT EXISTS `choc_an`.`member` (
   `fk_id_member` INT NOT NULL,
   `status` INT NOT NULL,
   PRIMARY KEY (`fk_id_member`),
   CONSTRAINT `fk_member_user`
     FOREIGN KEY (`fk_id_member`)
-    REFERENCES `mydb`.`user` (`id_user`)
+    REFERENCES `choc_an`.`user` (`id_user`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`manager`
+-- Table `choc_an`.`manager`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`manager` ;
+DROP TABLE IF EXISTS `choc_an`.`manager` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`manager` (
+CREATE TABLE IF NOT EXISTS `choc_an`.`manager` (
   `fk_id_manager` INT NOT NULL,
   PRIMARY KEY (`fk_id_manager`),
   INDEX `fk_manager_user1_idx` (`fk_id_manager` ASC),
   CONSTRAINT `fk_manager_user1`
     FOREIGN KEY (`fk_id_manager`)
-    REFERENCES `mydb`.`user` (`id_user`)
+    REFERENCES `choc_an`.`user` (`id_user`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`operator`
+-- Table `choc_an`.`operator`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`operator` ;
+DROP TABLE IF EXISTS `choc_an`.`operator` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`operator` (
+CREATE TABLE IF NOT EXISTS `choc_an`.`operator` (
   `fk_id_operator` INT NOT NULL,
   PRIMARY KEY (`fk_id_operator`),
   INDEX `fk_operator_user1_idx` (`fk_id_operator` ASC),
   CONSTRAINT `fk_operator_user1`
     FOREIGN KEY (`fk_id_operator`)
-    REFERENCES `mydb`.`user` (`id_user`)
+    REFERENCES `choc_an`.`user` (`id_user`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`provider`
+-- Table `choc_an`.`provider`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`provider` ;
+DROP TABLE IF EXISTS `choc_an`.`provider` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`provider` (
+CREATE TABLE IF NOT EXISTS `choc_an`.`provider` (
   `fk_id_provider` INT NOT NULL,
   `status` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`fk_id_provider`),
   INDEX `fk_provider_user1_idx` (`fk_id_provider` ASC),
   CONSTRAINT `fk_provider_user1`
     FOREIGN KEY (`fk_id_provider`)
-    REFERENCES `mydb`.`user` (`id_user`)
+    REFERENCES `choc_an`.`user` (`id_user`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`service`
+-- Table `choc_an`.`service`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`service` ;
+DROP TABLE IF EXISTS `choc_an`.`service` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`service` (
+CREATE TABLE IF NOT EXISTS `choc_an`.`service` (
   `id_service` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `fee` DOUBLE NOT NULL,
@@ -122,11 +122,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`service_provided`
+-- Table `choc_an`.`service_provided`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`service_provided` ;
+DROP TABLE IF EXISTS `choc_an`.`service_provided` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`service_provided` (
+CREATE TABLE IF NOT EXISTS `choc_an`.`service_provided` (
   `fk_id_provider` INT NOT NULL,
   `fk_id_service` INT NOT NULL,
   `fk_id_member` INT NOT NULL,
@@ -138,34 +138,34 @@ CREATE TABLE IF NOT EXISTS `mydb`.`service_provided` (
   INDEX `fk_service_provided_member1_idx` (`fk_id_member` ASC),
   CONSTRAINT `fk_provider_has_service_provider1`
     FOREIGN KEY (`fk_id_provider`)
-    REFERENCES `mydb`.`provider` (`fk_id_provider`)
+    REFERENCES `choc_an`.`provider` (`fk_id_provider`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_provider_has_service_service1`
     FOREIGN KEY (`fk_id_service`)
-    REFERENCES `mydb`.`service` (`id_service`)
+    REFERENCES `choc_an`.`service` (`id_service`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_service_provided_member1`
     FOREIGN KEY (`fk_id_member`)
-    REFERENCES `mydb`.`member` (`fk_id_member`)
+    REFERENCES `choc_an`.`member` (`fk_id_member`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`login`
+-- Table `choc_an`.`login`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`login` ;
+DROP TABLE IF EXISTS `choc_an`.`login` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`login` (
+CREATE TABLE IF NOT EXISTS `choc_an`.`login` (
   `fk_id_user` INT NOT NULL,
   `password` CHAR(32) NOT NULL,
   PRIMARY KEY (`fk_id_user`),
   CONSTRAINT `fk_id_user`
     FOREIGN KEY (`fk_id_user`)
-    REFERENCES `mydb`.`user` (`id_user`)
+    REFERENCES `choc_an`.`user` (`id_user`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
