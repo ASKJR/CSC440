@@ -117,3 +117,8 @@ INSERT INTO service_provided VALUES(16,8,3,(SELECT NOW()),'2015-12-16','Swim mor
 INSERT INTO service_provided VALUES(16,10,4,(SELECT NOW()),'2015-12-17','Fight harder next time!');
 INSERT INTO service_provided VALUES(16,5,5,(SELECT NOW()),'2015-12-18','Change needles size to 2.5mm.');
 
+
+
+INSERT INTO service_provided VALUES(17,9,7,(SELECT NOW()),'2015-12-08','Eat less sugar.');
+INSERT INTO service_provided VALUES(18,3,9,(SELECT NOW()),'2015-12-10','Another session scheduled for next week.');
+
