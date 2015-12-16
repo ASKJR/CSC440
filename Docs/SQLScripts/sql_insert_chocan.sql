@@ -97,4 +97,15 @@ VALUES
 ('Personal trainer',80.0),
 ('Psychologist',75.5),
 ('Psychiatrist',120.0),
-('Acupuncture',190.0);
+('Acupuncture',190.0),
+('Golf Instructor',144.0),
+('Endocrinologist',250.0),
+('Swimming Instructor',145.0),
+('Dietitian',100.0),
+('Muay Thai Instructor',120.0);
+
+INSERT INTO service_provided VALUES(16,6,1,(SELECT NOW()),'2015-12-14','It is required more golf classes to get better.');
+INSERT INTO service_provided VALUES(16,7,2,(SELECT NOW()),'2015-12-15','Eat more vegetables.');
+INSERT INTO service_provided VALUES(16,8,3,(SELECT NOW()),'2015-12-16','Swim more enthusiastically.');
+INSERT INTO service_provided VALUES(16,10,4,(SELECT NOW()),'2015-12-17','Fight harder next time!');
+INSERT INTO service_provided VALUES(16,5,5,(SELECT NOW()),'2015-12-18','Change needles size to 2.5mm.');
