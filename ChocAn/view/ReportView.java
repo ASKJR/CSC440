@@ -24,7 +24,7 @@ public class ReportView {
 		
 		while(!answer.equals("0")){
 			
-			System.out.println("\t\t ChocAn Reports\n\n\t Emails will be sent to: " + destinationAddress);
+			System.out.println("\n\t\t\t .:: ChocAn Reports ::.\n\n\t Emails will be sent to: " + destinationAddress);
 			System.out.println("\n\n\t 1. Create EFT");
 			System.out.println("\n\t 2. List Of Services Provided by a Provider");
 			System.out.println("\n\t 3. List Of Services Used by Client");
