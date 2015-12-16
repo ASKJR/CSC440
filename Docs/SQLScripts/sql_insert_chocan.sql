@@ -104,8 +104,16 @@ VALUES
 ('Dietitian',100.0),
 ('Muay Thai Instructor',120.0);
 
+
+INSERT INTO service_provided VALUES(16,6,1,(SELECT NOW()),'2015-12-07','Good class.');
+INSERT INTO service_provided VALUES(16,7,2,(SELECT NOW()),'2015-12-08','Eat more fruits.');
+INSERT INTO service_provided VALUES(16,8,3,(SELECT NOW()),'2015-12-09','Swim less enthusiastically to avoid injuries.');
+INSERT INTO service_provided VALUES(16,10,4,(SELECT NOW()),'2015-12-10','Kick harder.');
+INSERT INTO service_provided VALUES(16,5,5,(SELECT NOW()),'2015-12-11','More 5 sessions to get better.');
+
 INSERT INTO service_provided VALUES(16,6,1,(SELECT NOW()),'2015-12-14','It is required more golf classes to get better.');
 INSERT INTO service_provided VALUES(16,7,2,(SELECT NOW()),'2015-12-15','Eat more vegetables.');
 INSERT INTO service_provided VALUES(16,8,3,(SELECT NOW()),'2015-12-16','Swim more enthusiastically.');
 INSERT INTO service_provided VALUES(16,10,4,(SELECT NOW()),'2015-12-17','Fight harder next time!');
 INSERT INTO service_provided VALUES(16,5,5,(SELECT NOW()),'2015-12-18','Change needles size to 2.5mm.');
+
