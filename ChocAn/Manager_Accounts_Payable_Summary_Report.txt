@@ -5,11 +5,11 @@
 
 	 <BR><BR>First Name Provider: Maru
 
-	 <BR>Total Fee to Provider: 76
+	 <BR>Total Fee to Provider: 339.6
 
-	 <BR>Total Overall Fee: 190
+	 <BR>Total Overall Fee: 849
 
-	 <BR>Amount of Consultations: 1
+	 <BR>Amount of Consultations: 5
 
 
 
@@ -45,4 +45,4 @@
 
 	 <BR><BR>Number of Providers: 4
 
-	 <BR>Total Amount Of Consultations: 1
+	 <BR>Total Amount Of Consultations: 5

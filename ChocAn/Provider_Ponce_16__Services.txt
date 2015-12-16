@@ -10,14 +10,46 @@
 
 		 <br><br>Services provided in the last week
 
-	 <br><br>Date of Service: 12/12/2015
-	 <br>Date and Time of Registration: 12/13/2015 08:13:29 PM
+	 <br><br>Date of Service: 12/07/2015
+	 <br>Date and Time of Registration: 12/16/2015 02:47:14 PM
+	 <br>Member Name: Rafael Oliveira
+	 <br>Member ID: 1
+	 <br>Service Name: Golf Instructor
+	 <br>Service ID: 6
+	 <br>Fee: <b>US$57.60</b>
+
+	 <br><br>Date of Service: 12/08/2015
+	 <br>Date and Time of Registration: 12/16/2015 02:47:14 PM
 	 <br>Member Name: Jorge Ribeiro
 	 <br>Member ID: 2
-	 <br>Service Name: cook
+	 <br>Service Name: Endocrinologist
+	 <br>Service ID: 7
+	 <br>Fee: <b>US$100.00</b>
+
+	 <br><br>Date of Service: 12/09/2015
+	 <br>Date and Time of Registration: 12/16/2015 02:47:14 PM
+	 <br>Member Name: Alberto Kato
+	 <br>Member ID: 3
+	 <br>Service Name: Swimming Instructor
+	 <br>Service ID: 8
+	 <br>Fee: <b>US$58.00</b>
+
+	 <br><br>Date of Service: 12/10/2015
+	 <br>Date and Time of Registration: 12/16/2015 02:47:14 PM
+	 <br>Member Name: Maria Silva
+	 <br>Member ID: 4
+	 <br>Service Name: Muay Thai Instructor
+	 <br>Service ID: 10
+	 <br>Fee: <b>US$48.00</b>
+
+	 <br><br>Date of Service: 12/11/2015
+	 <br>Date and Time of Registration: 12/16/2015 02:47:14 PM
+	 <br>Member Name: Hiroshi Nakamo
+	 <br>Member ID: 5
+	 <br>Service Name: Acupuncture
 	 <br>Service ID: 5
 	 <br>Fee: <b>US$76.00</b>
 
-	 <br><br>Total number of consultations with members: 1
+	 <br><br>Total number of consultations with members: 5
 
-	 <br>Total fee for week: <b>US$76.00</b>
+	 <br>Total fee for week: <b>US$339.60</b>

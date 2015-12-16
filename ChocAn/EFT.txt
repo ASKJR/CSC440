@@ -1,5 +1,5 @@
 
-Ponce;16;465;
-Clemonce;17;200;
-Megumi;18;290;
-Smith;19;195;
+Ponce;16;1698;
+Clemonce;17;0;
+Megumi;18;0;
+Smith;19;0;
